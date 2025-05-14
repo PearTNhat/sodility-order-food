@@ -1,0 +1,248 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_row",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_col",
+						"type": "uint256"
+					}
+				],
+				"name": "addTable",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "deleteTable",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_row",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_col",
+						"type": "uint256"
+					}
+				],
+				"name": "editTable",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "getTableById",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tableId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "row",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "col",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "staffId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isReserved",
+								"type": "bool"
+							}
+						],
+						"internalType": "struct ITableManager.Table",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nextTableId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "tables",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "row",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "col",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "isReserved",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "updateStaffTable",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/manager/TableManager.sol": "TableManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/ITableInteface.sol": {
+			"keccak256": "0x7da8ae39a1aaafceb17cde1e5455ac18657c5ec9791c475d3e6ff9e3e756dcd1",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://718107e14eb872119ce6e9e3eccf3be774bf7a1a9074c206b50088f966ada8ba",
+				"dweb:/ipfs/QmQQbAN4tJoF55VhtBh5Vf8SpY868YQBqF4We8dMsqz7L1"
+			]
+		},
+		"contracts/manager/TableManager.sol": {
+			"keccak256": "0x7169203044b79d57356a470c306ffadcca118e9b56ac1fec6818cb569234f817",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://59e7c530c1a68ffc11275418cbf14c8f1ea9b14526a1b822f5de6b22ed2c2da5",
+				"dweb:/ipfs/QmQquzqwtJEx71qFRhnYj1aqcbTvQ4X3zGa5nuTfEa7aav"
+			]
+		}
+	},
+	"version": 1
+}

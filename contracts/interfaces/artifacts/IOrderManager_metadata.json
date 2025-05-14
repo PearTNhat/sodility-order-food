@@ -1,0 +1,201 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "totalAmount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum OrderStatus",
+						"name": "status",
+						"type": "uint8"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "orderItemId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "name",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "imageUrl",
+								"type": "string"
+							}
+						],
+						"indexed": false,
+						"internalType": "struct OrderItem[]",
+						"name": "orderItems",
+						"type": "tuple[]"
+					}
+				],
+				"name": "OrderCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "OrderDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum OrderStatus",
+						"name": "status",
+						"type": "uint8"
+					}
+				],
+				"name": "OrderUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_userInfo",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "name",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "imageUrl",
+								"type": "string"
+							}
+						],
+						"internalType": "struct OrderItemRequest[]",
+						"name": "_items",
+						"type": "tuple[]"
+					}
+				],
+				"name": "createOrder",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interfaces/IOrderManager.sol": "IOrderManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IOrderManager.sol": {
+			"keccak256": "0x63eb3bdc2883550d5606f00596df0c8e7495e2b58dd7bec323ee0c6b4f394cbe",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://390c7dd2520c48b48c8c1637c3078049677d19541db803d3c651d459a98a8068",
+				"dweb:/ipfs/QmWCi8oyEiGu9GtANYADhUQJ2jkq7JppBqcPcSq6PdHLUQ"
+			]
+		},
+		"contracts/structs/OrderStructs.sol": {
+			"keccak256": "0xc9f239c070140203b5fa401ebb1c39c75d04427706ab6e9d6fb9b648488894f9",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6f4e8d86a756970b0517094fec35c1dcbcafa3d8aeca59d6f188b9e1f6bf4cde",
+				"dweb:/ipfs/QmeKedrmz9tURSXqLs5oiQu3XbWJmGhG32RAedJeymB3o1"
+			]
+		}
+	},
+	"version": 1
+}

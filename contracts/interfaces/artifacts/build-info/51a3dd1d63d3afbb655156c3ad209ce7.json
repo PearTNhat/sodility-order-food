@@ -1,0 +1,1196 @@
+{
+	"id": "51a3dd1d63d3afbb655156c3ad209ce7",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/interface/IFoodManager.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nimport \"../models/FoodStructs.sol\";\r\n\r\ninterface IFoodManager {\r\n    function createFood(Food memory food) external;\r\n    function updateFood(uint foodId, Food memory food) external;\r\n    function deleteFood(uint foodId) external;\r\n    function getFood(uint foodId) external view returns (Food memory);\r\n    function getAllFoods() external view returns (Food[] memory);\r\n}\r\n"
+			},
+			"contracts/models/FoodStructs.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nstruct Food {\r\n    uint id;\r\n    string name;\r\n    string description;\r\n    uint categoryId;\r\n    uint basePrice;\r\n    string imageUrl;\r\n    string videoUrl;\r\n    bool isActive;\r\n}\r\n\r\nstruct FoodDetail {\r\n    uint id;\r\n    uint foodId;\r\n    string size;       // VD: Small, Medium, Large\r\n    uint quantity;     // tồn kho\r\n    uint price;        // giá theo size\r\n}\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/interface/IFoodManager.sol": {
+				"IFoodManager": {
+					"abi": [
+						{
+							"inputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "id",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "description",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "categoryId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "basePrice",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "imageUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "videoUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "bool",
+											"name": "isActive",
+											"type": "bool"
+										}
+									],
+									"internalType": "struct Food",
+									"name": "food",
+									"type": "tuple"
+								}
+							],
+							"name": "createFood",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "foodId",
+									"type": "uint256"
+								}
+							],
+							"name": "deleteFood",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "getAllFoods",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "id",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "description",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "categoryId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "basePrice",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "imageUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "videoUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "bool",
+											"name": "isActive",
+											"type": "bool"
+										}
+									],
+									"internalType": "struct Food[]",
+									"name": "",
+									"type": "tuple[]"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "foodId",
+									"type": "uint256"
+								}
+							],
+							"name": "getFood",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "id",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "description",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "categoryId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "basePrice",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "imageUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "videoUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "bool",
+											"name": "isActive",
+											"type": "bool"
+										}
+									],
+									"internalType": "struct Food",
+									"name": "",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "foodId",
+									"type": "uint256"
+								},
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "id",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "description",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "categoryId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "basePrice",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "imageUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "videoUrl",
+											"type": "string"
+										},
+										{
+											"internalType": "bool",
+											"name": "isActive",
+											"type": "bool"
+										}
+									],
+									"internalType": "struct Food",
+									"name": "food",
+									"type": "tuple"
+								}
+							],
+							"name": "updateFood",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"createFood((uint256,string,string,uint256,uint256,string,string,bool))": "7002a297",
+							"deleteFood(uint256)": "d198b650",
+							"getAllFoods()": "b9b5aae6",
+							"getFood(uint256)": "1e4de872",
+							"updateFood(uint256,(uint256,string,string,uint256,uint256,string,string,bool))": "740ac4fa"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"categoryId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"basePrice\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"imageUrl\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"videoUrl\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct Food\",\"name\":\"food\",\"type\":\"tuple\"}],\"name\":\"createFood\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"foodId\",\"type\":\"uint256\"}],\"name\":\"deleteFood\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getAllFoods\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"categoryId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"basePrice\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"imageUrl\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"videoUrl\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct Food[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"foodId\",\"type\":\"uint256\"}],\"name\":\"getFood\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"categoryId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"basePrice\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"imageUrl\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"videoUrl\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct Food\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"foodId\",\"type\":\"uint256\"},{\"components\":[{\"internalType\":\"uint256\",\"name\":\"id\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"description\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"categoryId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"basePrice\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"imageUrl\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"videoUrl\",\"type\":\"string\"},{\"internalType\":\"bool\",\"name\":\"isActive\",\"type\":\"bool\"}],\"internalType\":\"struct Food\",\"name\":\"food\",\"type\":\"tuple\"}],\"name\":\"updateFood\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interface/IFoodManager.sol\":\"IFoodManager\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interface/IFoodManager.sol\":{\"keccak256\":\"0x5c033f3b00dbabe6c8cd4ca32bcf5911a13edacf80a3f5a84af8ec8a191fc66d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ac8f2c2034493686356898c6f899b6e6ebb6acf685eb3f44508edf44b2771447\",\"dweb:/ipfs/QmQ7hwRenu4p4BLsfvRDLnYCNX7rkzW58Vj6ydp57BCuaW\"]},\"contracts/models/FoodStructs.sol\":{\"keccak256\":\"0xb1486b7098d43095cc58095334531f6eea19936e143b8db7fc74fb1e38c1d687\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://38608e7f580182f7bad526c8cf97299af26c60dce1e7ceadf27bae57f4c1197a\",\"dweb:/ipfs/QmU6dRLLEfyUrxU1UAJXZx8wSA11m2Kquw5onRu2YADSs2\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/interface/IFoodManager.sol": {
+				"ast": {
+					"absolutePath": "contracts/interface/IFoodManager.sol",
+					"exportedSymbols": {
+						"Food": [
+							56
+						],
+						"FoodDetail": [
+							67
+						],
+						"IFoodManager": [
+							37
+						]
+					},
+					"id": 38,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"absolutePath": "contracts/models/FoodStructs.sol",
+							"file": "../models/FoodStructs.sol",
+							"id": 2,
+							"nameLocation": "-1:-1:-1",
+							"nodeType": "ImportDirective",
+							"scope": 38,
+							"sourceUnit": 68,
+							"src": "60:35:0",
+							"symbolAliases": [],
+							"unitAlias": ""
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "IFoodManager",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 37,
+							"linearizedBaseContracts": [
+								37
+							],
+							"name": "IFoodManager",
+							"nameLocation": "109:12:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"functionSelector": "7002a297",
+									"id": 8,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "createFood",
+									"nameLocation": "138:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 6,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 5,
+												"mutability": "mutable",
+												"name": "food",
+												"nameLocation": "161:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 8,
+												"src": "149:16:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Food_$56_memory_ptr",
+													"typeString": "struct Food"
+												},
+												"typeName": {
+													"id": 4,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 3,
+														"name": "Food",
+														"nameLocations": [
+															"149:4:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 56,
+														"src": "149:4:0"
+													},
+													"referencedDeclaration": 56,
+													"src": "149:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Food_$56_storage_ptr",
+														"typeString": "struct Food"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "148:18:0"
+									},
+									"returnParameters": {
+										"id": 7,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "175:0:0"
+									},
+									"scope": 37,
+									"src": "129:47:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "740ac4fa",
+									"id": 16,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateFood",
+									"nameLocation": "191:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 14,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 10,
+												"mutability": "mutable",
+												"name": "foodId",
+												"nameLocation": "207:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "202:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 9,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "202:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 13,
+												"mutability": "mutable",
+												"name": "food",
+												"nameLocation": "227:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 16,
+												"src": "215:16:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Food_$56_memory_ptr",
+													"typeString": "struct Food"
+												},
+												"typeName": {
+													"id": 12,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 11,
+														"name": "Food",
+														"nameLocations": [
+															"215:4:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 56,
+														"src": "215:4:0"
+													},
+													"referencedDeclaration": 56,
+													"src": "215:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Food_$56_storage_ptr",
+														"typeString": "struct Food"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "201:31:0"
+									},
+									"returnParameters": {
+										"id": 15,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "241:0:0"
+									},
+									"scope": 37,
+									"src": "182:60:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "d198b650",
+									"id": 21,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "deleteFood",
+									"nameLocation": "257:10:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 18,
+												"mutability": "mutable",
+												"name": "foodId",
+												"nameLocation": "273:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "268:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "268:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "267:13:0"
+									},
+									"returnParameters": {
+										"id": 20,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "289:0:0"
+									},
+									"scope": 37,
+									"src": "248:42:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "1e4de872",
+									"id": 29,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getFood",
+									"nameLocation": "305:7:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 24,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 23,
+												"mutability": "mutable",
+												"name": "foodId",
+												"nameLocation": "318:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "313:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 22,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "313:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "312:13:0"
+									},
+									"returnParameters": {
+										"id": 28,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 27,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 29,
+												"src": "349:11:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Food_$56_memory_ptr",
+													"typeString": "struct Food"
+												},
+												"typeName": {
+													"id": 26,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 25,
+														"name": "Food",
+														"nameLocations": [
+															"349:4:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 56,
+														"src": "349:4:0"
+													},
+													"referencedDeclaration": 56,
+													"src": "349:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Food_$56_storage_ptr",
+														"typeString": "struct Food"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "348:13:0"
+									},
+									"scope": 37,
+									"src": "296:66:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "b9b5aae6",
+									"id": 36,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getAllFoods",
+									"nameLocation": "377:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 30,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "388:2:0"
+									},
+									"returnParameters": {
+										"id": 35,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 34,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 36,
+												"src": "414:13:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_array$_t_struct$_Food_$56_memory_ptr_$dyn_memory_ptr",
+													"typeString": "struct Food[]"
+												},
+												"typeName": {
+													"baseType": {
+														"id": 32,
+														"nodeType": "UserDefinedTypeName",
+														"pathNode": {
+															"id": 31,
+															"name": "Food",
+															"nameLocations": [
+																"414:4:0"
+															],
+															"nodeType": "IdentifierPath",
+															"referencedDeclaration": 56,
+															"src": "414:4:0"
+														},
+														"referencedDeclaration": 56,
+														"src": "414:4:0",
+														"typeDescriptions": {
+															"typeIdentifier": "t_struct$_Food_$56_storage_ptr",
+															"typeString": "struct Food"
+														}
+													},
+													"id": 33,
+													"nodeType": "ArrayTypeName",
+													"src": "414:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_array$_t_struct$_Food_$56_storage_$dyn_storage_ptr",
+														"typeString": "struct Food[]"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "413:15:0"
+									},
+									"scope": 37,
+									"src": "368:61:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 38,
+							"src": "99:333:0",
+							"usedErrors": [],
+							"usedEvents": []
+						}
+					],
+					"src": "33:401:0"
+				},
+				"id": 0
+			},
+			"contracts/models/FoodStructs.sol": {
+				"ast": {
+					"absolutePath": "contracts/models/FoodStructs.sol",
+					"exportedSymbols": {
+						"Food": [
+							56
+						],
+						"FoodDetail": [
+							67
+						]
+					},
+					"id": 68,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 39,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:1"
+						},
+						{
+							"canonicalName": "Food",
+							"id": 56,
+							"members": [
+								{
+									"constant": false,
+									"id": 41,
+									"mutability": "mutable",
+									"name": "id",
+									"nameLocation": "84:2:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "79:7:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 40,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "79:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 43,
+									"mutability": "mutable",
+									"name": "name",
+									"nameLocation": "100:4:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "93:11:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 42,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "93:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 45,
+									"mutability": "mutable",
+									"name": "description",
+									"nameLocation": "118:11:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "111:18:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 44,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "111:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 47,
+									"mutability": "mutable",
+									"name": "categoryId",
+									"nameLocation": "141:10:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "136:15:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 46,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "136:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 49,
+									"mutability": "mutable",
+									"name": "basePrice",
+									"nameLocation": "163:9:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "158:14:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 48,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "158:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 51,
+									"mutability": "mutable",
+									"name": "imageUrl",
+									"nameLocation": "186:8:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "179:15:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 50,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "179:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 53,
+									"mutability": "mutable",
+									"name": "videoUrl",
+									"nameLocation": "208:8:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "201:15:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 52,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "201:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 55,
+									"mutability": "mutable",
+									"name": "isActive",
+									"nameLocation": "228:8:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 56,
+									"src": "223:13:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_bool",
+										"typeString": "bool"
+									},
+									"typeName": {
+										"id": 54,
+										"name": "bool",
+										"nodeType": "ElementaryTypeName",
+										"src": "223:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_bool",
+											"typeString": "bool"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "Food",
+							"nameLocation": "67:4:1",
+							"nodeType": "StructDefinition",
+							"scope": 68,
+							"src": "60:180:1",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "FoodDetail",
+							"id": 67,
+							"members": [
+								{
+									"constant": false,
+									"id": 58,
+									"mutability": "mutable",
+									"name": "id",
+									"nameLocation": "274:2:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 67,
+									"src": "269:7:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 57,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "269:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 60,
+									"mutability": "mutable",
+									"name": "foodId",
+									"nameLocation": "288:6:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 67,
+									"src": "283:11:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 59,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "283:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 62,
+									"mutability": "mutable",
+									"name": "size",
+									"nameLocation": "308:4:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 67,
+									"src": "301:11:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 61,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "301:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 64,
+									"mutability": "mutable",
+									"name": "quantity",
+									"nameLocation": "358:8:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 67,
+									"src": "353:13:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 63,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "353:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 66,
+									"mutability": "mutable",
+									"name": "price",
+									"nameLocation": "395:5:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 67,
+									"src": "390:10:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 65,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "390:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "FoodDetail",
+							"nameLocation": "251:10:1",
+							"nodeType": "StructDefinition",
+							"scope": 68,
+							"src": "244:185:1",
+							"visibility": "public"
+						}
+					],
+					"src": "33:398:1"
+				},
+				"id": 1
+			}
+		}
+	}
+}

@@ -1,0 +1,267 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"addTable(uint256,uint256)": "e1f1c48d",
+			"deleteTable(uint256)": "e6f318c6",
+			"editTable(uint256,uint256,uint256)": "5cfd6607",
+			"getTableById(uint256)": "3844ac5b",
+			"updateStaffTable(uint256,uint256)": "bea02f62"
+		}
+	},
+	"abi": [
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "tableId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "StaffTableUpdated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "tableId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "row",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "col",
+					"type": "uint256"
+				}
+			],
+			"name": "TableAdded",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "TableDeleted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "tableId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "row",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "col",
+					"type": "uint256"
+				}
+			],
+			"name": "TableEdited",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_row",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_col",
+					"type": "uint256"
+				}
+			],
+			"name": "addTable",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "deleteTable",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_row",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_col",
+					"type": "uint256"
+				}
+			],
+			"name": "editTable",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "getTableById",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "tableId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "row",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "col",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "staffId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "bool",
+							"name": "isReserved",
+							"type": "bool"
+						}
+					],
+					"internalType": "struct ITableManager.Table",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "updateStaffTable",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

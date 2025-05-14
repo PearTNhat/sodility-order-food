@@ -1,0 +1,162 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_foodManagerAddress",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "imageUrl",
+						"type": "string"
+					},
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "foodDetailId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "size",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct FoodDetail[]",
+						"name": "fd",
+						"type": "tuple[]"
+					}
+				],
+				"name": "createFoodFromRouter",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "foodManager",
+				"outputs": [
+					{
+						"internalType": "contract IFoodManager",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/AppRouter.sol": "AppRouter"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/AppRouter.sol": {
+			"keccak256": "0xbc7cd1416230e73079647707fe770399d004bc2b72774ef92749bae8abb8f51f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://045316ec9ec80a58f93772b90607023a376f0ee421a8dada98d237efd314d979",
+				"dweb:/ipfs/QmYA2Uz2qws9gwXXeQHeUijBDytD81jjBF86pEaQTu5cRz"
+			]
+		},
+		"contracts/interfaces/IFoodManager.sol": {
+			"keccak256": "0x6c1d37a443af9612dc613580885c039d1ad0115fda20aa0f3020e7d1ff748f64",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://52b9283c6dcb3edd2d96aa2bf2f3c8e0028e2cdef4def9d7d56dc2442f69d743",
+				"dweb:/ipfs/QmRXek2ABvqW31kuKvhjgWQPdhCN4bkDUkDAXDy5hFWzNf"
+			]
+		},
+		"contracts/manager/FoodManager.sol": {
+			"keccak256": "0xc9d47d2be3ed4ac3999902538839e08ce7904081763b350740a70f6bf3873259",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://96fd05cc312c6d065e1e8c8deffff2a9d11f2dcda47e8c44e29b479fdc1ee684",
+				"dweb:/ipfs/Qmekc51YKtPLeWDEXX3p2X4CvsEWBpqqtD2z4YDcRHcm6t"
+			]
+		},
+		"contracts/models/FoodStructs.sol": {
+			"keccak256": "0x22b06b7f1b1d11d433409b0488fba85d58b73c2664a5ca7dd4c12a74d538e3bf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://84a9ba1df119ad6e63cfaf9240c0ccbfbc61a9be22ac1630fe60144a1fd6cbc8",
+				"dweb:/ipfs/QmaJKEsaJbWGJkJYMiWqtXSVkxFXBKXEgqxnaxCrWprsW5"
+			]
+		},
+		"contracts/utils/RoleManager.sol": {
+			"keccak256": "0x0a407b7c5a6bef14c22dc89e89832bab72265563df4892c0f5532cc53e27b493",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bb25b39c3ba7f594aa64ca4523ac2233df920cf0e2706c73a95b020ede23d3ae",
+				"dweb:/ipfs/QmZUmNB7MQMEeALJp5Ksi3dUGRj6rMgGTTbGStGwcAY7Ay"
+			]
+		}
+	},
+	"version": 1
+}

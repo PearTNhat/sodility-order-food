@@ -1,0 +1,1269 @@
+{
+	"id": "71a92322129a54411c5049d64bd1e7ec",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/interfaces/ITableInteface.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\ninterface ITableManager {\r\n    event TableAdded(uint tableId, uint row, uint col);\r\n    event TableEdited(uint tableId, uint row, uint col);\r\n    event TableDeleted(uint tableId);\r\n    event StaffTableUpdated(uint tableId, uint staffId);\r\n\r\n    struct Table {\r\n        uint tableId;\r\n        uint row;\r\n        uint col;\r\n        uint staffId;\r\n        bool isReserved;\r\n    }\r\n\r\n    function addTable(uint _row, uint _col) external returns (uint);\r\n    \r\n    function editTable(uint _tableId, uint _row, uint _col) external;\r\n\r\n    function deleteTable(uint _tableId) external;\r\n\r\n    function updateStaffTable(uint _tableId, uint _staffId) external;\r\n\r\n    function getTableById(uint _tableId) external view returns (Table memory);\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/interfaces/ITableInteface.sol": {
+				"ITableManager": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "tableId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "staffId",
+									"type": "uint256"
+								}
+							],
+							"name": "StaffTableUpdated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "tableId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "row",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "col",
+									"type": "uint256"
+								}
+							],
+							"name": "TableAdded",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "tableId",
+									"type": "uint256"
+								}
+							],
+							"name": "TableDeleted",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "tableId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "row",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "col",
+									"type": "uint256"
+								}
+							],
+							"name": "TableEdited",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_row",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_col",
+									"type": "uint256"
+								}
+							],
+							"name": "addTable",
+							"outputs": [
+								{
+									"internalType": "uint256",
+									"name": "",
+									"type": "uint256"
+								}
+							],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tableId",
+									"type": "uint256"
+								}
+							],
+							"name": "deleteTable",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tableId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_row",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_col",
+									"type": "uint256"
+								}
+							],
+							"name": "editTable",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tableId",
+									"type": "uint256"
+								}
+							],
+							"name": "getTableById",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "tableId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "row",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "col",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "staffId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "bool",
+											"name": "isReserved",
+											"type": "bool"
+										}
+									],
+									"internalType": "struct ITableManager.Table",
+									"name": "",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_tableId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								}
+							],
+							"name": "updateStaffTable",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"addTable(uint256,uint256)": "e1f1c48d",
+							"deleteTable(uint256)": "e6f318c6",
+							"editTable(uint256,uint256,uint256)": "5cfd6607",
+							"getTableById(uint256)": "3844ac5b",
+							"updateStaffTable(uint256,uint256)": "bea02f62"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tableId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"}],\"name\":\"StaffTableUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tableId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"row\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"col\",\"type\":\"uint256\"}],\"name\":\"TableAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tableId\",\"type\":\"uint256\"}],\"name\":\"TableDeleted\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tableId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"row\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"col\",\"type\":\"uint256\"}],\"name\":\"TableEdited\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_row\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_col\",\"type\":\"uint256\"}],\"name\":\"addTable\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tableId\",\"type\":\"uint256\"}],\"name\":\"deleteTable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tableId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_row\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_col\",\"type\":\"uint256\"}],\"name\":\"editTable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tableId\",\"type\":\"uint256\"}],\"name\":\"getTableById\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"tableId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"row\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"col\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isReserved\",\"type\":\"bool\"}],\"internalType\":\"struct ITableManager.Table\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_tableId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"}],\"name\":\"updateStaffTable\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/ITableInteface.sol\":\"ITableManager\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interfaces/ITableInteface.sol\":{\"keccak256\":\"0x6bd47a3f855944683dab688c501de00d6b078ece73c89bdfe621ef49e6bea908\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://124f384ad7f29decb141d8cecb7a85e6e03f69d5bb4bffac75348dc1a3ea6008\",\"dweb:/ipfs/QmPsh8NKNwBN8Rqo41wxsGb9dMeQ8LEtvvD3VNqdxNcAie\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/interfaces/ITableInteface.sol": {
+				"ast": {
+					"absolutePath": "contracts/interfaces/ITableInteface.sol",
+					"exportedSymbols": {
+						"ITableManager": [
+							77
+						]
+					},
+					"id": 78,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "ITableManager",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 77,
+							"linearizedBaseContracts": [
+								77
+							],
+							"name": "ITableManager",
+							"nameLocation": "68:13:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"eventSelector": "7c625ad207b65d4c400b3daab560616556395dfe69ebc199b59250c837db78e3",
+									"id": 9,
+									"name": "TableAdded",
+									"nameLocation": "95:10:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 8,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 3,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tableId",
+												"nameLocation": "111:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 9,
+												"src": "106:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 2,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "106:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 5,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "row",
+												"nameLocation": "125:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 9,
+												"src": "120:8:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 4,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "120:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 7,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "col",
+												"nameLocation": "135:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 9,
+												"src": "130:8:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 6,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "130:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "105:34:0"
+									},
+									"src": "89:51:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "f7237d4e5b6eb7009e4eb3d57722c89a2d5a309cb8766edd3d12c3a2f6369fea",
+									"id": 17,
+									"name": "TableEdited",
+									"nameLocation": "152:11:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 16,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 11,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tableId",
+												"nameLocation": "169:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 17,
+												"src": "164:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 10,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "164:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 13,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "row",
+												"nameLocation": "183:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 17,
+												"src": "178:8:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 12,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "178:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 15,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "col",
+												"nameLocation": "193:3:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 17,
+												"src": "188:8:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 14,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "188:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "163:34:0"
+									},
+									"src": "146:52:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "e9acaee49f406ba06f0464ee11615009a1b531e51e3e9d4427228acae8a4e6ba",
+									"id": 21,
+									"name": "TableDeleted",
+									"nameLocation": "210:12:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 20,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 19,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tableId",
+												"nameLocation": "228:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "223:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 18,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "223:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "222:14:0"
+									},
+									"src": "204:33:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "58d9fb21904de5c4096cb1c85e852f760b1fbefd362cc0963eee2e6c0e25b9dc",
+									"id": 27,
+									"name": "StaffTableUpdated",
+									"nameLocation": "249:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 26,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 23,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "tableId",
+												"nameLocation": "272:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 27,
+												"src": "267:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 22,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "267:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 25,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "staffId",
+												"nameLocation": "286:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 27,
+												"src": "281:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 24,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "281:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "266:28:0"
+									},
+									"src": "243:52:0"
+								},
+								{
+									"canonicalName": "ITableManager.Table",
+									"id": 38,
+									"members": [
+										{
+											"constant": false,
+											"id": 29,
+											"mutability": "mutable",
+											"name": "tableId",
+											"nameLocation": "332:7:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 38,
+											"src": "327:12:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 28,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "327:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 31,
+											"mutability": "mutable",
+											"name": "row",
+											"nameLocation": "355:3:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 38,
+											"src": "350:8:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 30,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "350:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 33,
+											"mutability": "mutable",
+											"name": "col",
+											"nameLocation": "374:3:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 38,
+											"src": "369:8:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 32,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "369:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 35,
+											"mutability": "mutable",
+											"name": "staffId",
+											"nameLocation": "393:7:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 38,
+											"src": "388:12:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 34,
+												"name": "uint",
+												"nodeType": "ElementaryTypeName",
+												"src": "388:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 37,
+											"mutability": "mutable",
+											"name": "isReserved",
+											"nameLocation": "416:10:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 38,
+											"src": "411:15:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_bool",
+												"typeString": "bool"
+											},
+											"typeName": {
+												"id": 36,
+												"name": "bool",
+												"nodeType": "ElementaryTypeName",
+												"src": "411:4:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bool",
+													"typeString": "bool"
+												}
+											},
+											"visibility": "internal"
+										}
+									],
+									"name": "Table",
+									"nameLocation": "310:5:0",
+									"nodeType": "StructDefinition",
+									"scope": 77,
+									"src": "303:131:0",
+									"visibility": "public"
+								},
+								{
+									"functionSelector": "e1f1c48d",
+									"id": 47,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "addTable",
+									"nameLocation": "451:8:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 43,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 40,
+												"mutability": "mutable",
+												"name": "_row",
+												"nameLocation": "465:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "460:9:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 39,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "460:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 42,
+												"mutability": "mutable",
+												"name": "_col",
+												"nameLocation": "476:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "471:9:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 41,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "471:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "459:22:0"
+									},
+									"returnParameters": {
+										"id": 46,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 45,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "500:4:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 44,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "500:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "499:6:0"
+									},
+									"scope": 77,
+									"src": "442:64:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "5cfd6607",
+									"id": 56,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "editTable",
+									"nameLocation": "527:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 54,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 49,
+												"mutability": "mutable",
+												"name": "_tableId",
+												"nameLocation": "542:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "537:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 48,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "537:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 51,
+												"mutability": "mutable",
+												"name": "_row",
+												"nameLocation": "557:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "552:9:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 50,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "552:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 53,
+												"mutability": "mutable",
+												"name": "_col",
+												"nameLocation": "568:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 56,
+												"src": "563:9:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 52,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "563:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "536:37:0"
+									},
+									"returnParameters": {
+										"id": 55,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "582:0:0"
+									},
+									"scope": 77,
+									"src": "518:65:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "e6f318c6",
+									"id": 61,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "deleteTable",
+									"nameLocation": "600:11:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 59,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 58,
+												"mutability": "mutable",
+												"name": "_tableId",
+												"nameLocation": "617:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 61,
+												"src": "612:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 57,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "612:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "611:15:0"
+									},
+									"returnParameters": {
+										"id": 60,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "635:0:0"
+									},
+									"scope": 77,
+									"src": "591:45:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "bea02f62",
+									"id": 68,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateStaffTable",
+									"nameLocation": "653:16:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 66,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 63,
+												"mutability": "mutable",
+												"name": "_tableId",
+												"nameLocation": "675:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 68,
+												"src": "670:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 62,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "670:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 65,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "690:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 68,
+												"src": "685:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 64,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "685:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "669:30:0"
+									},
+									"returnParameters": {
+										"id": 67,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "708:0:0"
+									},
+									"scope": 77,
+									"src": "644:65:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "3844ac5b",
+									"id": 76,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getTableById",
+									"nameLocation": "726:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 71,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 70,
+												"mutability": "mutable",
+												"name": "_tableId",
+												"nameLocation": "744:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "739:13:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 69,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "739:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "738:15:0"
+									},
+									"returnParameters": {
+										"id": 75,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 74,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 76,
+												"src": "777:12:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Table_$38_memory_ptr",
+													"typeString": "struct ITableManager.Table"
+												},
+												"typeName": {
+													"id": 73,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 72,
+														"name": "Table",
+														"nameLocations": [
+															"777:5:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 38,
+														"src": "777:5:0"
+													},
+													"referencedDeclaration": 38,
+													"src": "777:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Table_$38_storage_ptr",
+														"typeString": "struct ITableManager.Table"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "776:14:0"
+									},
+									"scope": 77,
+									"src": "717:74:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 78,
+							"src": "58:736:0",
+							"usedErrors": [],
+							"usedEvents": [
+								9,
+								17,
+								21,
+								27
+							]
+						}
+					],
+					"src": "33:761:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

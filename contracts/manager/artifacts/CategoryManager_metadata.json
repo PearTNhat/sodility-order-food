@@ -1,0 +1,316 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "CategoryCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					}
+				],
+				"name": "CategoryDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "newName",
+						"type": "string"
+					}
+				],
+				"name": "CategoryUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					}
+				],
+				"name": "addAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "categories",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "createCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					}
+				],
+				"name": "deleteCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllCategories",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "categoryId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Category[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					}
+				],
+				"name": "getCategory",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "categoryId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Category",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getOwner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "isAdmin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_admin",
+						"type": "address"
+					}
+				],
+				"name": "removeAdmin",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "newName",
+						"type": "string"
+					}
+				],
+				"name": "updateCategory",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/manager/CategoryManager.sol": "CategoryManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/access/RoleAccess.sol": {
+			"keccak256": "0xae4d3aab2faacdfa56ccf1f3766de447a245de99a8b09909c5629b380744882f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c9abbc43f08979c1e518c420f678ab4ceedebf7818b484cf7460960cc0d10b0f",
+				"dweb:/ipfs/QmWjZc1M5QG91VhPG2NiaXuNNXJwJmyYxaCVVJyciAdPJ6"
+			]
+		},
+		"contracts/interfaces/ICategoryManager.sol": {
+			"keccak256": "0x85d0048da124c71f5c7081e8f4b0873dbca91a0c59d5289afe1f984ec1b471fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2004edfe353c9ed5924ed3671f5d0b8c31e3785079ff5313e395103fbee08228",
+				"dweb:/ipfs/QmcbMeqW7babyAGXupT53uNVKohqoEUySWMsDWsH6N6y1S"
+			]
+		},
+		"contracts/manager/CategoryManager.sol": {
+			"keccak256": "0x9c46f5418aa29eb6b5727cd6a154d1d39a54f8d8306923cb89c5494e0f2db747",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://373368f59a01cea5d664625ecbe394bc4b75e2ba0bc4b0d24607d27676e8b723",
+				"dweb:/ipfs/QmNxYyVch56RU3jEk8Rz7SXhzcv8VSjsBHS16ckY59K427"
+			]
+		},
+		"contracts/structs/CategoryStructs.sol": {
+			"keccak256": "0xf98e2ecc9950e796c849dbd45dbb895103aeba82bee473307bc8d7d6e1212ae7",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://93da9b9b2df4760927edbf02132bb935e4d783c121b37250f454097a7debc2f5",
+				"dweb:/ipfs/QmbM2WP3uPCRhiZTvXtdhiDHAbxjed7nuc4JbpxqcUGw8o"
+			]
+		},
+		"contracts/structs/FoodStructs.sol": {
+			"keccak256": "0x22b06b7f1b1d11d433409b0488fba85d58b73c2664a5ca7dd4c12a74d538e3bf",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://84a9ba1df119ad6e63cfaf9240c0ccbfbc61a9be22ac1630fe60144a1fd6cbc8",
+				"dweb:/ipfs/QmaJKEsaJbWGJkJYMiWqtXSVkxFXBKXEgqxnaxCrWprsW5"
+			]
+		}
+	},
+	"version": 1
+}

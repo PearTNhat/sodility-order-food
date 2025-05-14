@@ -1,0 +1,204 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"createOrder(address,string,(uint256,uint256,uint256,string)[])": "6590209d"
+		}
+	},
+	"abi": [
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "user",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "totalAmount",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "enum OrderStatus",
+					"name": "status",
+					"type": "uint8"
+				},
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "orderItemId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "name",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "quantity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "price",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "imageUrl",
+							"type": "string"
+						}
+					],
+					"indexed": false,
+					"internalType": "struct OrderItem[]",
+					"name": "orderItems",
+					"type": "tuple[]"
+				}
+			],
+			"name": "OrderCreated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "OrderDeleted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "enum OrderStatus",
+					"name": "status",
+					"type": "uint8"
+				}
+			],
+			"name": "OrderUpdated",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "_user",
+					"type": "address"
+				},
+				{
+					"internalType": "string",
+					"name": "_userInfo",
+					"type": "string"
+				},
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "name",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "quantity",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "price",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "imageUrl",
+							"type": "string"
+						}
+					],
+					"internalType": "struct OrderItemRequest[]",
+					"name": "_items",
+					"type": "tuple[]"
+				}
+			],
+			"name": "createOrder",
+			"outputs": [
+				{
+					"internalType": "uint256",
+					"name": "",
+					"type": "uint256"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}
