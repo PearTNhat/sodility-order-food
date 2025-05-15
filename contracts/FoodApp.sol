@@ -3,21 +3,40 @@ pragma solidity ^0.8.0;
 
 import "./manager/FoodManager.sol";
 import "./structs/FoodStructs.sol";
-import "./interfaces/IFoodManager.sol"; 
-import "./interfaces/ICategoryManager.sol"; 
+import "./interfaces/IFoodManager.sol";
+import "./interfaces/ICategoryManager.sol";
 import "./access/RoleAccess.sol";
-import "./interfaces/ITableManager.sol"; 
+import "./interfaces/ITableManager.sol";
+import "./interfaces/IOrderManager.sol";
 
-contract FoodApp is RoleAccess  {
-    IFoodManager public foodManager;
-    ICategoryManager public categoryManager;
-    ITableManager public tableManager; // Add TableManager
-    constructor(address _foodManagerAddress, address _categoryManager,address _tableManagerAddress) {
-        foodManager = IFoodManager(_foodManagerAddress);
-        categoryManager = ICategoryManager(_categoryManager);
-        tableManager = ITableManager(_tableManagerAddress); 
+
+contract FoodApp is RoleAccess {
+    address public foodManager;
+    address public categoryManager;
+    address public tableManager;
+    address public orderManager;
+
+    function setFoodManager(address _foodManager) external onlyAdmin {
+        require(_foodManager != address(0), "Invalid address");
+        foodManager = _foodManager;
     }
-// manage food
+
+    function setCategoryManager(address _categoryManager) external onlyAdmin {
+        require(_categoryManager != address(0), "Invalid address");
+        categoryManager = _categoryManager;
+    }
+
+    function setTableManager(address _tableManager) external onlyAdmin {
+        require(_tableManager != address(0), "Invalid address");
+        tableManager = _tableManager;
+    }
+
+    function setOrderManager(address _orderManager) external onlyAdmin {
+        require(_orderManager != address(0), "Invalid address");
+        orderManager = _orderManager;
+    }
+
+    // Manage food
     function createFood(
         uint256 foodId,
         string memory name,
@@ -26,7 +45,7 @@ contract FoodApp is RoleAccess  {
         string[] memory imageUrl,
         UpdateFoodDetail[] memory fd
     ) external onlyAdmin {
-        foodManager.createFood(foodId, name, description, categoryId, imageUrl, fd);
+        IFoodManager(foodManager).createFood(foodId, name, description, categoryId, imageUrl, fd);
     }
 
     function updateFood(
@@ -36,72 +55,115 @@ contract FoodApp is RoleAccess  {
         uint256 categoryId,
         string[] memory imageUrl
     ) external onlyAdmin {
-        foodManager.updateFood(foodId, name, description, categoryId, imageUrl);
+        IFoodManager(foodManager).updateFood(foodId, name, description, categoryId, imageUrl);
     }
 
     function deleteFood(uint256 foodId) external onlyAdmin {
-        foodManager.deleteFood(foodId);
+        IFoodManager(foodManager).deleteFood(foodId);
     }
 
     function addFoodDetails(uint foodId, UpdateFoodDetail[] memory details) external onlyAdmin {
-        foodManager.addFoodDetails(foodId, details);
+        IFoodManager(foodManager).addFoodDetails(foodId, details);
     }
 
     function updateFoodDetail(uint foodId, uint foodDetailId, UpdateFoodDetail memory newDetail) external onlyAdmin {
-        foodManager.updateFoodDetail(foodId, foodDetailId, newDetail);
+        IFoodManager(foodManager).updateFoodDetail(foodId, foodDetailId, newDetail);
     }
 
     function deleteFoodDetail(uint foodId, uint foodDetailId) external onlyAdmin {
-        foodManager.deleteFoodDetail(foodId, foodDetailId);
+        IFoodManager(foodManager).deleteFoodDetail(foodId, foodDetailId);
     }
 
     function getFoodDetails(uint foodId) external view returns (FoodDetail[] memory) {
-        return foodManager.getFoodDetails(foodId);
+        return IFoodManager(foodManager).getFoodDetails(foodId);
     }
 
     function getFood(uint foodId) external view returns (Food memory) {
-        return foodManager.getFood(foodId);
+        return IFoodManager(foodManager).getFood(foodId);
     }
 
     function getAllFoods() external view returns (FoodWithDetails[] memory) {
-        return foodManager.getAllFoods();
+        return IFoodManager(foodManager).getAllFoods();
     }
 
-    //CategoryManager
+    // CategoryManager
     function createCategory(uint categoryId, string memory name) external onlyAdmin {
-        categoryManager.createCategory(categoryId, name);
+        ICategoryManager(categoryManager).createCategory(categoryId, name);
     }
 
     function getCategory(uint categoryId) external view returns (Category memory) {
-        return categoryManager.getCategory(categoryId);
+        return ICategoryManager(categoryManager).getCategory(categoryId);
     }
 
     function updateCategory(uint categoryId, string memory newName) external onlyAdmin {
-        categoryManager.updateCategory(categoryId, newName);
+        ICategoryManager(categoryManager).updateCategory(categoryId, newName);
     }
 
     function deleteCategory(uint categoryId) external onlyAdmin {
-        categoryManager.deleteCategory(categoryId);
+        ICategoryManager(categoryManager).deleteCategory(categoryId);
     }
 
     function getAllCategories() external view returns (Category[] memory) {
-        return categoryManager.getAllCategories();
+        return ICategoryManager(categoryManager).getAllCategories();
     }
 
-    //table
+    // Order
+    function createOrder(
+        address _user,
+        uint256 _foodId,
+        string memory _userInfo,
+        string memory _note,
+        OrderItemRequest[] memory _items
+    ) external returns (Order memory) {
+        return IOrderManager(orderManager).createOrder(_user, _foodId, _userInfo, _note, _items);
+    }
+
+    function updateOrderItemStatus(
+        uint256 _orderId,
+        uint256 _orderItemId,
+        OrderItemStatus _newStatus
+    ) external {
+        IOrderManager(orderManager).updateOrderItemStatus(_orderId, _orderItemId, _newStatus);
+    }
+
+    function getOrdersByStatus(OrderStatus _status)
+        external
+        view
+        returns (Order[] memory)
+    {
+        return IOrderManager(orderManager).getOrdersByStatus(_status);
+    }
+
+    function updateOrderStatus(uint256 _orderId, OrderStatus _status) external {
+        IOrderManager(orderManager).updateOrderStatus(_orderId, _status);
+    }
+
+    function getUserOrders(address _user)
+        external
+        view
+        returns (uint256[] memory)
+    {
+        return IOrderManager(orderManager).getUserOrders(_user);
+    }
+
+    // Table
     function addTable(uint _row, uint _col) external onlyAdmin returns (uint) {
-        return tableManager.addTable(_row, _col);
+        return ITableManager(tableManager).addTable(_row, _col);
     }
 
     function editTable(uint _tableId, uint _row, uint _col) external onlyAdmin {
-        tableManager.editTable(_tableId, _row, _col);
+        ITableManager(tableManager).editTable(_tableId, _row, _col);
     }
 
     function deleteTable(uint _tableId) external onlyAdmin {
-        tableManager.deleteTable(_tableId);
+        ITableManager(tableManager).deleteTable(_tableId);
     }
 
     function updateStaffTable(uint _tableId, uint _staffId) external onlyAdmin {
-        tableManager.updateStaffTable(_tableId, _staffId);
+        ITableManager(tableManager).updateStaffTable(_tableId, _staffId);
+    }
+
+    function getTableById(uint _tableId) external view returns (ITableManager.Table memory) {
+        return ITableManager(tableManager).getTableById(_tableId);
     }
 }

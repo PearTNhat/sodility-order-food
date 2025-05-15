@@ -66,4 +66,5 @@ interface IFoodManager {
 
     function reduceQuantiy (uint _foodId,uint foodDetailId,uint _quantity) external;
     function increaseQuantiy (uint _foodId,uint foodDetailId,uint _quantity) external ;
+      function getFoodDetailByFoodId_FoodDetailId (uint _foodId,uint _foodDetailId) external  returns (FoodDetail memory);
 }

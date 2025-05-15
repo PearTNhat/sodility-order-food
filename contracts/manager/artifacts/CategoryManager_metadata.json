@@ -59,12 +59,17 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_admin",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "categoryId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
 					}
 				],
-				"name": "addAdmin",
+				"name": "addFoodIdToCategory",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -88,6 +93,30 @@
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "categoryToFoodId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -181,51 +210,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getOwner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isAdmin",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_admin",
-						"type": "address"
-					}
-				],
-				"name": "removeAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -271,28 +255,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0xae4d3aab2faacdfa56ccf1f3766de447a245de99a8b09909c5629b380744882f",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://c9abbc43f08979c1e518c420f678ab4ceedebf7818b484cf7460960cc0d10b0f",
-				"dweb:/ipfs/QmWjZc1M5QG91VhPG2NiaXuNNXJwJmyYxaCVVJyciAdPJ6"
-			]
-		},
 		"contracts/interfaces/ICategoryManager.sol": {
-			"keccak256": "0x85d0048da124c71f5c7081e8f4b0873dbca91a0c59d5289afe1f984ec1b471fa",
+			"keccak256": "0x65d911c06fb6465e4e93ff64b91d732d6af71dfcaff2ae5d8c9030c49e2a1ab2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2004edfe353c9ed5924ed3671f5d0b8c31e3785079ff5313e395103fbee08228",
-				"dweb:/ipfs/QmcbMeqW7babyAGXupT53uNVKohqoEUySWMsDWsH6N6y1S"
+				"bzz-raw://6856cec52e3d027b44b04cc41191cef6f00814acb6b907b0005bae430b7756f7",
+				"dweb:/ipfs/Qma4t8UspGrssoFQueYpJnD8u5RicNybyHtZ3wL7GVuBkW"
 			]
 		},
 		"contracts/manager/CategoryManager.sol": {
-			"keccak256": "0x9c46f5418aa29eb6b5727cd6a154d1d39a54f8d8306923cb89c5494e0f2db747",
+			"keccak256": "0xc767ff92750a4981b2728d3a3a2cc39dab4913a6250dc8e134eae80ae7389b8d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://373368f59a01cea5d664625ecbe394bc4b75e2ba0bc4b0d24607d27676e8b723",
-				"dweb:/ipfs/QmNxYyVch56RU3jEk8Rz7SXhzcv8VSjsBHS16ckY59K427"
+				"bzz-raw://9d6eb5975959d98d8acd58a1d007398134a7879e6e0c9c6b0f614cb9e72be234",
+				"dweb:/ipfs/QmRkoLnBw5owS5QAbwPVJdr8EebwUJNgf4pMXAAK6HXp14"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -304,11 +280,11 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0x22b06b7f1b1d11d433409b0488fba85d58b73c2664a5ca7dd4c12a74d538e3bf",
+			"keccak256": "0x6d62d76266bb85d8cc0df8c1b87be30a4d4045a4dca110853588a80b474f0f94",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://84a9ba1df119ad6e63cfaf9240c0ccbfbc61a9be22ac1630fe60144a1fd6cbc8",
-				"dweb:/ipfs/QmaJKEsaJbWGJkJYMiWqtXSVkxFXBKXEgqxnaxCrWprsW5"
+				"bzz-raw://497ee0739afacef5b4a64a5b735c5727f20fb2e72e398bdc8358cdc30b01f964",
+				"dweb:/ipfs/QmNmQNfGLhGb9c8rgPUhzA8dYmcpRMX7Cc2vyz9sHZjF75"
 			]
 		}
 	},

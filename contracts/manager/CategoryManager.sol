@@ -3,9 +3,8 @@ pragma solidity ^0.8.0;
 
 import "../interfaces/ICategoryManager.sol";
 import "../structs/FoodStructs.sol"; // Import struct Category
-import "../access/RoleAccess.sol";
 
-contract CategoryManager is ICategoryManager, RoleAccess {
+contract CategoryManager is ICategoryManager {
     mapping(uint => Category) public categories;
     uint[] private categoryIds;
     mapping(uint => uint[]) public categoryToFoodId;

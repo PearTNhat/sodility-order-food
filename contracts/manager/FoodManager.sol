@@ -173,7 +173,7 @@ contract FoodManager is IFoodManager, RoleAccess {
         require(foods[foodId].foodId != 0, "Food does not exist");
         return foodDetails[foodId];
     }
-
+// hàm đưa dữ liệu ra bên ngoài
     function getFood(uint256 foodId)
         external
         view
@@ -220,4 +220,20 @@ contract FoodManager is IFoodManager, RoleAccess {
             }
         } 
     }
+
+   function getFoodDetailByFoodId_FoodDetailId(uint _foodId, uint _foodDetailId) 
+    external 
+    view 
+    override 
+    returns (FoodDetail memory fd) 
+{
+    for (uint i = 0; i < foodDetails[_foodId].length; i++) {
+        if (foodDetails[_foodId][i].foodDetailId == _foodDetailId) {
+            return foodDetails[_foodId][i];
+        }
+    }
+    revert("FoodDetail not found");
+}
+
+
 }

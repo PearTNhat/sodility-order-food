@@ -7,6 +7,7 @@ struct Food {
     string description;
     uint categoryId;
     string[] imageUrl;
+    string soldQuantity;
     uint sumRating;
     uint countRating;
 }

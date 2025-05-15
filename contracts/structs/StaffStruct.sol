@@ -1,0 +1,11 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+struct Staff {
+    uint staffId;
+    string name;
+    string dob;
+    string phone;
+    string sumRating;
+    string countRating;
+}

@@ -31,39 +31,6 @@
 						"internalType": "enum OrderStatus",
 						"name": "status",
 						"type": "uint8"
-					},
-					{
-						"components": [
-							{
-								"internalType": "uint256",
-								"name": "orderItemId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "name",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "quantity",
-								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "imageUrl",
-								"type": "string"
-							}
-						],
-						"indexed": false,
-						"internalType": "struct OrderItem[]",
-						"name": "orderItems",
-						"type": "tuple[]"
 					}
 				],
 				"name": "OrderCreated",
@@ -93,6 +60,31 @@
 					},
 					{
 						"indexed": false,
+						"internalType": "uint256",
+						"name": "orderItemId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum OrderItemStatus",
+						"name": "newStatus",
+						"type": "uint8"
+					}
+				],
+				"name": "OrderItemStatusUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "orderId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
 						"internalType": "enum OrderStatus",
 						"name": "status",
 						"type": "uint8"
@@ -109,31 +101,36 @@
 						"type": "address"
 					},
 					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
 						"internalType": "string",
 						"name": "_userInfo",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "note",
 						"type": "string"
 					},
 					{
 						"components": [
 							{
 								"internalType": "uint256",
-								"name": "name",
+								"name": "foodId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "foodDetailId",
 								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
 								"name": "quantity",
 								"type": "uint256"
-							},
-							{
-								"internalType": "uint256",
-								"name": "price",
-								"type": "uint256"
-							},
-							{
-								"internalType": "string",
-								"name": "imageUrl",
-								"type": "string"
 							}
 						],
 						"internalType": "struct OrderItemRequest[]",
@@ -144,11 +141,258 @@
 				"name": "createOrder",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "orderId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "user",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "userInfo",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "note",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "imgage",
+								"type": "string"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "orderItemId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "foodDetailId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "foodId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "quantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "price",
+										"type": "uint256"
+									},
+									{
+										"internalType": "enum OrderItemStatus",
+										"name": "status",
+										"type": "uint8"
+									}
+								],
+								"internalType": "struct OrderItem[]",
+								"name": "items",
+								"type": "tuple[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum OrderStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Order",
 						"name": "",
-						"type": "uint256"
+						"type": "tuple"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum OrderStatus",
+						"name": "_status",
+						"type": "uint8"
+					}
+				],
+				"name": "getOrdersByStatus",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "orderId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "user",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "userInfo",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "note",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "imgage",
+								"type": "string"
+							},
+							{
+								"components": [
+									{
+										"internalType": "uint256",
+										"name": "orderItemId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "foodDetailId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "foodId",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "quantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "price",
+										"type": "uint256"
+									},
+									{
+										"internalType": "enum OrderItemStatus",
+										"name": "status",
+										"type": "uint8"
+									}
+								],
+								"internalType": "struct OrderItem[]",
+								"name": "items",
+								"type": "tuple[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "totalAmount",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum OrderStatus",
+								"name": "status",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Order[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					}
+				],
+				"name": "getUserOrders",
+				"outputs": [
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_orderItemId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum OrderItemStatus",
+						"name": "_newStatus",
+						"type": "uint8"
+					}
+				],
+				"name": "updateOrderItemStatus",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum OrderStatus",
+						"name": "_status",
+						"type": "uint8"
+					}
+				],
+				"name": "updateOrderStatus",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			}
@@ -181,19 +425,19 @@
 	},
 	"sources": {
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0x63eb3bdc2883550d5606f00596df0c8e7495e2b58dd7bec323ee0c6b4f394cbe",
+			"keccak256": "0xe5b7bd906502f627a07b9dfb16566f880fb0667ca4c2be23cf670338708b8b4d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://390c7dd2520c48b48c8c1637c3078049677d19541db803d3c651d459a98a8068",
-				"dweb:/ipfs/QmWCi8oyEiGu9GtANYADhUQJ2jkq7JppBqcPcSq6PdHLUQ"
+				"bzz-raw://323f027a541d6469ec507747e9ac7889ea0a384f2e1cf56b11814f86ee26bc3a",
+				"dweb:/ipfs/QmSJV3BUCwMkjSjpHhD3oc7HMWwzXQRKgmFKETzi5eVKXn"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0xc9f239c070140203b5fa401ebb1c39c75d04427706ab6e9d6fb9b648488894f9",
+			"keccak256": "0x4602e0f2d632b7cca9741dcd62a57b2c3c4b16d5aff952d63760baced4052517",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6f4e8d86a756970b0517094fec35c1dcbcafa3d8aeca59d6f188b9e1f6bf4cde",
-				"dweb:/ipfs/QmeKedrmz9tURSXqLs5oiQu3XbWJmGhG32RAedJeymB3o1"
+				"bzz-raw://393f354e152e8b03be2197bded9cbb25c623e27d3aece1630902071f477b81bf",
+				"dweb:/ipfs/Qmd44gaTL6AwyTaHma48N4dQtszBeZAziMSQnv541HLncv"
 			]
 		}
 	},

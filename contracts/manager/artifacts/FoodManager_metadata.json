@@ -445,6 +445,52 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_foodDetailId",
+						"type": "uint256"
+					}
+				],
+				"name": "getFoodDetailByFoodId_FoodDetailId",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "foodDetailId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "size",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct FoodDetail",
+						"name": "fd",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "foodId",
 						"type": "uint256"
 					}
@@ -717,19 +763,19 @@
 			]
 		},
 		"contracts/interfaces/IFoodManager.sol": {
-			"keccak256": "0xcf2083e8a92476e8c32155ee3b5554c7f74cfe70fb4e5888a6cfe9c2cdc11256",
+			"keccak256": "0xfca1c8b269f73e389697a5201613dc99c53e6f60959cf0f8b29db209be5d82f2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f1e13e56f28b7a1b0f1147e19e7232f9078725f671a8f69d6236d90232fc67a8",
-				"dweb:/ipfs/QmaMSv3dW2h5iJyRihijjQRfeSxCnXsewDK6Psjpq9MyJH"
+				"bzz-raw://e8e1a2f65c45b6960ddf986d4fcdb057f6e3cd9cf3bdb80288f8191883ff5542",
+				"dweb:/ipfs/QmZN5TCTdq4daxwrjXfDvRrDPLusdnWQKTY18QZM6SHV1u"
 			]
 		},
 		"contracts/manager/FoodManager.sol": {
-			"keccak256": "0xeced31441933f48769f462b2afc7f5faf74be60a9093a3e1183831c460a01531",
+			"keccak256": "0x6c683028eda664970f415f1ddf8dba4c733af82bd6ceb971c32e16d99b893799",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://64f24f7519b52f980685d2ae00c6ebf25d822a8a34a362b189eb281958053acf",
-				"dweb:/ipfs/QmdvSa51ttSUSZ7VPNk4SZiZR1uATKChychB6UY4ypHsnz"
+				"bzz-raw://58b419ba35667c9ad8b9ac0c8b581ad3271278e92c9b2355d03386a7ca11ba85",
+				"dweb:/ipfs/QmWX2ALsjCsnDLfBzZtzGf3VMkVg9wQsCasEhpZGxG4ZVt"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {

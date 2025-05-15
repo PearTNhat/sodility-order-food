@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 import "../interfaces/IOrderManager.sol";
 import "../interfaces/IFoodManager.sol";
+// import "hardhat/console.log";
 
 contract OrderManager is IOrderManager {
     IFoodManager public foodManager;
@@ -20,11 +21,10 @@ contract OrderManager is IOrderManager {
         uint256 _foodId,
         string memory _userInfo,
         string memory _note,
-        string memory _img,
         OrderItemRequest[] memory _items
     ) public override returns (Order memory) {
         require(_items.length > 0, "Order must contain at least one item");
-
+        Food memory food = foodManager.getFood(_foodId);
         uint256 totalAmount = 0;
         uint256 orderId = nextOrderId++;
         Order storage o = orders[orderId];
@@ -32,13 +32,15 @@ contract OrderManager is IOrderManager {
         o.user = _user;
         o.userInfo = _userInfo;
         o.totalAmount = totalAmount;
+        o.name = food.name;
         o.note=_note;
-        o.image=_img;
+        o.imgage = food.imageUrl[0];
         o.status = OrderStatus.Pending;
         o.timestamp = block.timestamp;
 
         for (uint256 i = 0; i < _items.length; i++) {
-            totalAmount += _items[i].price * _items[i].quantity;
+            FoodDetail memory foodDetail = foodManager.getFoodDetailByFoodId_FoodDetailId(_foodId, _items[i].foodDetailId) ;
+            totalAmount += foodDetail.price * _items[i].quantity;
             foodManager.reduceQuantiy(
                 _foodId,
                 _items[i].foodDetailId,
@@ -49,9 +51,8 @@ contract OrderManager is IOrderManager {
                     orderItemId: nextOrderItemId++,
                     foodDetailId:_items[i].foodDetailId,
                     foodId:_items[i].foodId,
-                    name: _items[i].name,
                     quantity: _items[i].quantity,
-                    price: _items[i].price,
+                    price: foodDetail.price,
                     status: OrderItemStatus.Shipping
                 })
             );
@@ -63,8 +64,7 @@ contract OrderManager is IOrderManager {
             orderId,
             _user,
             totalAmount,
-            OrderStatus.Pending,
-            _items
+            OrderStatus.Pending
         );
         return o;
     }
@@ -76,9 +76,10 @@ contract OrderManager is IOrderManager {
     ) public override {
         require(orders[_orderId].orderId != 0, "Order does not exist");
         Order memory tempOrder = orders[_orderId];
+        bool found = false;
         for (uint256 i = 0; i < tempOrder.items.length; i++) {
             // tìm kiếm orderItemId trong đó xem =  truyền vào k
-            if (orders[_orderItemId].items[i].orderItemId == _orderItemId) {
+            if (tempOrder.items[i].orderItemId == _orderItemId) {
                 require(
                     tempOrder.items[i].status != OrderItemStatus.Success,
                     "Order item already marked as success. Can not update"
@@ -90,12 +91,13 @@ contract OrderManager is IOrderManager {
                         .quantity;
                 }
                 orders[_orderId].totalAmount -= tempOrder.items[i].price;
+                found = true;
                 break;
             }
         }
+        require(found, "Order item not found");
         emit OrderItemStatusUpdated(_orderId, _orderItemId, _newStatus);
     }
-
     function getOrdersByStatus(OrderStatus _status)
         public
         view
@@ -149,4 +151,5 @@ contract OrderManager is IOrderManager {
     {
         return userOrders[_user];
     }
+   
 }

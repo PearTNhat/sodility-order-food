@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 import "../structs/OrderStructs.sol";
 interface IOrderManager {
-    event OrderCreated(uint orderId, address user, uint totalAmount, OrderStatus status, OrderItemRequest[] orderItems);
+    event OrderCreated(uint orderId, address user, uint totalAmount, OrderStatus status);
     event OrderUpdated(uint orderId, OrderStatus status);
      event OrderItemStatusUpdated(uint orderId, uint orderItemId, OrderItemStatus newStatus); // Thêm sự kiện
     event OrderDeleted(uint orderId);
@@ -12,7 +12,6 @@ interface IOrderManager {
         uint _foodId,
         string memory _userInfo,
         string memory note,
-        string memory imgage,
         OrderItemRequest[] memory _items
     ) external returns (Order memory);
 
@@ -28,4 +27,5 @@ interface IOrderManager {
         returns (Order[] memory);
     function updateOrderStatus(uint _orderId, OrderStatus _status) external;
     function getUserOrders(address _user) external view returns (uint[] memory);
+
 }
