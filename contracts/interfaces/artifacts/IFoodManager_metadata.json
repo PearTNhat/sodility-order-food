@@ -34,9 +34,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "string[]",
 						"name": "imageUrl",
-						"type": "string"
+						"type": "string[]"
 					}
 				],
 				"name": "FoodCreated",
@@ -135,12 +135,31 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "string[]",
 						"name": "imageUrl",
-						"type": "string"
+						"type": "string[]"
 					}
 				],
 				"name": "FoodUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "hidden",
+						"type": "bool"
+					}
+				],
+				"name": "FoodVisibilityChanged",
 				"type": "event"
 			},
 			{
@@ -296,6 +315,31 @@
 										"internalType": "string[]",
 										"name": "imageUrl",
 										"type": "string[]"
+									},
+									{
+										"internalType": "uint256",
+										"name": "soldQuantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "quantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "sumRating",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
+										"name": "countRating",
+										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "isHidden",
+										"type": "bool"
 									}
 								],
 								"internalType": "struct Food",
@@ -313,6 +357,11 @@
 										"internalType": "string",
 										"name": "size",
 										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "soldQuantity",
+										"type": "uint256"
 									},
 									{
 										"internalType": "uint256",
@@ -374,6 +423,31 @@
 								"internalType": "string[]",
 								"name": "imageUrl",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "sumRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "countRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isHidden",
+								"type": "bool"
 							}
 						],
 						"internalType": "struct Food",
@@ -382,6 +456,57 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_foodDetailId",
+						"type": "uint256"
+					}
+				],
+				"name": "getFoodDetailByFoodId_FoodDetailId",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "foodDetailId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "size",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "price",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct FoodDetail",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -405,6 +530,11 @@
 								"internalType": "string",
 								"name": "size",
 								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
@@ -466,7 +596,71 @@
 						"type": "uint256"
 					}
 				],
+				"name": "increaseSoldQuantiy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "foodDetailId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_quantity",
+						"type": "uint256"
+					}
+				],
 				"name": "reduceQuantiy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "foodDetailId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_quantity",
+						"type": "uint256"
+					}
+				],
+				"name": "reduceSoldQuantiy",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "hidden",
+						"type": "bool"
+					}
+				],
+				"name": "setFoodVisibility",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -566,26 +760,26 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/interfaces/IFoodManager.sol": {
-			"keccak256": "0xa83b3088da2e6c2e9ff8ee0122eafc3fb8f3be640edfc699d28ac93369f4c306",
+			"keccak256": "0x98ec4c133c89bbc47a72d20ae8f2b70af0f943e5da303b52997dd948e38bee60",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://3ab0ebe13658012619deaf2d4777b4a97218b718ba2443f975ab75650295ee55",
-				"dweb:/ipfs/QmW5PBVMbw7gfC1QdBuHdbSgBwF1m7H1r5C6sAFzXp6ofb"
+				"bzz-raw://e32258fc17fe7c86b929cd342e80fb0d92ccc0e76ae14c637e3b519d2e18aa3b",
+				"dweb:/ipfs/QmQo8taPTbcAr7hCX97VM6nvvWv2MEvLqRwJgh5dmpd3cx"
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0xbacc5e01e45e67024930b36842466179bbe60a634dbf965308e462aac1cdaa9f",
+			"keccak256": "0xf10e8cac411afde2b7c67359281e698c58c788ec3e187d5c6a7b70fe1dea8fba",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4aeb8a568b1a926215beb3dde28559d9eab9e3d103fd23584dd5e8da8516b9de",
-				"dweb:/ipfs/QmWcZ6xbPyFQkG9hDYVP8153sF7VYhA5KjFq8fbcfy3UXE"
+				"bzz-raw://8841147cc4ee9867a2426477ea57ae7bdd95b1fa8c87f0b908ce4d1e5691bee0",
+				"dweb:/ipfs/QmcJq7zSSAxHWcKg2MtDMYR9DQQiPiWFrcN8yyppx2SGEk"
 			]
 		}
 	},

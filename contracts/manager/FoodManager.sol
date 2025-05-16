@@ -23,7 +23,7 @@ contract FoodManager is IFoodManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        require(roleAccess.isAdmin(tx.origin), "You are not admin");
         _;
     }
 
@@ -36,7 +36,6 @@ contract FoodManager is IFoodManager {
         UpdateFoodDetail[] memory _foodDetail
     ) external override onlyAdmin {
         // Kiểm tra xem ID thực phẩm đã tồn tại chưa
-        console.log("Owner contract deployed by:", msg.sender);
         require(foods[_foodId].foodId == 0, "Food with this ID already exists");
         require(
             categoryManager.getCategory(_categoryId).categoryId != 0,
@@ -51,8 +50,10 @@ contract FoodManager is IFoodManager {
             categoryId: _categoryId,
             imageUrl: _imageUrl,
             soldQuantity: 0,
+            quantity: 0,
             sumRating: 0,
-            countRating: 0
+            countRating: 0,
+            isHidden: false
         });
         foods[_foodId] = newFood;
         foodIds.push(_foodId);
@@ -80,7 +81,7 @@ contract FoodManager is IFoodManager {
         string memory _description,
         uint256 _categoryId,
         string[] memory _imageUrl
-    ) external override onlyAdmin{
+    ) external override onlyAdmin {
         require(foods[_foodId].foodId != 0, "Food does not exist");
         require(
             categoryManager.getCategory(_categoryId).categoryId != 0,
@@ -95,7 +96,7 @@ contract FoodManager is IFoodManager {
         emit FoodUpdated(_foodId, _name, _description, _categoryId, _imageUrl);
     }
 
-    function deleteFood(uint256 foodId) external override onlyAdmin{
+    function deleteFood(uint256 foodId) external override onlyAdmin {
         require(foods[foodId].foodId != 0, "Food does not exist");
         delete foods[foodId];
         // Xóa chi tiết món ăn liên quan
@@ -125,7 +126,7 @@ contract FoodManager is IFoodManager {
             FoodDetail memory fd = FoodDetail({
                 foodDetailId: nextFoodDetailId,
                 size: details[i].size,
-                soldQuantity:0,
+                soldQuantity: 0,
                 quantity: details[i].quantity,
                 price: details[i].price
             });
@@ -138,7 +139,7 @@ contract FoodManager is IFoodManager {
         uint256 foodId,
         uint256 foodDetailId,
         UpdateFoodDetail memory newDetail
-    ) external override onlyAdmin{
+    ) external override onlyAdmin {
         require(foods[foodId].foodId != 0, "Food does not exist");
         FoodDetail[] storage foodDetailList = foodDetails[foodId];
         bool found = false;
@@ -167,7 +168,7 @@ contract FoodManager is IFoodManager {
             if (foodDetailList[i].foodDetailId == foodDetailId) {
                 foodDetailList[i] = foodDetailList.length > 1
                     ? foodDetailList[foodDetailList.length - 1]
-                    : FoodDetail(0, "", 0, 0,0);
+                    : FoodDetail(0, "", 0, 0, 0);
                 foodDetailList.pop();
                 found = true;
                 emit FoodDetailDeleted(foodId, foodDetailId);
@@ -187,17 +188,22 @@ contract FoodManager is IFoodManager {
         require(foods[foodId].foodId != 0, "Food does not exist");
         return foodDetails[foodId];
     }
-// bán chạy
-    function getAllFoodsSortedBySoldQuantity() public view returns (Food[] memory) {
-        uint length = foodIds.length;
+
+    // bán chạy
+    function getAllFoodsSortedBySoldQuantity()
+        public
+        view
+        returns (Food[] memory)
+    {
+        uint256 length = foodIds.length;
         Food[] memory foodList = new Food[](length);
-        for (uint i = 0; i < length; i++) {
+        for (uint256 i = 0; i < length; i++) {
             foodList[i] = foods[foodIds[i]];
         }
 
         // Bubble Sort để sắp xếp theo soldQuantity giảm dần
-        for (uint i = 0; i < length - 1; i++) {
-            for (uint j = 0; j < length - i - 1; j++) {
+        for (uint256 i = 0; i < length - 1; i++) {
+            for (uint256 j = 0; j < length - i - 1; j++) {
                 if (foodList[j].soldQuantity < foodList[j + 1].soldQuantity) {
                     // Hoán đổi vị trí
                     Food memory temp = foodList[j];
@@ -209,15 +215,22 @@ contract FoodManager is IFoodManager {
         return foodList;
     }
 
+    // ẩn hiện foood
+    function setFoodVisibility(uint _foodId, bool hidden) external onlyAdmin {
+        require(foods[_foodId].foodId != 0, "Food does not exist");
+        foods[_foodId].isHidden = hidden;
+        emit FoodVisibilityChanged(_foodId, hidden);
+    }
+
     // hàm đưa dữ liệu ra bên ngoài
-    function getFood(uint256 foodId)
+    function getFood(uint256 _foodId)
         external
         view
         override
         returns (Food memory)
     {
-        require(foods[foodId].foodId != 0, "Food does not exist");
-        return foods[foodId];
+        require(foods[_foodId].foodId != 0, "Food does not exist");
+        return foods[_foodId];
     }
 
     function getAllFoods()
@@ -254,6 +267,11 @@ contract FoodManager is IFoodManager {
                 break;
             }
         }
+        require(
+            foods[_foodId].quantity >= _quantity,
+            "Quantity's food cannot be smaller than 0"
+        );
+        foods[_foodId].quantity -= _quantity;
     }
 
     function increaseQuantiy(
@@ -267,6 +285,7 @@ contract FoodManager is IFoodManager {
                 break;
             }
         }
+        foods[_foodId].quantity += _quantity;
     }
 
     function increaseSoldQuantiy(
@@ -282,6 +301,7 @@ contract FoodManager is IFoodManager {
         }
         foods[_foodId].soldQuantity += _quantity;
     }
+
     function reduceSoldQuantiy(
         uint256 _foodId,
         uint256 foodDetailId,
@@ -289,12 +309,18 @@ contract FoodManager is IFoodManager {
     ) external override {
         for (uint256 i = 0; i < foodDetails[_foodId].length; i++) {
             if (foodDetails[_foodId][i].foodDetailId == foodDetailId) {
-                require(foodDetails[_foodId][i].soldQuantity >= _quantity , "Quantity's food detail cannot be smaller than 0");
+                require(
+                    foodDetails[_foodId][i].soldQuantity >= _quantity,
+                    "Quantity's food detail cannot be smaller than 0"
+                );
                 foodDetails[_foodId][i].soldQuantity -= _quantity;
                 break;
             }
         }
-        require(foods[_foodId].soldQuantity >= _quantity , "Quantity's food cannot be smaller than 0");
+        require(
+            foods[_foodId].soldQuantity >= _quantity,
+            "Quantity's food cannot be smaller than 0"
+        );
         foods[_foodId].soldQuantity -= _quantity;
     }
 
@@ -311,4 +337,14 @@ contract FoodManager is IFoodManager {
         revert("FoodDetail not found ___.");
     }
 
+    function updateRatingFood(
+        uint256 _foodId,
+        uint256 _sumRating,
+        uint256 _countRating
+    ) public {
+        require(foods[_foodId].foodId > 0, "Food does not exist");
+        foods[_foodId].sumRating = _sumRating;
+        foods[_foodId].countRating = _countRating;
+        emit FoodRatingUpdate(_foodId, _sumRating);
+    }
 }

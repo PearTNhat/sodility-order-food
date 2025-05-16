@@ -1,0 +1,414 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_roleAccess",
+						"type": "address"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "FoodRatingAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					}
+				],
+				"name": "FoodRatingDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "FoodRatingUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "addFoodRating",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					}
+				],
+				"name": "deleteFoodRating",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "foodIdToRatingIds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "foodManager",
+				"outputs": [
+					{
+						"internalType": "contract IFoodManager",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "foodRatings",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "foodId",
+						"type": "uint256"
+					}
+				],
+				"name": "getFoodRatingsByFoodId",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "reviewer",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "foodId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"internalType": "uint8",
+								"name": "stars",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct FoodRating[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nextFoodRatingId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "roleAccess",
+				"outputs": [
+					{
+						"internalType": "contract RoleAccess",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_foodManager",
+						"type": "address"
+					}
+				],
+				"name": "setFoodManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "updateFoodRating",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/manager/FoodRating.sol": "FoodRatingManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/access/RoleAccess.sol": {
+			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
+				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+			]
+		},
+		"contracts/interfaces/IFoodManager.sol": {
+			"keccak256": "0xa7d95edd76e03e60daac3477f3e9fab0eaf770f83749d7bc056dee562f5fabe3",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e355ade4d53014c7facbb42b544573878740a000001a091396562059c1d73c62",
+				"dweb:/ipfs/QmVjzsMqorwwQHWvU8upDTNxouSFAyx7Z2WnNgGKxvozRy"
+			]
+		},
+		"contracts/interfaces/IFoodRatingManager.sol": {
+			"keccak256": "0xa54e06cde17c4cf6d7194592cbd1c377835ef358b9ffa45b4fe34e1571e8da8f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2ea1bb6dbc1d693f7685ef76dbd534100cf2df29f183777fb9212c7fc6adcccd",
+				"dweb:/ipfs/QmbZsrq5aTSfMzoPNjV8E4mDb7e9TJVb24F4dZEejA69Zd"
+			]
+		},
+		"contracts/manager/FoodRating.sol": {
+			"keccak256": "0xb8f9f1cc37dc477aefa1c7571db459ff865133480ece3afb721ef8b0b5734e27",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ebd2af99b5489ea142d0dc0a904cad45e16c3ab588165edf3f96ca3402c7ea67",
+				"dweb:/ipfs/QmNNtD1da3hz1phAqPSY9GDy5ZCZL5qm7mRmHsXpJ45rBg"
+			]
+		},
+		"contracts/structs/FoodStructs.sol": {
+			"keccak256": "0xf10e8cac411afde2b7c67359281e698c58c788ec3e187d5c6a7b70fe1dea8fba",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8841147cc4ee9867a2426477ea57ae7bdd95b1fa8c87f0b908ce4d1e5691bee0",
+				"dweb:/ipfs/QmcJq7zSSAxHWcKg2MtDMYR9DQQiPiWFrcN8yyppx2SGEk"
+			]
+		},
+		"contracts/structs/RatingStruct.sol": {
+			"keccak256": "0xb45d50b9aaa7635852d03b6ca7182fd9f7184c796d75bcf29494a5e07d8c4328",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://35a0285a7c282d78ae7bc095d87c8ac1d3d7e08fa37b47064f7c8831bdf14b1d",
+				"dweb:/ipfs/QmUW25ZjmT35px6WcWKh66j2DkRKuAsDhK17e8bn2AyhNW"
+			]
+		}
+	},
+	"version": 1
+}

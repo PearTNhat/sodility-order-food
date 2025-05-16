@@ -55,6 +55,25 @@
 					{
 						"indexed": false,
 						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "TableAddedToOrder",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
 						"name": "tableId",
 						"type": "uint256"
 					}
@@ -88,6 +107,19 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "TableUpdatedStaus",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -108,6 +140,24 @@
 						"type": "uint256"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "addTableToOrder",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -175,17 +225,12 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint256",
-								"name": "staffId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "isReserved",
-								"type": "bool"
+								"internalType": "enum TableStatus",
+								"name": "status",
+								"type": "uint8"
 							}
 						],
-						"internalType": "struct ITableManager.Table",
+						"internalType": "struct Table",
 						"name": "",
 						"type": "tuple"
 					}
@@ -201,12 +246,12 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "enum TableStatus",
+						"name": "_status",
+						"type": "uint8"
 					}
 				],
-				"name": "updateStaffTable",
+				"name": "updateStatusTable",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -225,7 +270,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/interfaces/ITableInteface.sol": "ITableManager"
+			"contracts/interfaces/ITableManager.sol": "ITableManager"
 		},
 		"evmVersion": "prague",
 		"libraries": {},
@@ -239,12 +284,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/interfaces/ITableInteface.sol": {
-			"keccak256": "0x6bd47a3f855944683dab688c501de00d6b078ece73c89bdfe621ef49e6bea908",
+		"contracts/interfaces/ITableManager.sol": {
+			"keccak256": "0x1471b56b08ebf037f7ae42f7ef68cbdb9e1c03e44b9c1087aa49b2b5f0e2bbe5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://124f384ad7f29decb141d8cecb7a85e6e03f69d5bb4bffac75348dc1a3ea6008",
-				"dweb:/ipfs/QmPsh8NKNwBN8Rqo41wxsGb9dMeQ8LEtvvD3VNqdxNcAie"
+				"bzz-raw://ad0baf4208656806b9c611437eee1c9f08129f22fd471094554589f2f5aec543",
+				"dweb:/ipfs/QmSG5aadDueau8vh4mj67mpZuzvHQ1EFEsngGQGi2fC7En"
+			]
+		},
+		"contracts/structs/TableStruct.sol": {
+			"keccak256": "0xeba4b14f3eda8af9b2e3e318ac15b5f9ede865664825482581c00f1f9aae23c6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://754308bf229ded8e1bd8ffb5020e06340c39ea89c2f0f31bcff589b777ebd0bd",
+				"dweb:/ipfs/QmYv9zq8t97k9TP74oKs475dsfeN2pegBihQbPUNCNCqBk"
 			]
 		}
 	},

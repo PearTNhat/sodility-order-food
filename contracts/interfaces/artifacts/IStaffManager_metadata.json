@@ -47,6 +47,31 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "sumRating",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "countRating",
+						"type": "uint256"
+					}
+				],
+				"name": "StaffRatingUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": true,
 						"internalType": "uint256",
 						"name": "staffId",
@@ -141,14 +166,14 @@
 								"type": "string"
 							},
 							{
-								"internalType": "string",
+								"internalType": "uint256",
 								"name": "sumRating",
-								"type": "string"
+								"type": "uint256"
 							},
 							{
-								"internalType": "string",
+								"internalType": "uint256",
 								"name": "countRating",
-								"type": "string"
+								"type": "uint256"
 							}
 						],
 						"internalType": "struct Staff",
@@ -163,11 +188,21 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_orderId",
+						"name": "_staffId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_sumRating",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_countRating",
 						"type": "uint256"
 					}
 				],
-				"name": "getStaffForOrder",
+				"name": "updateRatingStaff",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -222,26 +257,26 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/interfaces/IStaffManager.sol": {
-			"keccak256": "0x9fb65817b4efef5e2c8d5d0bf39d5668fd2e009c54f447cf7281fe04be5223eb",
+			"keccak256": "0x2414f51962e37cbe55c17da36f7ec1c7881677d02e63b276f3b604f303344819",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://17292fb13498453d05f40d55f96e64aeb786bcf5423eb48092d41fffb454b6a5",
-				"dweb:/ipfs/QmfVXtt7hvhPxt7NwYKG1Qy26vXQGgxhfWMVTD4xy7EjbL"
+				"bzz-raw://1c82c305d1a63e364dccd5b0f52f55d7b3a7f6a3d7c11fa2abeceb84631442da",
+				"dweb:/ipfs/QmVp22ZhGc2JoAD9up7e25A5QXTkuKC9aR6ByTh713pUvj"
 			]
 		},
 		"contracts/structs/StaffStruct.sol": {
-			"keccak256": "0xbaa8251fbd3e8029eb70294f4d7778834ba9a2f4b4f1de5dcf10b5f8fc0ec239",
+			"keccak256": "0x9d8928b427fd4e538d9a70a0d102a292128823230c9577685d0b87f435f0e497",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e5cd9c3f9f29a649b61fe5f4dec49135752a1a536c1e29e5a369cb832a0d1bd6",
-				"dweb:/ipfs/QmVm7TYXPWSFfUdRQzZiNVSGPrQM74553ygUZUsC9cQBJN"
+				"bzz-raw://fe01fba94919580a61dc1187be389989995d77a980a3cc9ad13eb43a7a529666",
+				"dweb:/ipfs/QmRo6GbkhL9Ei4NVkRxJss192tCiYreKpvByywFxthu9qc"
 			]
 		}
 	},

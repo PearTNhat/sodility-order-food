@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "../interfaces/ICategoryManager.sol";
 import "../structs/FoodStructs.sol"; // Import struct Category
 import "../access/RoleAccess.sol";
+import "hardhat/console.sol";
 
 contract CategoryManager is ICategoryManager {
     RoleAccess public roleAccess;
@@ -17,7 +18,7 @@ contract CategoryManager is ICategoryManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        require(roleAccess.isAdmin(tx.origin), "You are not admin");
         _;
     }
 
@@ -47,7 +48,7 @@ contract CategoryManager is ICategoryManager {
 
     function deleteCategory(uint categoryId) external override {
         require(categories[categoryId].categoryId != 0, "Category does not exist");
-        require(categoryToFoodId[categoryId].length != 0, "Category contains food items");
+        require(categoryToFoodId[categoryId].length == 0, "Category contains food items");
         delete categories[categoryId];
 
         // Remove from categoryIds array

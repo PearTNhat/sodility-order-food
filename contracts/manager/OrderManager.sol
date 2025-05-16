@@ -4,6 +4,7 @@ import "../interfaces/IOrderManager.sol";
 import "../interfaces/IFoodManager.sol";
 import "../interfaces/ITableManager.sol";
 import "../access/RoleAccess.sol";
+import "hardhat/console.sol";
 
 // import "hardhat/console.log";
 
@@ -25,7 +26,7 @@ contract OrderManager is IOrderManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        require(roleAccess.isAdmin(tx.origin), "You are not admin");
         _;
     }
 
@@ -34,6 +35,7 @@ contract OrderManager is IOrderManager {
         uint256 _foodId,
         string memory _userInfo,
         string memory _note,
+        uint _tableId,
         OrderItemRequest[] memory _items
     ) public override returns (Order memory) {
         require(_items.length > 0, "Order must contain at least one item");
@@ -46,6 +48,7 @@ contract OrderManager is IOrderManager {
         o.userInfo = _userInfo;
         o.name = food.name;
         o.staffId =0; // nếu staffId = 0 thì k có nhân viên
+        o.tableId =_tableId;
         o.note = _note;
         o.imgage = food.imageUrl[0];
         o.status = OrderStatus.Pending;
@@ -77,6 +80,9 @@ contract OrderManager is IOrderManager {
         }
         o.totalAmount = totalAmount;
         orders[orderId] = o;
+        if(_tableId > 0){
+            tableManager.updateStatusTable(_tableId, TableStatus.Booked);
+        }
         userOrders[_user].push(orderId);
         emit OrderCreated(orderId, _user, totalAmount, OrderStatus.Pending);
         return o;
@@ -101,13 +107,19 @@ contract OrderManager is IOrderManager {
                     order.items[i].status != OrderItemStatus.Success,
                     "Order item already marked as success. Can not update"
                 );
+                require(
+                    order.items[i].status != OrderItemStatus.Cancelled,
+                    "Order item already marked as cancelled. Can not update"
+                );
                 order.items[i].status = _newStatus;
-                OrderItem memory orderItem =order.items[i];
-                if (_newStatus != OrderItemStatus.Success) {
-                    foodManager.increaseQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
-                    foodManager.reduceSoldQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                if(order.items[i].status == OrderItemStatus.Cancelled){
+                    OrderItem memory orderItem =order.items[i];
+                    if (_newStatus != OrderItemStatus.Success) {
+                        foodManager.increaseQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                        foodManager.reduceSoldQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                    }
+                    order.totalAmount -= orderItem.price;
                 }
-                order.totalAmount -= orderItem.price;
                 found = true;
                 break;
             }
@@ -151,6 +163,10 @@ contract OrderManager is IOrderManager {
             tempOrder.status != OrderStatus.Confirmed,
             "Order already marked as confirm. Can not update"
         );
+        require(
+            tempOrder.status != OrderStatus.Cancelled,
+            "Order already cancelled as confirm. Can not update"
+        );
         for (uint256 i = 0; i < tempOrder.items.length; i++) {
             foodManager.increaseQuantiy(
                 tempOrder.items[i].foodId,
@@ -158,6 +174,10 @@ contract OrderManager is IOrderManager {
                 tempOrder.items[i].quantity
             );
             foodManager.reduceSoldQuantiy(tempOrder.items[i].foodId, tempOrder.items[i].foodDetailId,  tempOrder.items[i].quantity);
+        }   
+        console.log("tableId: ",tempOrder.tableId);
+        if(tempOrder.tableId>0){
+            tableManager.updateStatusTable(tempOrder.tableId, TableStatus.Free);
         }
         orders[_orderId].status = _status;
         emit OrderUpdated(_orderId, _status);

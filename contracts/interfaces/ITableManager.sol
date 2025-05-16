@@ -17,5 +17,5 @@ interface ITableManager {
 
     function getTableById(uint _tableId) external view returns (Table memory);
     function addTableToOrder(uint _orderId, uint _tableId) external ;
-    function updateReservedTable(uint _tableId, TableStatus _status) external;
+    function updateStatusTable(uint _tableId, TableStatus _status) external;
 }

@@ -1,0 +1,148 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "StaffRatingAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "StaffRatingDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "reviewer",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "StaffRatingUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_staffManager",
+						"type": "address"
+					}
+				],
+				"name": "setStaffManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interfaces/IStaffRatingManager.sol": "IStaffRatingManager"
+		},
+		"evmVersion": "prague",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": true,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IStaffRatingManager.sol": {
+			"keccak256": "0x67c0f8b44cc59c84cc9fb5dee52a6fb0c678615b43148d0b7021220237b50e4b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://eaf76927c7d4dccd6d150f7debe23f30637e994b3bf9e6d6c3ffe7d992f96b79",
+				"dweb:/ipfs/QmatKc9v2YyChGtSTsxfK9nyytYW8SbnZBqBwTBF4F7LEG"
+			]
+		},
+		"contracts/structs/RatingStruct.sol": {
+			"keccak256": "0xb45d50b9aaa7635852d03b6ca7182fd9f7184c796d75bcf29494a5e07d8c4328",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://35a0285a7c282d78ae7bc095d87c8ac1d3d7e08fa37b47064f7c8831bdf14b1d",
+				"dweb:/ipfs/QmUW25ZjmT35px6WcWKh66j2DkRKuAsDhK17e8bn2AyhNW"
+			]
+		}
+	},
+	"version": 1
+}

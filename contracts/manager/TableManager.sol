@@ -17,7 +17,7 @@ contract TableManager is ITableManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        require(roleAccess.isAdmin(tx.origin), "You are not admin");
         _;
     }
     function setOrderManager(address _orderManager) external onlyAdmin {
@@ -61,7 +61,7 @@ contract TableManager is ITableManager {
         orderManager.addTableForOrder(_orderId,_tableId);
         emit TableAddedToOrder( _tableId,_orderId);
     }
-    function updateReservedTable(uint _tableId, TableStatus _status) external override onlyAdmin {
+    function updateStatusTable(uint _tableId, TableStatus _status) external override onlyAdmin {
         require(tables[_tableId].tableId != 0, "Table ID does not exist");
         tables[_tableId].status = _status;
         emit TableUpdatedStaus(_tableId);

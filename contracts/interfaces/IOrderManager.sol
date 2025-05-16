@@ -12,6 +12,7 @@ interface IOrderManager {
         uint _foodId,
         string memory _userInfo,
         string memory note,
+        uint _tableId,
         OrderItemRequest[] memory _items
     ) external returns (Order memory);
 

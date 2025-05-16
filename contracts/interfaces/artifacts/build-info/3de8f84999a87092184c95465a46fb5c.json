@@ -1,0 +1,1473 @@
+{
+	"id": "3de8f84999a87092184c95465a46fb5c",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/interfaces/IStaffManager.sol": {
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\nimport \"../structs/StaffStruct.sol\";\n\ninterface IStaffManager {\n    event StaffAdded(uint256 indexed staffId, string name);\n    event StaffUpdated(uint256 indexed staffId, string name);\n    event StaffAddedToOrder(uint256 indexed staffId, uint256 _orderId);\n    event StaffRatingUpdated(\n        uint256 staffId,\n        uint256 sumRating,\n        uint256 countRating\n    );\n\n    function addStaff(\n        uint256 _staffId,\n        string calldata _name,\n        string calldata _dob,\n        string calldata _phone\n    ) external;\n\n    function getStaff(uint256 _staffId) external view returns (Staff memory);\n\n    function updateStaffInfo(\n        uint256 _staffId,\n        string calldata _name,\n        string calldata _dob,\n        string calldata _phone\n    ) external;\n\n    function addStaffToOrder(uint256 _orderId, uint256 _staffId) external;\n\n    function updateRatingStaff(\n        uint256 _staffId,\n        uint256 _sumRating,\n        uint256 _countRating\n    ) external;\n}\n"
+			},
+			"contracts/structs/StaffStruct.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nstruct Staff {\r\n    uint staffId;\r\n    string name;\r\n    string dob;\r\n    string phone;\r\n    uint sumRating;\r\n    uint countRating;\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/interfaces/IStaffManager.sol": {
+				"IStaffManager": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "staffId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "name",
+									"type": "string"
+								}
+							],
+							"name": "StaffAdded",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "staffId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "_orderId",
+									"type": "uint256"
+								}
+							],
+							"name": "StaffAddedToOrder",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "staffId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "sumRating",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "uint256",
+									"name": "countRating",
+									"type": "uint256"
+								}
+							],
+							"name": "StaffRatingUpdated",
+							"type": "event"
+						},
+						{
+							"anonymous": false,
+							"inputs": [
+								{
+									"indexed": true,
+									"internalType": "uint256",
+									"name": "staffId",
+									"type": "uint256"
+								},
+								{
+									"indexed": false,
+									"internalType": "string",
+									"name": "name",
+									"type": "string"
+								}
+							],
+							"name": "StaffUpdated",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "_name",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_dob",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_phone",
+									"type": "string"
+								}
+							],
+							"name": "addStaff",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_orderId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								}
+							],
+							"name": "addStaffToOrder",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								}
+							],
+							"name": "getStaff",
+							"outputs": [
+								{
+									"components": [
+										{
+											"internalType": "uint256",
+											"name": "staffId",
+											"type": "uint256"
+										},
+										{
+											"internalType": "string",
+											"name": "name",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "dob",
+											"type": "string"
+										},
+										{
+											"internalType": "string",
+											"name": "phone",
+											"type": "string"
+										},
+										{
+											"internalType": "uint256",
+											"name": "sumRating",
+											"type": "uint256"
+										},
+										{
+											"internalType": "uint256",
+											"name": "countRating",
+											"type": "uint256"
+										}
+									],
+									"internalType": "struct Staff",
+									"name": "",
+									"type": "tuple"
+								}
+							],
+							"stateMutability": "view",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_sumRating",
+									"type": "uint256"
+								},
+								{
+									"internalType": "uint256",
+									"name": "_countRating",
+									"type": "uint256"
+								}
+							],
+							"name": "updateRatingStaff",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "_staffId",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "_name",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_dob",
+									"type": "string"
+								},
+								{
+									"internalType": "string",
+									"name": "_phone",
+									"type": "string"
+								}
+							],
+							"name": "updateStaffInfo",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"addStaff(uint256,string,string,string)": "9121f4eb",
+							"addStaffToOrder(uint256,uint256)": "fdff9aab",
+							"getStaff(uint256)": "f4def44b",
+							"updateRatingStaff(uint256,uint256,uint256)": "deab8c75",
+							"updateStaffInfo(uint256,string,string,string)": "b3ce9dea"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.30+commit.73712a01\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"StaffAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"_orderId\",\"type\":\"uint256\"}],\"name\":\"StaffAddedToOrder\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"sumRating\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"countRating\",\"type\":\"uint256\"}],\"name\":\"StaffRatingUpdated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"}],\"name\":\"StaffUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_dob\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_phone\",\"type\":\"string\"}],\"name\":\"addStaff\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_orderId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"}],\"name\":\"addStaffToOrder\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"}],\"name\":\"getStaff\",\"outputs\":[{\"components\":[{\"internalType\":\"uint256\",\"name\":\"staffId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"dob\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"phone\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"sumRating\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"countRating\",\"type\":\"uint256\"}],\"internalType\":\"struct Staff\",\"name\":\"\",\"type\":\"tuple\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_sumRating\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_countRating\",\"type\":\"uint256\"}],\"name\":\"updateRatingStaff\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_staffId\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_dob\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"_phone\",\"type\":\"string\"}],\"name\":\"updateStaffInfo\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IStaffManager.sol\":\"IStaffManager\"},\"evmVersion\":\"prague\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interfaces/IStaffManager.sol\":{\"keccak256\":\"0x2414f51962e37cbe55c17da36f7ec1c7881677d02e63b276f3b604f303344819\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://1c82c305d1a63e364dccd5b0f52f55d7b3a7f6a3d7c11fa2abeceb84631442da\",\"dweb:/ipfs/QmVp22ZhGc2JoAD9up7e25A5QXTkuKC9aR6ByTh713pUvj\"]},\"contracts/structs/StaffStruct.sol\":{\"keccak256\":\"0x9d8928b427fd4e538d9a70a0d102a292128823230c9577685d0b87f435f0e497\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://fe01fba94919580a61dc1187be389989995d77a980a3cc9ad13eb43a7a529666\",\"dweb:/ipfs/QmRo6GbkhL9Ei4NVkRxJss192tCiYreKpvByywFxthu9qc\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/interfaces/IStaffManager.sol": {
+				"ast": {
+					"absolutePath": "contracts/interfaces/IStaffManager.sol",
+					"exportedSymbols": {
+						"IStaffManager": [
+							75
+						],
+						"Staff": [
+							90
+						]
+					},
+					"id": 76,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "32:23:0"
+						},
+						{
+							"absolutePath": "contracts/structs/StaffStruct.sol",
+							"file": "../structs/StaffStruct.sol",
+							"id": 2,
+							"nameLocation": "-1:-1:-1",
+							"nodeType": "ImportDirective",
+							"scope": 76,
+							"sourceUnit": 91,
+							"src": "56:36:0",
+							"symbolAliases": [],
+							"unitAlias": ""
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "IStaffManager",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 75,
+							"linearizedBaseContracts": [
+								75
+							],
+							"name": "IStaffManager",
+							"nameLocation": "104:13:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"anonymous": false,
+									"eventSelector": "b9918942a2a29d1164ea11d03222c9a01a970e1d37797e67a114dd2c6196dac2",
+									"id": 8,
+									"name": "StaffAdded",
+									"nameLocation": "130:10:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 7,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 4,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "staffId",
+												"nameLocation": "157:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 8,
+												"src": "141:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 3,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "141:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 6,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "name",
+												"nameLocation": "173:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 8,
+												"src": "166:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 5,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "166:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "140:38:0"
+									},
+									"src": "124:55:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "27556b62664053de7a418476f2c4abc9b526d3c747991948d328082493d82c0e",
+									"id": 14,
+									"name": "StaffUpdated",
+									"nameLocation": "190:12:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 13,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 10,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "staffId",
+												"nameLocation": "219:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 14,
+												"src": "203:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 9,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "203:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 12,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "name",
+												"nameLocation": "235:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 14,
+												"src": "228:11:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 11,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "228:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "202:38:0"
+									},
+									"src": "184:57:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "37fe5ba29264c8debd409a782c67744bf54751791ccf1197762b9819c10ab610",
+									"id": 20,
+									"name": "StaffAddedToOrder",
+									"nameLocation": "252:17:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"indexed": true,
+												"mutability": "mutable",
+												"name": "staffId",
+												"nameLocation": "286:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 20,
+												"src": "270:23:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "270:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 18,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "_orderId",
+												"nameLocation": "303:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 20,
+												"src": "295:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "295:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "269:43:0"
+									},
+									"src": "246:67:0"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "9e2a40167f414f24ed49cbf67801d7ca9206eea4d409f6734bed8f92b0c9f2da",
+									"id": 28,
+									"name": "StaffRatingUpdated",
+									"nameLocation": "324:18:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 27,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 22,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "staffId",
+												"nameLocation": "360:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "352:15:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 21,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "352:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 24,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "sumRating",
+												"nameLocation": "385:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "377:17:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 23,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "377:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 26,
+												"indexed": false,
+												"mutability": "mutable",
+												"name": "countRating",
+												"nameLocation": "412:11:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 28,
+												"src": "404:19:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 25,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "404:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "342:87:0"
+									},
+									"src": "318:112:0"
+								},
+								{
+									"functionSelector": "9121f4eb",
+									"id": 39,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "addStaff",
+									"nameLocation": "445:8:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 37,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 30,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "471:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 39,
+												"src": "463:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 29,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "463:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 32,
+												"mutability": "mutable",
+												"name": "_name",
+												"nameLocation": "505:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 39,
+												"src": "489:21:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 31,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "489:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 34,
+												"mutability": "mutable",
+												"name": "_dob",
+												"nameLocation": "536:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 39,
+												"src": "520:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 33,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "520:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 36,
+												"mutability": "mutable",
+												"name": "_phone",
+												"nameLocation": "566:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 39,
+												"src": "550:22:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 35,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "550:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "453:125:0"
+									},
+									"returnParameters": {
+										"id": 38,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "587:0:0"
+									},
+									"scope": 75,
+									"src": "436:152:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "f4def44b",
+									"id": 47,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "getStaff",
+									"nameLocation": "603:8:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 42,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 41,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "620:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "612:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 40,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "612:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "611:18:0"
+									},
+									"returnParameters": {
+										"id": 46,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 45,
+												"mutability": "mutable",
+												"name": "",
+												"nameLocation": "-1:-1:-1",
+												"nodeType": "VariableDeclaration",
+												"scope": 47,
+												"src": "653:12:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_struct$_Staff_$90_memory_ptr",
+													"typeString": "struct Staff"
+												},
+												"typeName": {
+													"id": 44,
+													"nodeType": "UserDefinedTypeName",
+													"pathNode": {
+														"id": 43,
+														"name": "Staff",
+														"nameLocations": [
+															"653:5:0"
+														],
+														"nodeType": "IdentifierPath",
+														"referencedDeclaration": 90,
+														"src": "653:5:0"
+													},
+													"referencedDeclaration": 90,
+													"src": "653:5:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_struct$_Staff_$90_storage_ptr",
+														"typeString": "struct Staff"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "652:14:0"
+									},
+									"scope": 75,
+									"src": "594:73:0",
+									"stateMutability": "view",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "b3ce9dea",
+									"id": 58,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateStaffInfo",
+									"nameLocation": "682:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 56,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 49,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "715:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 58,
+												"src": "707:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 48,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "707:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 51,
+												"mutability": "mutable",
+												"name": "_name",
+												"nameLocation": "749:5:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 58,
+												"src": "733:21:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 50,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "733:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 53,
+												"mutability": "mutable",
+												"name": "_dob",
+												"nameLocation": "780:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 58,
+												"src": "764:20:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 52,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "764:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 55,
+												"mutability": "mutable",
+												"name": "_phone",
+												"nameLocation": "810:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 58,
+												"src": "794:22:0",
+												"stateVariable": false,
+												"storageLocation": "calldata",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_calldata_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 54,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "794:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "697:125:0"
+									},
+									"returnParameters": {
+										"id": 57,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "831:0:0"
+									},
+									"scope": 75,
+									"src": "673:159:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "fdff9aab",
+									"id": 65,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "addStaffToOrder",
+									"nameLocation": "847:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 63,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 60,
+												"mutability": "mutable",
+												"name": "_orderId",
+												"nameLocation": "871:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 65,
+												"src": "863:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 59,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "863:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 62,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "889:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 65,
+												"src": "881:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 61,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "881:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "862:36:0"
+									},
+									"returnParameters": {
+										"id": 64,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "907:0:0"
+									},
+									"scope": 75,
+									"src": "838:70:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "deab8c75",
+									"id": 74,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "updateRatingStaff",
+									"nameLocation": "923:17:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 72,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 67,
+												"mutability": "mutable",
+												"name": "_staffId",
+												"nameLocation": "958:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 74,
+												"src": "950:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 66,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "950:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 69,
+												"mutability": "mutable",
+												"name": "_sumRating",
+												"nameLocation": "984:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 74,
+												"src": "976:18:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 68,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "976:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 71,
+												"mutability": "mutable",
+												"name": "_countRating",
+												"nameLocation": "1012:12:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 74,
+												"src": "1004:20:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 70,
+													"name": "uint256",
+													"nodeType": "ElementaryTypeName",
+													"src": "1004:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "940:90:0"
+									},
+									"returnParameters": {
+										"id": 73,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1039:0:0"
+									},
+									"scope": 75,
+									"src": "914:126:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								}
+							],
+							"scope": 76,
+							"src": "94:948:0",
+							"usedErrors": [],
+							"usedEvents": [
+								8,
+								14,
+								20,
+								28
+							]
+						}
+					],
+					"src": "32:1011:0"
+				},
+				"id": 0
+			},
+			"contracts/structs/StaffStruct.sol": {
+				"ast": {
+					"absolutePath": "contracts/structs/StaffStruct.sol",
+					"exportedSymbols": {
+						"Staff": [
+							90
+						]
+					},
+					"id": 91,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 77,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:1"
+						},
+						{
+							"canonicalName": "Staff",
+							"id": 90,
+							"members": [
+								{
+									"constant": false,
+									"id": 79,
+									"mutability": "mutable",
+									"name": "staffId",
+									"nameLocation": "85:7:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "80:12:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 78,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "80:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 81,
+									"mutability": "mutable",
+									"name": "name",
+									"nameLocation": "106:4:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "99:11:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 80,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "99:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 83,
+									"mutability": "mutable",
+									"name": "dob",
+									"nameLocation": "124:3:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "117:10:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 82,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "117:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 85,
+									"mutability": "mutable",
+									"name": "phone",
+									"nameLocation": "141:5:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "134:12:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 84,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "134:6:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 87,
+									"mutability": "mutable",
+									"name": "sumRating",
+									"nameLocation": "158:9:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "153:14:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 86,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "153:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 89,
+									"mutability": "mutable",
+									"name": "countRating",
+									"nameLocation": "179:11:1",
+									"nodeType": "VariableDeclaration",
+									"scope": 90,
+									"src": "174:16:1",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 88,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "174:4:1",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "Staff",
+							"nameLocation": "67:5:1",
+							"nodeType": "StructDefinition",
+							"scope": 91,
+							"src": "60:134:1",
+							"visibility": "public"
+						}
+					],
+					"src": "33:161:1"
+				},
+				"id": 1
+			}
+		}
+	}
+}

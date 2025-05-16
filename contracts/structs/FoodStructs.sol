@@ -8,8 +8,10 @@ struct Food {
     uint categoryId;
     string[] imageUrl;
     uint soldQuantity;
+    uint quantity;
     uint sumRating;
     uint countRating;
+    bool isHidden;
 }
 
 struct FoodDetail {

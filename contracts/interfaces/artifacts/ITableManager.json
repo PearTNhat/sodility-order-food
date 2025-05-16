@@ -50,10 +50,11 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {
 			"addTable(uint256,uint256)": "e1f1c48d",
+			"addTableToOrder(uint256,uint256)": "95ebcb24",
 			"deleteTable(uint256)": "e6f318c6",
 			"editTable(uint256,uint256,uint256)": "5cfd6607",
 			"getTableById(uint256)": "3844ac5b",
-			"updateStaffTable(uint256,uint256)": "bea02f62"
+			"updateStatusTable(uint256,uint8)": "b4afd52c"
 		}
 	},
 	"abi": [
@@ -107,6 +108,25 @@
 				{
 					"indexed": false,
 					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "TableAddedToOrder",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
 					"name": "tableId",
 					"type": "uint256"
 				}
@@ -140,6 +160,19 @@
 			"type": "event"
 		},
 		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "TableUpdatedStaus",
+			"type": "event"
+		},
+		{
 			"inputs": [
 				{
 					"internalType": "uint256",
@@ -160,6 +193,24 @@
 					"type": "uint256"
 				}
 			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "addTableToOrder",
+			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
 		},
@@ -227,17 +278,12 @@
 							"type": "uint256"
 						},
 						{
-							"internalType": "uint256",
-							"name": "staffId",
-							"type": "uint256"
-						},
-						{
-							"internalType": "bool",
-							"name": "isReserved",
-							"type": "bool"
+							"internalType": "enum TableStatus",
+							"name": "status",
+							"type": "uint8"
 						}
 					],
-					"internalType": "struct ITableManager.Table",
+					"internalType": "struct Table",
 					"name": "",
 					"type": "tuple"
 				}
@@ -253,12 +299,12 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "enum TableStatus",
+					"name": "_status",
+					"type": "uint8"
 				}
 			],
-			"name": "updateStaffTable",
+			"name": "updateStatusTable",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"

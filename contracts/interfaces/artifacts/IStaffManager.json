@@ -52,7 +52,7 @@
 			"addStaff(uint256,string,string,string)": "9121f4eb",
 			"addStaffToOrder(uint256,uint256)": "fdff9aab",
 			"getStaff(uint256)": "f4def44b",
-			"getStaffForOrder(uint256)": "cbe8eaad",
+			"updateRatingStaff(uint256,uint256,uint256)": "deab8c75",
 			"updateStaffInfo(uint256,string,string,string)": "b3ce9dea"
 		}
 	},
@@ -93,6 +93,31 @@
 				}
 			],
 			"name": "StaffAddedToOrder",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "sumRating",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "countRating",
+					"type": "uint256"
+				}
+			],
+			"name": "StaffRatingUpdated",
 			"type": "event"
 		},
 		{
@@ -193,14 +218,14 @@
 							"type": "string"
 						},
 						{
-							"internalType": "string",
+							"internalType": "uint256",
 							"name": "sumRating",
-							"type": "string"
+							"type": "uint256"
 						},
 						{
-							"internalType": "string",
+							"internalType": "uint256",
 							"name": "countRating",
-							"type": "string"
+							"type": "uint256"
 						}
 					],
 					"internalType": "struct Staff",
@@ -215,11 +240,21 @@
 			"inputs": [
 				{
 					"internalType": "uint256",
-					"name": "_orderId",
+					"name": "_staffId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_sumRating",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_countRating",
 					"type": "uint256"
 				}
 			],
-			"name": "getStaffForOrder",
+			"name": "updateRatingStaff",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"

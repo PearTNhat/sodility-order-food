@@ -68,6 +68,52 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_staffId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_dob",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_phone",
+						"type": "string"
+					}
+				],
+				"name": "addStaff",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "addStaffToOrder",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_row",
 						"type": "uint256"
 					},
@@ -85,6 +131,24 @@
 						"type": "uint256"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "addTableToOrder",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -197,6 +261,11 @@
 						"type": "string"
 					},
 					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
 						"components": [
 							{
 								"internalType": "uint256",
@@ -256,6 +325,11 @@
 							{
 								"internalType": "uint256",
 								"name": "staffId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "tableId",
 								"type": "uint256"
 							},
 							{
@@ -477,6 +551,11 @@
 									},
 									{
 										"internalType": "uint256",
+										"name": "quantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
 										"name": "sumRating",
 										"type": "uint256"
 									},
@@ -484,6 +563,11 @@
 										"internalType": "uint256",
 										"name": "countRating",
 										"type": "uint256"
+									},
+									{
+										"internalType": "bool",
+										"name": "isHidden",
+										"type": "bool"
 									}
 								],
 								"internalType": "struct Food",
@@ -606,6 +690,11 @@
 							},
 							{
 								"internalType": "uint256",
+								"name": "quantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
 								"name": "sumRating",
 								"type": "uint256"
 							},
@@ -613,6 +702,11 @@
 								"internalType": "uint256",
 								"name": "countRating",
 								"type": "uint256"
+							},
+							{
+								"internalType": "bool",
+								"name": "isHidden",
+								"type": "bool"
 							}
 						],
 						"internalType": "struct Food",
@@ -717,6 +811,11 @@
 								"type": "uint256"
 							},
 							{
+								"internalType": "uint256",
+								"name": "tableId",
+								"type": "uint256"
+							},
+							{
 								"components": [
 									{
 										"internalType": "uint256",
@@ -794,6 +893,57 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "getStaff",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "staffId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dob",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "phone",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "sumRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "countRating",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Staff",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_tableId",
 						"type": "uint256"
 					}
@@ -818,17 +968,12 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint256",
-								"name": "staffId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "isReserved",
-								"type": "bool"
+								"internalType": "enum TableStatus",
+								"name": "status",
+								"type": "uint8"
 							}
 						],
-						"internalType": "struct ITableManager.Table",
+						"internalType": "struct Table",
 						"name": "",
 						"type": "tuple"
 					}
@@ -910,12 +1055,43 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "_foodId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bool",
+						"name": "_hidden",
+						"type": "bool"
+					}
+				],
+				"name": "setFoodVisibility",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_orderManager",
 						"type": "address"
 					}
 				],
 				"name": "setOrderManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_staffManager",
+						"type": "address"
+					}
+				],
+				"name": "setStaffManager",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -931,6 +1107,19 @@
 				"name": "setTableManager",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "staffManager",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -1082,16 +1271,44 @@
 				"inputs": [
 					{
 						"internalType": "uint256",
+						"name": "_staffId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_dob",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_phone",
+						"type": "string"
+					}
+				],
+				"name": "updateStaffInfo",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
 						"name": "_tableId",
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "enum TableStatus",
+						"name": "_status",
+						"type": "uint8"
 					}
 				],
-				"name": "updateStaffTable",
+				"name": "updateStatusTable",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -1118,18 +1335,18 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/FoodApp.sol": {
-			"keccak256": "0x2d181e8585280bef2bac0f3c42b08f5fede01787fe1bc59af4010e5ad5cf10b0",
+			"keccak256": "0xc8509106d8b62d4b08f17d2d1d406e3732b1af44e022af467472cdee22e080f7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://05d38102721969e99657adeeb4e894d6018d25216330f0a1e018ec52f4f0ac8a",
-				"dweb:/ipfs/QmWNuubXRVu5z1DUvKE4qmqLgLgJfmRQVAdMmGrcuiL1L3"
+				"bzz-raw://beb95636a2bf20203150d53db83796cce952459339fe6f8ef7498330c04958f7",
+				"dweb:/ipfs/QmW4EmYy6qXwvJCB7pkZfSiJrMF823LaB7rJKgit8cQY6P"
 			]
 		},
 		"contracts/access/RoleAccess.sol": {
@@ -1149,35 +1366,43 @@
 			]
 		},
 		"contracts/interfaces/IFoodManager.sol": {
-			"keccak256": "0x5b4bbda206afc3b3ee0530c220ceaac119ceefde1ad9a5dd9ef0dfc4fe5cbc8d",
+			"keccak256": "0x98ec4c133c89bbc47a72d20ae8f2b70af0f943e5da303b52997dd948e38bee60",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4205bcad0d3072afba19e980a0ed427044cdd3227ecdb2abdbe690b3877bd54d",
-				"dweb:/ipfs/Qman8LPZ1YQiXBUYi3Nf5WgLR4mLTZtffbctifhGdRd8CQ"
+				"bzz-raw://e32258fc17fe7c86b929cd342e80fb0d92ccc0e76ae14c637e3b519d2e18aa3b",
+				"dweb:/ipfs/QmQo8taPTbcAr7hCX97VM6nvvWv2MEvLqRwJgh5dmpd3cx"
 			]
 		},
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0xf1b6d1f85c82dbb44ed7a990a8b0f509d7f78430916562b4b2eb6e951bdd1eaa",
+			"keccak256": "0x146f96a3ac47375ef900a45d65c2adddb454829758461b0460fb538a034b6618",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://41e137ebbb9eac0ebb9bb22726beab91031ab96e608bfa379b423c64920253b6",
-				"dweb:/ipfs/QmYp9VQ1eaxWbnKjZKGhfxecpDue4AYRjPgK8fBugnJWCu"
+				"bzz-raw://bd07e37634fe9d526ed8e2d4fb53f367a10050c82a02aee30a10d12989a096ad",
+				"dweb:/ipfs/Qmac4dXJvLwwKXxFNaTjLjEUhPSAAgh9fvLZqUVMJuJY4N"
+			]
+		},
+		"contracts/interfaces/IStaffManager.sol": {
+			"keccak256": "0x5448b7f86083a6eed2d3435a554eb0befa95ad9cddffad991fd7c826b406913b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bdf59789d1d527d3b67e74b22e9c6b13a119b4bc7c044e417174a36600a195da",
+				"dweb:/ipfs/QmceDm4uTjg4XMMoQy98EXPKxYcvakvAJKD3ASTQfzGt7P"
 			]
 		},
 		"contracts/interfaces/ITableManager.sol": {
-			"keccak256": "0x6bd47a3f855944683dab688c501de00d6b078ece73c89bdfe621ef49e6bea908",
+			"keccak256": "0x1471b56b08ebf037f7ae42f7ef68cbdb9e1c03e44b9c1087aa49b2b5f0e2bbe5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://124f384ad7f29decb141d8cecb7a85e6e03f69d5bb4bffac75348dc1a3ea6008",
-				"dweb:/ipfs/QmPsh8NKNwBN8Rqo41wxsGb9dMeQ8LEtvvD3VNqdxNcAie"
+				"bzz-raw://ad0baf4208656806b9c611437eee1c9f08129f22fd471094554589f2f5aec543",
+				"dweb:/ipfs/QmSG5aadDueau8vh4mj67mpZuzvHQ1EFEsngGQGi2fC7En"
 			]
 		},
 		"contracts/manager/FoodManager.sol": {
-			"keccak256": "0x3f18fdd45380e91d560dfe1fc02dcb59334d76e0883facacef8b3564e11d579a",
+			"keccak256": "0xd77d6ea891ca4077eb55cb22832bca77eb52681b0061e31cd8ca8697b7c6a897",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0a8d283cd30fc333f5fa46abf11c3b4dbbca1e579514a61581e4e517a4884e60",
-				"dweb:/ipfs/QmdbyGS2bteiwkQpRAFDMcDgeXEwh32b1bLNst2dUHr8rF"
+				"bzz-raw://cb33ab8fa79eb772d49f73aba754f4271f604ffc398ae9c96b99c82dbd0f8d7e",
+				"dweb:/ipfs/QmcjfTbAEu4ZrZ3WCNA3sH6zcxuvyKLRXwDi9hndLcpUPa"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -1189,19 +1414,35 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0xc7e84a159519015af6abad7bd1876eb875c0c93675cd9f5300008c36d724c886",
+			"keccak256": "0xf10e8cac411afde2b7c67359281e698c58c788ec3e187d5c6a7b70fe1dea8fba",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://54725b3e32f96b63e57f4175501b7201f262de3b13a15d3843b833220f6d59a1",
-				"dweb:/ipfs/Qmd2GRLh2tm5GHmrLyRZSw2gGqZzmU1oJY3qGcZgjSAMfA"
+				"bzz-raw://8841147cc4ee9867a2426477ea57ae7bdd95b1fa8c87f0b908ce4d1e5691bee0",
+				"dweb:/ipfs/QmcJq7zSSAxHWcKg2MtDMYR9DQQiPiWFrcN8yyppx2SGEk"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0x63ad6664a74698bb883333feaba5c5bc3426c1ab87b4aee14c8079f1874d35cd",
+			"keccak256": "0x9db119baedfe813ab9224ce215da9e553525189cdcadab3b11e8892f195c3a71",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://514867577c9e7424b27443812aa06027fd674fd49684b2472c42b3ca718388f2",
-				"dweb:/ipfs/QmV97uo2cLyAnQZsuzDgKBTJFx3VQs1FFWBm7eg5CmKRha"
+				"bzz-raw://4db24211ed639ad9555a4097a4dd9b417eb4bf7ce8bdc5328a4b65c16134c297",
+				"dweb:/ipfs/QmbwVLFCzMhUZrBBNmpRpZXawdcg4fGCP9fX8KV4cw8s6S"
+			]
+		},
+		"contracts/structs/StaffStruct.sol": {
+			"keccak256": "0x9d8928b427fd4e538d9a70a0d102a292128823230c9577685d0b87f435f0e497",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fe01fba94919580a61dc1187be389989995d77a980a3cc9ad13eb43a7a529666",
+				"dweb:/ipfs/QmRo6GbkhL9Ei4NVkRxJss192tCiYreKpvByywFxthu9qc"
+			]
+		},
+		"contracts/structs/TableStruct.sol": {
+			"keccak256": "0xeba4b14f3eda8af9b2e3e318ac15b5f9ede865664825482581c00f1f9aae23c6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://754308bf229ded8e1bd8ffb5020e06340c39ea89c2f0f31bcff589b777ebd0bd",
+				"dweb:/ipfs/QmYv9zq8t97k9TP74oKs475dsfeN2pegBihQbPUNCNCqBk"
 			]
 		},
 		"hardhat/console.sol": {

@@ -372,7 +372,7 @@
 						"type": "uint8"
 					}
 				],
-				"name": "updateReservedTable",
+				"name": "updateStatusTable",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -399,7 +399,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
@@ -414,27 +414,27 @@
 			]
 		},
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0xb49a1ee1663c65134a1a3fa65ee85e480bcea37274837f70802f34ebbb668f57",
+			"keccak256": "0x146f96a3ac47375ef900a45d65c2adddb454829758461b0460fb538a034b6618",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://eeff515275d944c3df48eaca03cafdb7222f937fac50ddbd11c036c631d30151",
-				"dweb:/ipfs/QmatD5QdKHYNqGY7GxqjaY6FsaVcCGmneW2oEiCaz1aJkh"
+				"bzz-raw://bd07e37634fe9d526ed8e2d4fb53f367a10050c82a02aee30a10d12989a096ad",
+				"dweb:/ipfs/Qmac4dXJvLwwKXxFNaTjLjEUhPSAAgh9fvLZqUVMJuJY4N"
 			]
 		},
 		"contracts/interfaces/ITableManager.sol": {
-			"keccak256": "0xcc99e33d95af8dc9c6ea8ca7312c45c930ef82be72b6c133decda6f476db9371",
+			"keccak256": "0x1471b56b08ebf037f7ae42f7ef68cbdb9e1c03e44b9c1087aa49b2b5f0e2bbe5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fcb2cb1a89aa20d016243012adecd502099710dd32b234a7bf11b31409ade8ae",
-				"dweb:/ipfs/QmcvgJVSbeGdwp2Kko1Ydtdep794HeYg5eh5PmWjomCqnQ"
+				"bzz-raw://ad0baf4208656806b9c611437eee1c9f08129f22fd471094554589f2f5aec543",
+				"dweb:/ipfs/QmSG5aadDueau8vh4mj67mpZuzvHQ1EFEsngGQGi2fC7En"
 			]
 		},
 		"contracts/manager/TableManager.sol": {
-			"keccak256": "0x8cca11bea39eddc3bafad2a6e86c6cbb44c13700bc64adb9fbb7db3d29da4727",
+			"keccak256": "0xd082252fc4dfad33fb8fef0622721e89a51c478b5e25c05239f1dcb9ea43ce66",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://582e59639e8df51547a6b6c8c8b04c56ad370d8a92ddc3095197933164124641",
-				"dweb:/ipfs/QmcCRuzkqZuEpQDE4JeS9y9RJvADu8S79wcx13maBYs2t1"
+				"bzz-raw://74b245be3671e23347d5206108c1cbd5a536dde5d9455631a0e313f0656115d2",
+				"dweb:/ipfs/QmWLM2qeasBGBe1ExwY7wkEUwmkKBKk265j2f4uoc7xwnw"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
