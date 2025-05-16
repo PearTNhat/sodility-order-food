@@ -8,14 +8,28 @@ import "./interfaces/ICategoryManager.sol";
 import "./access/RoleAccess.sol";
 import "./interfaces/ITableManager.sol";
 import "./interfaces/IOrderManager.sol";
+contract FoodApp  {
+    RoleAccess public roleAccess;
 
-
-contract FoodApp is RoleAccess {
     address public foodManager;
     address public categoryManager;
     address public tableManager;
     address public orderManager;
 
+    constructor(address _roleAccessAddress) {
+        roleAccess = RoleAccess(_roleAccessAddress);
+    }
+
+    modifier onlyAdmin() {
+        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        _;
+    }
+    function getOwner () view public returns (address owner ){
+        return roleAccess.getOwner();
+    }
+    function addAmin (address _address) public {
+        roleAccess.addAdmin(_address);
+    }
     function setFoodManager(address _foodManager) external onlyAdmin {
         require(_foodManager != address(0), "Invalid address");
         foodManager = _foodManager;
@@ -159,11 +173,7 @@ contract FoodApp is RoleAccess {
         ITableManager(tableManager).deleteTable(_tableId);
     }
 
-    function updateStaffTable(uint _tableId, uint _staffId) external onlyAdmin {
-        ITableManager(tableManager).updateStaffTable(_tableId, _staffId);
-    }
-
-    function getTableById(uint _tableId) external view returns (ITableManager.Table memory) {
+    function getTableById(uint _tableId) external view returns (Table memory) {
         return ITableManager(tableManager).getTableById(_tableId);
     }
 }

@@ -11,6 +11,11 @@
 						"internalType": "address",
 						"name": "_categoryManagerAddress",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_roleAcces",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -153,19 +158,6 @@
 				],
 				"name": "FoodUpdated",
 				"type": "event"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_admin",
-						"type": "address"
-					}
-				],
-				"name": "addAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
 			},
 			{
 				"inputs": [
@@ -336,6 +328,11 @@
 									},
 									{
 										"internalType": "uint256",
+										"name": "soldQuantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
 										"name": "sumRating",
 										"type": "uint256"
 									},
@@ -386,6 +383,61 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getAllFoodsSortedBySoldQuantity",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "foodId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "description",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "categoryId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string[]",
+								"name": "imageUrl",
+								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "sumRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "countRating",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct Food[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -421,6 +473,11 @@
 								"internalType": "string[]",
 								"name": "imageUrl",
 								"type": "string[]"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
@@ -529,19 +586,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "getOwner",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -562,25 +606,6 @@
 				"name": "increaseQuantiy",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isAdmin",
-				"outputs": [
-					{
-						"internalType": "enum RoleAccess.Role",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -633,16 +658,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "roleAccess",
+				"outputs": [
 					{
-						"internalType": "address",
-						"name": "_admin",
+						"internalType": "contract RoleAccess",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "removeAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -747,11 +772,11 @@
 	},
 	"sources": {
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x29826e7ca65f3785c1d542dd06e1139a9386ebd9182a193e7a497a7735df4caf",
+			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9c9bac481ae921c780360c4d853e9d21913a9cc462b90d72dd70694bbed7dbce",
-				"dweb:/ipfs/QmW9iS5x8QvugSTPZ4MsxunJgKocr6oLonoRSj2VjcSJCs"
+				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
+				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
 			]
 		},
 		"contracts/interfaces/ICategoryManager.sol": {
@@ -771,11 +796,11 @@
 			]
 		},
 		"contracts/manager/FoodManager.sol": {
-			"keccak256": "0x6c683028eda664970f415f1ddf8dba4c733af82bd6ceb971c32e16d99b893799",
+			"keccak256": "0xa06ca4a30323fe9e399e7cf7abb15f7dd0469f21a72b2424bdf03f93fc41d946",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://58b419ba35667c9ad8b9ac0c8b581ad3271278e92c9b2355d03386a7ca11ba85",
-				"dweb:/ipfs/QmWX2ALsjCsnDLfBzZtzGf3VMkVg9wQsCasEhpZGxG4ZVt"
+				"bzz-raw://e0c1b1b4bd76250814b9f6d8313208dbc585bd6154272398052459e96ca8aa36",
+				"dweb:/ipfs/QmTedCtU2AtozCVx3pg68bgsbWpVAL7s5F6ajdQRwx3WmL"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -787,11 +812,19 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0x6d62d76266bb85d8cc0df8c1b87be30a4d4045a4dca110853588a80b474f0f94",
+			"keccak256": "0xd7d06d295cb18a9047ef0a5e79aa654203e005bde07c88ed864457f26674a509",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://497ee0739afacef5b4a64a5b735c5727f20fb2e72e398bdc8358cdc30b01f964",
-				"dweb:/ipfs/QmNmQNfGLhGb9c8rgPUhzA8dYmcpRMX7Cc2vyz9sHZjF75"
+				"bzz-raw://0f71cdbad6ffa8add33fe831658e446782718d80bf4711d37dbb1bd6c899b447",
+				"dweb:/ipfs/Qmc8175Q6HgEow7ARVoj787rLL9WP7Gxr1KqyKDroayxk7"
+			]
+		},
+		"hardhat/console.sol": {
+			"keccak256": "0xf2560b5386574153057104d19a9e68a32ee912cf23c0c8df1fe9a0607f42d543",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a63166e036b040826baa513772451a79925daa304b38749100efb089ac07cdc2",
+				"dweb:/ipfs/QmUtMTxUFKU6a5oFXsEJnTPvb3QPb7GDDmSv5yZ1jFHDwR"
 			]
 		}
 	},

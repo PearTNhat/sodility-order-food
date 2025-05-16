@@ -9,11 +9,22 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_admin",
+						"name": "_roleAccessAddress",
 						"type": "address"
 					}
 				],
-				"name": "addAdmin",
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					}
+				],
+				"name": "addAmin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -243,6 +254,11 @@
 								"type": "string"
 							},
 							{
+								"internalType": "uint256",
+								"name": "staffId",
+								"type": "uint256"
+							},
+							{
 								"components": [
 									{
 										"internalType": "uint256",
@@ -456,6 +472,11 @@
 									},
 									{
 										"internalType": "uint256",
+										"name": "soldQuantity",
+										"type": "uint256"
+									},
+									{
+										"internalType": "uint256",
 										"name": "sumRating",
 										"type": "uint256"
 									},
@@ -480,6 +501,11 @@
 										"internalType": "string",
 										"name": "size",
 										"type": "string"
+									},
+									{
+										"internalType": "uint256",
+										"name": "soldQuantity",
+										"type": "uint256"
 									},
 									{
 										"internalType": "uint256",
@@ -575,6 +601,11 @@
 							},
 							{
 								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
 								"name": "sumRating",
 								"type": "uint256"
 							},
@@ -613,6 +644,11 @@
 								"internalType": "string",
 								"name": "size",
 								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "soldQuantity",
+								"type": "uint256"
 							},
 							{
 								"internalType": "uint256",
@@ -674,6 +710,11 @@
 								"internalType": "string",
 								"name": "imgage",
 								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "staffId",
+								"type": "uint256"
 							},
 							{
 								"components": [
@@ -742,7 +783,7 @@
 				"outputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "owner",
 						"type": "address"
 					}
 				],
@@ -815,25 +856,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "isAdmin",
-				"outputs": [
-					{
-						"internalType": "enum RoleAccess.Role",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "orderManager",
 				"outputs": [
@@ -847,16 +869,16 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "roleAccess",
+				"outputs": [
 					{
-						"internalType": "address",
-						"name": "_admin",
+						"internalType": "contract RoleAccess",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "removeAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -1103,19 +1125,19 @@
 	},
 	"sources": {
 		"contracts/FoodApp.sol": {
-			"keccak256": "0xcc9d1d232fbf978aba21f49f5e60af2c558b024b5321cb80e55606730a152796",
+			"keccak256": "0x2d181e8585280bef2bac0f3c42b08f5fede01787fe1bc59af4010e5ad5cf10b0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4530056a143d67ecc8f369f28ed96d9c6bd3e126dd0ca09bb2c25a5a4e215542",
-				"dweb:/ipfs/QmPsZJA2MzyC5M2nr6BkD6hQ1qrgmYnhGS41DUMo4b93km"
+				"bzz-raw://05d38102721969e99657adeeb4e894d6018d25216330f0a1e018ec52f4f0ac8a",
+				"dweb:/ipfs/QmWNuubXRVu5z1DUvKE4qmqLgLgJfmRQVAdMmGrcuiL1L3"
 			]
 		},
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x29826e7ca65f3785c1d542dd06e1139a9386ebd9182a193e7a497a7735df4caf",
+			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9c9bac481ae921c780360c4d853e9d21913a9cc462b90d72dd70694bbed7dbce",
-				"dweb:/ipfs/QmW9iS5x8QvugSTPZ4MsxunJgKocr6oLonoRSj2VjcSJCs"
+				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
+				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
 			]
 		},
 		"contracts/interfaces/ICategoryManager.sol": {
@@ -1127,19 +1149,19 @@
 			]
 		},
 		"contracts/interfaces/IFoodManager.sol": {
-			"keccak256": "0xfca1c8b269f73e389697a5201613dc99c53e6f60959cf0f8b29db209be5d82f2",
+			"keccak256": "0x5b4bbda206afc3b3ee0530c220ceaac119ceefde1ad9a5dd9ef0dfc4fe5cbc8d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e8e1a2f65c45b6960ddf986d4fcdb057f6e3cd9cf3bdb80288f8191883ff5542",
-				"dweb:/ipfs/QmZN5TCTdq4daxwrjXfDvRrDPLusdnWQKTY18QZM6SHV1u"
+				"bzz-raw://4205bcad0d3072afba19e980a0ed427044cdd3227ecdb2abdbe690b3877bd54d",
+				"dweb:/ipfs/Qman8LPZ1YQiXBUYi3Nf5WgLR4mLTZtffbctifhGdRd8CQ"
 			]
 		},
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0xf3df0e842ed825e94d2fb4a5b5a8cf6183b94deac3a0195599cfd88872f89ada",
+			"keccak256": "0xf1b6d1f85c82dbb44ed7a990a8b0f509d7f78430916562b4b2eb6e951bdd1eaa",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b4145c832dbe7231687904bb6b7c937b239754746e7de3821d073c060fd063eb",
-				"dweb:/ipfs/QmYhe5mJdUsCjHKeoU3j265Z5vLn7i1tYee1NRzDfjyJUb"
+				"bzz-raw://41e137ebbb9eac0ebb9bb22726beab91031ab96e608bfa379b423c64920253b6",
+				"dweb:/ipfs/QmYp9VQ1eaxWbnKjZKGhfxecpDue4AYRjPgK8fBugnJWCu"
 			]
 		},
 		"contracts/interfaces/ITableManager.sol": {
@@ -1151,11 +1173,11 @@
 			]
 		},
 		"contracts/manager/FoodManager.sol": {
-			"keccak256": "0x6c683028eda664970f415f1ddf8dba4c733af82bd6ceb971c32e16d99b893799",
+			"keccak256": "0x3f18fdd45380e91d560dfe1fc02dcb59334d76e0883facacef8b3564e11d579a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://58b419ba35667c9ad8b9ac0c8b581ad3271278e92c9b2355d03386a7ca11ba85",
-				"dweb:/ipfs/QmWX2ALsjCsnDLfBzZtzGf3VMkVg9wQsCasEhpZGxG4ZVt"
+				"bzz-raw://0a8d283cd30fc333f5fa46abf11c3b4dbbca1e579514a61581e4e517a4884e60",
+				"dweb:/ipfs/QmdbyGS2bteiwkQpRAFDMcDgeXEwh32b1bLNst2dUHr8rF"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -1167,19 +1189,27 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0x6d62d76266bb85d8cc0df8c1b87be30a4d4045a4dca110853588a80b474f0f94",
+			"keccak256": "0xc7e84a159519015af6abad7bd1876eb875c0c93675cd9f5300008c36d724c886",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://497ee0739afacef5b4a64a5b735c5727f20fb2e72e398bdc8358cdc30b01f964",
-				"dweb:/ipfs/QmNmQNfGLhGb9c8rgPUhzA8dYmcpRMX7Cc2vyz9sHZjF75"
+				"bzz-raw://54725b3e32f96b63e57f4175501b7201f262de3b13a15d3843b833220f6d59a1",
+				"dweb:/ipfs/Qmd2GRLh2tm5GHmrLyRZSw2gGqZzmU1oJY3qGcZgjSAMfA"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0x4602e0f2d632b7cca9741dcd62a57b2c3c4b16d5aff952d63760baced4052517",
+			"keccak256": "0x63ad6664a74698bb883333feaba5c5bc3426c1ab87b4aee14c8079f1874d35cd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://393f354e152e8b03be2197bded9cbb25c623e27d3aece1630902071f477b81bf",
-				"dweb:/ipfs/Qmd44gaTL6AwyTaHma48N4dQtszBeZAziMSQnv541HLncv"
+				"bzz-raw://514867577c9e7424b27443812aa06027fd674fd49684b2472c42b3ca718388f2",
+				"dweb:/ipfs/QmV97uo2cLyAnQZsuzDgKBTJFx3VQs1FFWBm7eg5CmKRha"
+			]
+		},
+		"hardhat/console.sol": {
+			"keccak256": "0xf2560b5386574153057104d19a9e68a32ee912cf23c0c8df1fe9a0607f42d543",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a63166e036b040826baa513772451a79925daa304b38749100efb089ac07cdc2",
+				"dweb:/ipfs/QmUtMTxUFKU6a5oFXsEJnTPvb3QPb7GDDmSv5yZ1jFHDwR"
 			]
 		}
 	},

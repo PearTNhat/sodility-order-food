@@ -7,7 +7,7 @@ struct Food {
     string description;
     uint categoryId;
     string[] imageUrl;
-    string soldQuantity;
+    uint soldQuantity;
     uint sumRating;
     uint countRating;
 }
@@ -15,6 +15,7 @@ struct Food {
 struct FoodDetail {
     uint foodDetailId;
     string size;       // VD: Small, Medium, Large
+    uint soldQuantity; // sl hàng đã bán
     uint quantity;     // tồn kho
     uint price;        // giá theo size
 }

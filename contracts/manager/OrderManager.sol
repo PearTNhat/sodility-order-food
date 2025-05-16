@@ -2,18 +2,31 @@
 pragma solidity ^0.8.0;
 import "../interfaces/IOrderManager.sol";
 import "../interfaces/IFoodManager.sol";
+import "../interfaces/ITableManager.sol";
+import "../access/RoleAccess.sol";
+
 // import "hardhat/console.log";
 
 contract OrderManager is IOrderManager {
     IFoodManager public foodManager;
+    ITableManager public tableManager;
+    RoleAccess public roleAccess;
+
 
     uint256 nextOrderItemId = 1;
     mapping(uint256 => Order) public orders;
     uint256 public nextOrderId = 1;
     mapping(address => uint256[]) public userOrders; //track order ids by user
 
-    constructor(address _foodManagerAddress) {
+    constructor(address _foodManagerAddress, address _roleAcces, address _tableManager) {
         foodManager = IFoodManager(_foodManagerAddress);
+        tableManager=ITableManager(_tableManager);
+        roleAccess = RoleAccess(_roleAcces);
+    }
+
+    modifier onlyAdmin() {
+        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        _;
     }
 
     function createOrder(
@@ -31,41 +44,41 @@ contract OrderManager is IOrderManager {
         o.orderId = orderId;
         o.user = _user;
         o.userInfo = _userInfo;
-        o.totalAmount = totalAmount;
         o.name = food.name;
-        o.note=_note;
+        o.staffId =0; // nếu staffId = 0 thì k có nhân viên
+        o.note = _note;
         o.imgage = food.imageUrl[0];
         o.status = OrderStatus.Pending;
         o.timestamp = block.timestamp;
 
         for (uint256 i = 0; i < _items.length; i++) {
-            FoodDetail memory foodDetail = foodManager.getFoodDetailByFoodId_FoodDetailId(_foodId, _items[i].foodDetailId) ;
+            FoodDetail memory foodDetail = foodManager
+                .getFoodDetailByFoodId_FoodDetailId(
+                    _foodId,
+                    _items[i].foodDetailId
+                );
             totalAmount += foodDetail.price * _items[i].quantity;
             foodManager.reduceQuantiy(
                 _foodId,
                 _items[i].foodDetailId,
                 _items[i].quantity
             );
+            foodManager.increaseSoldQuantiy(_foodId,foodDetail.foodDetailId, _items[i].quantity);
             o.items.push(
                 OrderItem({
                     orderItemId: nextOrderItemId++,
-                    foodDetailId:_items[i].foodDetailId,
-                    foodId:_items[i].foodId,
+                    foodDetailId: _items[i].foodDetailId,
+                    foodId: _items[i].foodId,
                     quantity: _items[i].quantity,
                     price: foodDetail.price,
                     status: OrderItemStatus.Shipping
                 })
             );
         }
-
+        o.totalAmount = totalAmount;
         orders[orderId] = o;
         userOrders[_user].push(orderId);
-        emit OrderCreated(
-            orderId,
-            _user,
-            totalAmount,
-            OrderStatus.Pending
-        );
+        emit OrderCreated(orderId, _user, totalAmount, OrderStatus.Pending);
         return o;
     }
 
@@ -73,24 +86,28 @@ contract OrderManager is IOrderManager {
         uint256 _orderId,
         uint256 _orderItemId,
         OrderItemStatus _newStatus
-    ) public override {
+    ) public override onlyAdmin {
         require(orders[_orderId].orderId != 0, "Order does not exist");
-        Order memory tempOrder = orders[_orderId];
+        require(
+            orders[_orderId].items.length != 0,
+            "Order item does not exist"
+        );
+        Order storage order = orders[_orderId];
         bool found = false;
-        for (uint256 i = 0; i < tempOrder.items.length; i++) {
+        for (uint256 i = 0; i < order.items.length; i++) {
             // tìm kiếm orderItemId trong đó xem =  truyền vào k
-            if (tempOrder.items[i].orderItemId == _orderItemId) {
+            if (order.items[i].orderItemId == _orderItemId) {
                 require(
-                    tempOrder.items[i].status != OrderItemStatus.Success,
+                    order.items[i].status != OrderItemStatus.Success,
                     "Order item already marked as success. Can not update"
                 );
-                orders[_orderId].items[i].status = _newStatus;
+                order.items[i].status = _newStatus;
+                OrderItem memory orderItem =order.items[i];
                 if (_newStatus != OrderItemStatus.Success) {
-                    orders[_orderId].items[i].quantity -= tempOrder
-                        .items[i]
-                        .quantity;
+                    foodManager.increaseQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                    foodManager.reduceSoldQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
                 }
-                orders[_orderId].totalAmount -= tempOrder.items[i].price;
+                order.totalAmount -= orderItem.price;
                 found = true;
                 break;
             }
@@ -98,6 +115,7 @@ contract OrderManager is IOrderManager {
         require(found, "Order item not found");
         emit OrderItemStatusUpdated(_orderId, _orderItemId, _newStatus);
     }
+
     function getOrdersByStatus(OrderStatus _status)
         public
         view
@@ -125,6 +143,7 @@ contract OrderManager is IOrderManager {
     function updateOrderStatus(uint256 _orderId, OrderStatus _status)
         public
         override
+        onlyAdmin
     {
         Order memory tempOrder = orders[_orderId];
         require(tempOrder.orderId != 0, "Order does not exist");
@@ -138,6 +157,7 @@ contract OrderManager is IOrderManager {
                 tempOrder.items[i].foodDetailId,
                 tempOrder.items[i].quantity
             );
+            foodManager.reduceSoldQuantiy(tempOrder.items[i].foodId, tempOrder.items[i].foodDetailId,  tempOrder.items[i].quantity);
         }
         orders[_orderId].status = _status;
         emit OrderUpdated(_orderId, _status);
@@ -151,5 +171,12 @@ contract OrderManager is IOrderManager {
     {
         return userOrders[_user];
     }
-   
+    function addStaffForOrder(uint orderId, uint staffId) public onlyAdmin {
+        require(orders[orderId].orderId != 0, "OrderId does not exist");
+        orders[orderId].staffId = staffId;
+    }
+    function addTableForOrder(uint _orderId, uint _tableId ) public onlyAdmin {
+         require(orders[_orderId].orderId != 0, "OrderId does not exist");
+         orders[_orderId].tableId = _tableId;
+    }
 }

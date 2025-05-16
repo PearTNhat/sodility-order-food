@@ -6,9 +6,129 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_roleAccess",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "StaffTableUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "row",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "col",
+						"type": "uint256"
+					}
+				],
+				"name": "TableAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "TableAddedToOrder",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "TableDeleted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "row",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "col",
+						"type": "uint256"
+					}
+				],
+				"name": "TableEdited",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "TableUpdatedStaus",
+				"type": "event"
 			},
 			{
 				"inputs": [
@@ -31,6 +151,24 @@
 						"type": "uint256"
 					}
 				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "addTableToOrder",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -98,17 +236,12 @@
 								"type": "uint256"
 							},
 							{
-								"internalType": "uint256",
-								"name": "staffId",
-								"type": "uint256"
-							},
-							{
-								"internalType": "bool",
-								"name": "isReserved",
-								"type": "bool"
+								"internalType": "enum TableStatus",
+								"name": "status",
+								"type": "uint8"
 							}
 						],
-						"internalType": "struct ITableManager.Table",
+						"internalType": "struct Table",
 						"name": "",
 						"type": "tuple"
 					}
@@ -131,15 +264,65 @@
 			},
 			{
 				"inputs": [],
-				"name": "owner",
+				"name": "orderManager",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "contract IOrderManager",
 						"name": "",
 						"type": "address"
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "orderTable",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "roleAccess",
+				"outputs": [
+					{
+						"internalType": "contract RoleAccess",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_orderManager",
+						"type": "address"
+					}
+				],
+				"name": "setOrderManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -168,14 +351,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "bool",
-						"name": "isReserved",
-						"type": "bool"
+						"internalType": "enum TableStatus",
+						"name": "status",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -189,12 +367,12 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "enum TableStatus",
+						"name": "_status",
+						"type": "uint8"
 					}
 				],
-				"name": "updateStaffTable",
+				"name": "updateReservedTable",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -227,20 +405,52 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/interfaces/ITableInteface.sol": {
-			"keccak256": "0x7da8ae39a1aaafceb17cde1e5455ac18657c5ec9791c475d3e6ff9e3e756dcd1",
+		"contracts/access/RoleAccess.sol": {
+			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://718107e14eb872119ce6e9e3eccf3be774bf7a1a9074c206b50088f966ada8ba",
-				"dweb:/ipfs/QmQQbAN4tJoF55VhtBh5Vf8SpY868YQBqF4We8dMsqz7L1"
+				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
+				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+			]
+		},
+		"contracts/interfaces/IOrderManager.sol": {
+			"keccak256": "0xb49a1ee1663c65134a1a3fa65ee85e480bcea37274837f70802f34ebbb668f57",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://eeff515275d944c3df48eaca03cafdb7222f937fac50ddbd11c036c631d30151",
+				"dweb:/ipfs/QmatD5QdKHYNqGY7GxqjaY6FsaVcCGmneW2oEiCaz1aJkh"
+			]
+		},
+		"contracts/interfaces/ITableManager.sol": {
+			"keccak256": "0xcc99e33d95af8dc9c6ea8ca7312c45c930ef82be72b6c133decda6f476db9371",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://fcb2cb1a89aa20d016243012adecd502099710dd32b234a7bf11b31409ade8ae",
+				"dweb:/ipfs/QmcvgJVSbeGdwp2Kko1Ydtdep794HeYg5eh5PmWjomCqnQ"
 			]
 		},
 		"contracts/manager/TableManager.sol": {
-			"keccak256": "0x7169203044b79d57356a470c306ffadcca118e9b56ac1fec6818cb569234f817",
+			"keccak256": "0x8cca11bea39eddc3bafad2a6e86c6cbb44c13700bc64adb9fbb7db3d29da4727",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://59e7c530c1a68ffc11275418cbf14c8f1ea9b14526a1b822f5de6b22ed2c2da5",
-				"dweb:/ipfs/QmQquzqwtJEx71qFRhnYj1aqcbTvQ4X3zGa5nuTfEa7aav"
+				"bzz-raw://582e59639e8df51547a6b6c8c8b04c56ad370d8a92ddc3095197933164124641",
+				"dweb:/ipfs/QmcCRuzkqZuEpQDE4JeS9y9RJvADu8S79wcx13maBYs2t1"
+			]
+		},
+		"contracts/structs/OrderStructs.sol": {
+			"keccak256": "0x9db119baedfe813ab9224ce215da9e553525189cdcadab3b11e8892f195c3a71",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4db24211ed639ad9555a4097a4dd9b417eb4bf7ce8bdc5328a4b65c16134c297",
+				"dweb:/ipfs/QmbwVLFCzMhUZrBBNmpRpZXawdcg4fGCP9fX8KV4cw8s6S"
+			]
+		},
+		"contracts/structs/TableStruct.sol": {
+			"keccak256": "0xeba4b14f3eda8af9b2e3e318ac15b5f9ede865664825482581c00f1f9aae23c6",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://754308bf229ded8e1bd8ffb5020e06340c39ea89c2f0f31bcff589b777ebd0bd",
+				"dweb:/ipfs/QmYv9zq8t97k9TP74oKs475dsfeN2pegBihQbPUNCNCqBk"
 			]
 		}
 	},

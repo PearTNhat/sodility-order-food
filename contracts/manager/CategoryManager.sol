@@ -3,13 +3,25 @@ pragma solidity ^0.8.0;
 
 import "../interfaces/ICategoryManager.sol";
 import "../structs/FoodStructs.sol"; // Import struct Category
+import "../access/RoleAccess.sol";
 
 contract CategoryManager is ICategoryManager {
+    RoleAccess public roleAccess;
+
     mapping(uint => Category) public categories;
     uint[] private categoryIds;
     mapping(uint => uint[]) public categoryToFoodId;
+    
+    constructor( address _roleAcces) {
+        roleAccess = RoleAccess(_roleAcces);
+    }
 
-    function createCategory(uint categoryId, string memory name) external override {
+    modifier onlyAdmin() {
+        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        _;
+    }
+
+    function createCategory(uint categoryId, string memory name) external override onlyAdmin{
         require(bytes(name).length > 0, "Category name cannot be empty");
         require(categories[categoryId].categoryId == 0, "Category ID already exists"); //prevent overwrite
         Category memory newCategory = Category({categoryId: categoryId, name: name});

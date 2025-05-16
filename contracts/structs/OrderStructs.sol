@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-enum OrderStatus { Pending, Confirmed, Cancelled }
-enum OrderItemStatus {Success, Cancelled, Shipping }
+enum OrderStatus {  Confirmed,Pending, Cancelled }
+enum OrderItemStatus {Success,  Shipping,Cancelled }
 struct OrderItem {
     uint orderItemId;
     uint foodDetailId;
@@ -16,7 +16,10 @@ struct OrderItemRequest {
     uint foodDetailId;
     uint quantity;
 }
-
+// khi order gọi món khách hàng chọn
+// 1. order k có nhân viên thì staffId 0 , tableId 0
+// 2. order có nv, staffId != 0
+// 3. order có nv, bàn staffId != 0, tableId !=0
 struct Order {
     uint orderId;
     address user;
@@ -24,6 +27,8 @@ struct Order {
     string note;
     string name;
     string imgage;
+    uint  staffId; // nếu staffId = 0 thì k có nhân viên
+    uint tableId; // bàn được order nếu = 0 là k có bàn
     OrderItem[] items;
     uint totalAmount;
     OrderStatus status;

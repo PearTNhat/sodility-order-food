@@ -1,0 +1,256 @@
+{
+	"deploy": {
+		"VM:-": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"main:1": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"ropsten:3": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"rinkeby:4": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"kovan:42": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"goerli:5": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		},
+		"Custom": {
+			"linkReferences": {},
+			"autoDeployLib": true
+		}
+	},
+	"data": {
+		"bytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"deployedBytecode": {
+			"functionDebugData": {},
+			"generatedSources": [],
+			"immutableReferences": {},
+			"linkReferences": {},
+			"object": "",
+			"opcodes": "",
+			"sourceMap": ""
+		},
+		"gasEstimates": null,
+		"methodIdentifiers": {
+			"addStaff(uint256,string,string,string)": "9121f4eb",
+			"addStaffToOrder(uint256,uint256)": "fdff9aab",
+			"getStaff(uint256)": "f4def44b",
+			"getStaffForOrder(uint256)": "cbe8eaad",
+			"updateStaffInfo(uint256,string,string,string)": "b3ce9dea"
+		}
+	},
+	"abi": [
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				}
+			],
+			"name": "StaffAdded",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "StaffAddedToOrder",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": true,
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				},
+				{
+					"indexed": false,
+					"internalType": "string",
+					"name": "name",
+					"type": "string"
+				}
+			],
+			"name": "StaffUpdated",
+			"type": "event"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_staffId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_dob",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_phone",
+					"type": "string"
+				}
+			],
+			"name": "addStaff",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "addStaffToOrder",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "getStaff",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "staffId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "name",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "dob",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "phone",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "sumRating",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "countRating",
+							"type": "string"
+						}
+					],
+					"internalType": "struct Staff",
+					"name": "",
+					"type": "tuple"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				}
+			],
+			"name": "getStaffForOrder",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_staffId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "_name",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_dob",
+					"type": "string"
+				},
+				{
+					"internalType": "string",
+					"name": "_phone",
+					"type": "string"
+				}
+			],
+			"name": "updateStaffInfo",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		}
+	]
+}

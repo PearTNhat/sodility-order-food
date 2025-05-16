@@ -49,6 +49,7 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
+			"addStaffForOrder(uint256,uint256)": "3f9fb5fd",
 			"createOrder(address,uint256,string,string,(uint256,uint256,uint256)[])": "5055aa01",
 			"getOrdersByStatus(uint8)": "8ce2ec79",
 			"getUserOrders(address)": "63c69f08",
@@ -148,6 +149,24 @@
 		{
 			"inputs": [
 				{
+					"internalType": "uint256",
+					"name": "orderId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "addStaffForOrder",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "address",
 					"name": "_user",
 					"type": "address"
@@ -223,6 +242,11 @@
 							"internalType": "string",
 							"name": "imgage",
 							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "staffId",
+							"type": "uint256"
 						},
 						{
 							"components": [
@@ -326,6 +350,11 @@
 							"internalType": "string",
 							"name": "imgage",
 							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "staffId",
+							"type": "uint256"
 						},
 						{
 							"components": [

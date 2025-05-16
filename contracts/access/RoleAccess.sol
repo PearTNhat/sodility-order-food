@@ -8,10 +8,10 @@ contract RoleAccess {
         ADMIN,
         CUSTOMER
     }
-    mapping(address => Role) public isAdmin;
+    mapping(address => Role) public roles;
 
     modifier onlyAdmin() {
-        require(isAdmin[msg.sender] == Role.ADMIN, "You are not admin");
+        require(roles[msg.sender] == Role.ADMIN, "You are not admin");
         _;
     }
     
@@ -22,15 +22,18 @@ contract RoleAccess {
      constructor(){
         owner =msg.sender;
     }
-     function getOwner () public  view returns (address){
+     function getOwner () public view returns (address){
         return owner;
     }
     function addAdmin(address _admin) external virtual  {
         // implement quyền cấp cao hơn nếu cần
-        isAdmin[_admin] = Role.ADMIN;
+        roles[_admin] = Role.ADMIN;
+    }
+    function isAdmin(address _addr) external view returns (bool) {
+        return roles[_addr] == Role.ADMIN;
     }
 
     function removeAdmin(address _admin) external {
-        isAdmin[_admin] = Role.NONE;
+        roles[_admin] = Role.NONE;
     }
 }

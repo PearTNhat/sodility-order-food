@@ -6,6 +6,6 @@ struct Staff {
     string name;
     string dob;
     string phone;
-    string sumRating;
-    string countRating;
+    uint sumRating;
+    uint countRating;
 }

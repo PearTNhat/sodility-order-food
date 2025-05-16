@@ -2,13 +2,25 @@
 pragma solidity ^0.8.0;
 
 import "../interfaces/IStaffManager.sol";
+import "../interfaces/IOrderManager.sol";
+import "../access/RoleAccess.sol";
 
 contract StaffManagement is IStaffManager {
+    IOrderManager public orderManager;
+    RoleAccess public roleAccess;
     mapping(uint => Staff) public staffs;
-    mapping(uint => uint[]) public orderStaffs;
+    // mapping(uint => uint) public staffInOrder;
     uint public nextStaffId = 1;
 
-    function addStaff(uint _staffId, string calldata _name, string calldata _dob, string calldata _phone) external override {
+    constructor(address _orderManagerAddress, address _roleAccess) {
+        orderManager = IOrderManager(_orderManagerAddress);
+        roleAccess = RoleAccess(_roleAccess);
+    }
+     modifier onlyAdmin() {
+        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        _;
+    }
+    function addStaff(uint _staffId, string calldata _name, string calldata _dob, string calldata _phone) external override onlyAdmin {
         require(staffs[_staffId].staffId == 0, "Staff ID already exists");
         staffs[_staffId] = Staff(_staffId, _name, _dob, _phone, 0, 0);
         emit StaffAdded(_staffId, _name);
@@ -26,24 +38,9 @@ contract StaffManagement is IStaffManager {
         emit StaffUpdated(_staffId, _name);
     }
 
-    function recordRating(uint _staffId, uint _rating) external override {
+    function addStaffToOrder(uint _orderId, uint _staffId) external override onlyAdmin{
         require(staffs[_staffId].staffId != 0, "Staff ID does not exist");
-        staffs[_staffId].sumRating += _rating;
-        staffs[_staffId].countRating++;
-    }
-
-    function getAverageRating(uint _staffId) external view override returns (uint) {
-        require(staffs[_staffId].countRating > 0, "No ratings yet");
-        return staffs[_staffId].sumRating / staffs[_staffId].countRating;
-    }
-
-    function addStaffToOrder(uint _orderId, uint _staffId) external override {
-        require(staffs[_staffId].staffId != 0, "Staff ID does not exist");
-        orderStaffs[_orderId].push(_staffId);
-        emit StaffAddedToOrder(_orderId, _staffId);
-    }
-
-    function getStaffForOrder(uint _orderId) external view override returns (uint[] memory) {
-        return orderStaffs[_orderId];
+        orderManager.addStaffForOrder(_orderId,_staffId);
+        emit StaffAddedToOrder( _staffId,_orderId);
     }
 }

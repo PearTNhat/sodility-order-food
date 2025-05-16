@@ -1,0 +1,654 @@
+{
+	"id": "45d544df909f3fc7e59812ecf2b4a8d3",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/structs/FoodStructs.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nstruct Food {\r\n    uint foodId;\r\n    string name;\r\n    string description;\r\n    uint categoryId;\r\n    string[] imageUrl;\r\n    uint soldQuantity;\r\n    uint sumRating;\r\n    uint countRating;\r\n}\r\n\r\nstruct FoodDetail {\r\n    uint foodDetailId;\r\n    string size;       // VD: Small, Medium, Large\r\n    uint soldQuantity; // sl hàng đã bán\r\n    uint quantity;     // tồn kho\r\n    uint price;        // giá theo size\r\n}\r\nstruct UpdateFoodDetail {\r\n    string size;       \r\n    uint quantity;    \r\n    uint price;  \r\n}\r\nstruct FoodWithDetails { // Struct mới để chứa cả Food và FoodDetail\r\n    Food food;\r\n    FoodDetail[] foodDetails;\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"contracts/structs/FoodStructs.sol": {
+				"ast": {
+					"absolutePath": "contracts/structs/FoodStructs.sol",
+					"exportedSymbols": {
+						"Food": [
+							19
+						],
+						"FoodDetail": [
+							30
+						],
+						"FoodWithDetails": [
+							45
+						],
+						"UpdateFoodDetail": [
+							37
+						]
+					},
+					"id": 46,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"canonicalName": "Food",
+							"id": 19,
+							"members": [
+								{
+									"constant": false,
+									"id": 3,
+									"mutability": "mutable",
+									"name": "foodId",
+									"nameLocation": "84:6:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "79:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 2,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "79:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 5,
+									"mutability": "mutable",
+									"name": "name",
+									"nameLocation": "104:4:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "97:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 4,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "97:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 7,
+									"mutability": "mutable",
+									"name": "description",
+									"nameLocation": "122:11:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "115:18:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 6,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "115:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 9,
+									"mutability": "mutable",
+									"name": "categoryId",
+									"nameLocation": "145:10:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "140:15:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 8,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "140:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 12,
+									"mutability": "mutable",
+									"name": "imageUrl",
+									"nameLocation": "171:8:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "162:17:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+										"typeString": "string[]"
+									},
+									"typeName": {
+										"baseType": {
+											"id": 10,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "162:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"id": 11,
+										"nodeType": "ArrayTypeName",
+										"src": "162:8:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+											"typeString": "string[]"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 14,
+									"mutability": "mutable",
+									"name": "soldQuantity",
+									"nameLocation": "191:12:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "186:17:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 13,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "186:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 16,
+									"mutability": "mutable",
+									"name": "sumRating",
+									"nameLocation": "215:9:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "210:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 15,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "210:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 18,
+									"mutability": "mutable",
+									"name": "countRating",
+									"nameLocation": "236:11:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 19,
+									"src": "231:16:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 17,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "231:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "Food",
+							"nameLocation": "67:4:0",
+							"nodeType": "StructDefinition",
+							"scope": 46,
+							"src": "60:191:0",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "FoodDetail",
+							"id": 30,
+							"members": [
+								{
+									"constant": false,
+									"id": 21,
+									"mutability": "mutable",
+									"name": "foodDetailId",
+									"nameLocation": "285:12:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 30,
+									"src": "280:17:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 20,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "280:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 23,
+									"mutability": "mutable",
+									"name": "size",
+									"nameLocation": "311:4:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 30,
+									"src": "304:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 22,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "304:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 25,
+									"mutability": "mutable",
+									"name": "soldQuantity",
+									"nameLocation": "361:12:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 30,
+									"src": "356:17:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 24,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "356:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 27,
+									"mutability": "mutable",
+									"name": "quantity",
+									"nameLocation": "407:8:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 30,
+									"src": "402:13:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 26,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "402:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 29,
+									"mutability": "mutable",
+									"name": "price",
+									"nameLocation": "444:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 30,
+									"src": "439:10:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 28,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "439:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "FoodDetail",
+							"nameLocation": "262:10:0",
+							"nodeType": "StructDefinition",
+							"scope": 46,
+							"src": "255:223:0",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "UpdateFoodDetail",
+							"id": 37,
+							"members": [
+								{
+									"constant": false,
+									"id": 32,
+									"mutability": "mutable",
+									"name": "size",
+									"nameLocation": "518:4:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 37,
+									"src": "511:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 31,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "511:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 34,
+									"mutability": "mutable",
+									"name": "quantity",
+									"nameLocation": "541:8:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 37,
+									"src": "536:13:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 33,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "536:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 36,
+									"mutability": "mutable",
+									"name": "price",
+									"nameLocation": "565:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 37,
+									"src": "560:10:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 35,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "560:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "UpdateFoodDetail",
+							"nameLocation": "487:16:0",
+							"nodeType": "StructDefinition",
+							"scope": 46,
+							"src": "480:96:0",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "FoodWithDetails",
+							"id": 45,
+							"members": [
+								{
+									"constant": false,
+									"id": 40,
+									"mutability": "mutable",
+									"name": "food",
+									"nameLocation": "667:4:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 45,
+									"src": "662:9:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_struct$_Food_$19_storage_ptr",
+										"typeString": "struct Food"
+									},
+									"typeName": {
+										"id": 39,
+										"nodeType": "UserDefinedTypeName",
+										"pathNode": {
+											"id": 38,
+											"name": "Food",
+											"nameLocations": [
+												"662:4:0"
+											],
+											"nodeType": "IdentifierPath",
+											"referencedDeclaration": 19,
+											"src": "662:4:0"
+										},
+										"referencedDeclaration": 19,
+										"src": "662:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_struct$_Food_$19_storage_ptr",
+											"typeString": "struct Food"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 44,
+									"mutability": "mutable",
+									"name": "foodDetails",
+									"nameLocation": "691:11:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 45,
+									"src": "678:24:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_array$_t_struct$_FoodDetail_$30_storage_$dyn_storage_ptr",
+										"typeString": "struct FoodDetail[]"
+									},
+									"typeName": {
+										"baseType": {
+											"id": 42,
+											"nodeType": "UserDefinedTypeName",
+											"pathNode": {
+												"id": 41,
+												"name": "FoodDetail",
+												"nameLocations": [
+													"678:10:0"
+												],
+												"nodeType": "IdentifierPath",
+												"referencedDeclaration": 30,
+												"src": "678:10:0"
+											},
+											"referencedDeclaration": 30,
+											"src": "678:10:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_struct$_FoodDetail_$30_storage_ptr",
+												"typeString": "struct FoodDetail"
+											}
+										},
+										"id": 43,
+										"nodeType": "ArrayTypeName",
+										"src": "678:12:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_array$_t_struct$_FoodDetail_$30_storage_$dyn_storage_ptr",
+											"typeString": "struct FoodDetail[]"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "FoodWithDetails",
+							"nameLocation": "585:15:0",
+							"nodeType": "StructDefinition",
+							"scope": 46,
+							"src": "578:128:0",
+							"visibility": "public"
+						}
+					],
+					"src": "33:673:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
