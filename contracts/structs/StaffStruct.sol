@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 
 struct Staff {
-    uint staffId;
+    address staffAddress;
     string name;
     string dob;
     string phone;

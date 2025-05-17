@@ -21,7 +21,7 @@ contract FoodRatingManager is IFoodRatingManager {
     constructor(address _roleAccess) {
         roleAccess = RoleAccess(_roleAccess);
     }
-    function setFoodManager(address _foodManager) external {
+    function setFoodManager(address _foodManager) external override {
         require(_foodManager != address(0), "Invalid address");
         foodManager = IFoodManager(_foodManager);
     }

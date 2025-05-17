@@ -20,6 +20,7 @@ struct FoodDetail {
     uint soldQuantity; // sl hàng đã bán
     uint quantity;     // tồn kho
     uint price;        // giá theo size
+    bool isHidden;
 }
 struct UpdateFoodDetail {
     string size;       

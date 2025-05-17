@@ -1,0 +1,499 @@
+{
+	"id": "bc1d847d419b4aaf6f14664ae56ab9e0",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.30",
+	"solcLongVersion": "0.8.30+commit.73712a01",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/structs/RatingStruct.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.0;\r\n\r\nstruct FoodRating {\r\n    uint id;\r\n    address reviewer;\r\n    string[] image; // cho tối đa 5 ảnh\r\n    uint foodId;\r\n    string content;\r\n    uint8 stars; // 1–5\r\n    uint timestamp;\r\n}\r\n\r\nstruct StaffRating {\r\n    uint id;\r\n    address reviewer;      // Người đánh giá (user)\r\n    address staffAddress;    // Người bị đánh giá (staff)\r\n    string content;\r\n    string[] image; // cho tối đa 5 ảnh\r\n    uint8 stars;           // 1 - 5\r\n    uint timestamp;\r\n}"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": true,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"sources": {
+			"contracts/structs/RatingStruct.sol": {
+				"ast": {
+					"absolutePath": "contracts/structs/RatingStruct.sol",
+					"exportedSymbols": {
+						"FoodRating": [
+							17
+						],
+						"StaffRating": [
+							33
+						]
+					},
+					"id": 34,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".0"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "33:23:0"
+						},
+						{
+							"canonicalName": "FoodRating",
+							"id": 17,
+							"members": [
+								{
+									"constant": false,
+									"id": 3,
+									"mutability": "mutable",
+									"name": "id",
+									"nameLocation": "90:2:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "85:7:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 2,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "85:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 5,
+									"mutability": "mutable",
+									"name": "reviewer",
+									"nameLocation": "107:8:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "99:16:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 4,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "99:7:0",
+										"stateMutability": "nonpayable",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 8,
+									"mutability": "mutable",
+									"name": "image",
+									"nameLocation": "131:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "122:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+										"typeString": "string[]"
+									},
+									"typeName": {
+										"baseType": {
+											"id": 6,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "122:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"id": 7,
+										"nodeType": "ArrayTypeName",
+										"src": "122:8:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+											"typeString": "string[]"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 10,
+									"mutability": "mutable",
+									"name": "foodId",
+									"nameLocation": "173:6:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "168:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 9,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "168:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 12,
+									"mutability": "mutable",
+									"name": "content",
+									"nameLocation": "193:7:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "186:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 11,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "186:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 14,
+									"mutability": "mutable",
+									"name": "stars",
+									"nameLocation": "213:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "207:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint8",
+										"typeString": "uint8"
+									},
+									"typeName": {
+										"id": 13,
+										"name": "uint8",
+										"nodeType": "ElementaryTypeName",
+										"src": "207:5:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint8",
+											"typeString": "uint8"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 16,
+									"mutability": "mutable",
+									"name": "timestamp",
+									"nameLocation": "239:9:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 17,
+									"src": "234:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 15,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "234:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "FoodRating",
+							"nameLocation": "67:10:0",
+							"nodeType": "StructDefinition",
+							"scope": 34,
+							"src": "60:192:0",
+							"visibility": "public"
+						},
+						{
+							"canonicalName": "StaffRating",
+							"id": 33,
+							"members": [
+								{
+									"constant": false,
+									"id": 19,
+									"mutability": "mutable",
+									"name": "id",
+									"nameLocation": "287:2:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "282:7:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 18,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "282:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 21,
+									"mutability": "mutable",
+									"name": "reviewer",
+									"nameLocation": "304:8:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "296:16:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 20,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "296:7:0",
+										"stateMutability": "nonpayable",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 23,
+									"mutability": "mutable",
+									"name": "staffAddress",
+									"nameLocation": "363:12:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "355:20:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_address",
+										"typeString": "address"
+									},
+									"typeName": {
+										"id": 22,
+										"name": "address",
+										"nodeType": "ElementaryTypeName",
+										"src": "355:7:0",
+										"stateMutability": "nonpayable",
+										"typeDescriptions": {
+											"typeIdentifier": "t_address",
+											"typeString": "address"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 25,
+									"mutability": "mutable",
+									"name": "content",
+									"nameLocation": "429:7:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "422:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_string_storage_ptr",
+										"typeString": "string"
+									},
+									"typeName": {
+										"id": 24,
+										"name": "string",
+										"nodeType": "ElementaryTypeName",
+										"src": "422:6:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_string_storage_ptr",
+											"typeString": "string"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 28,
+									"mutability": "mutable",
+									"name": "image",
+									"nameLocation": "452:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "443:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+										"typeString": "string[]"
+									},
+									"typeName": {
+										"baseType": {
+											"id": 26,
+											"name": "string",
+											"nodeType": "ElementaryTypeName",
+											"src": "443:6:0",
+											"typeDescriptions": {
+												"typeIdentifier": "t_string_storage_ptr",
+												"typeString": "string"
+											}
+										},
+										"id": 27,
+										"nodeType": "ArrayTypeName",
+										"src": "443:8:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_array$_t_string_storage_$dyn_storage_ptr",
+											"typeString": "string[]"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 30,
+									"mutability": "mutable",
+									"name": "stars",
+									"nameLocation": "495:5:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "489:11:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint8",
+										"typeString": "uint8"
+									},
+									"typeName": {
+										"id": 29,
+										"name": "uint8",
+										"nodeType": "ElementaryTypeName",
+										"src": "489:5:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint8",
+											"typeString": "uint8"
+										}
+									},
+									"visibility": "internal"
+								},
+								{
+									"constant": false,
+									"id": 32,
+									"mutability": "mutable",
+									"name": "timestamp",
+									"nameLocation": "531:9:0",
+									"nodeType": "VariableDeclaration",
+									"scope": 33,
+									"src": "526:14:0",
+									"stateVariable": false,
+									"storageLocation": "default",
+									"typeDescriptions": {
+										"typeIdentifier": "t_uint256",
+										"typeString": "uint256"
+									},
+									"typeName": {
+										"id": 31,
+										"name": "uint",
+										"nodeType": "ElementaryTypeName",
+										"src": "526:4:0",
+										"typeDescriptions": {
+											"typeIdentifier": "t_uint256",
+											"typeString": "uint256"
+										}
+									},
+									"visibility": "internal"
+								}
+							],
+							"name": "StaffRating",
+							"nameLocation": "263:11:0",
+							"nodeType": "StructDefinition",
+							"scope": 34,
+							"src": "256:288:0",
+							"visibility": "public"
+						}
+					],
+					"src": "33:511:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}

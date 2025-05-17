@@ -1,22 +1,21 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-import "./manager/FoodManager.sol";
+import "./access/RoleAccess.sol";
 import "./structs/FoodStructs.sol";
 import "./interfaces/IFoodManager.sol";
 import "./interfaces/ICategoryManager.sol";
-import "./access/RoleAccess.sol";
 import "./interfaces/ITableManager.sol";
 import "./interfaces/IOrderManager.sol";
 import "./interfaces/IStaffManager.sol";
 import "./interfaces/IStaffRatingManager.sol"; 
 import "./interfaces/IFoodRatingManager.sol";
 
+import "./manager/CategoryManager.sol";
 contract FoodApp {
     RoleAccess public roleAccess;
 
     address public foodManager;
-    address public categoryManager;
+    ICategoryManager public categoryManager;
     address public tableManager;
     address public orderManager;
     address public staffManager;
@@ -28,7 +27,7 @@ contract FoodApp {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "You are not admin");
+        require(roleAccess.isAdmin(msg.sender), "Not admin");
         _;
     }
 
@@ -45,14 +44,20 @@ contract FoodApp {
         foodManager = _foodManager;
     }
 
-    function setCategoryManager(address _categoryManager) external onlyAdmin {
-        require(_categoryManager != address(0), "Invalid address");
-        categoryManager = _categoryManager;
+    function deployCategoryManager() external onlyAdmin returns (address) {
+        require(address(roleAccess) != address(0), "Invalid RoleAccess");
+        require(address(categoryManager) == address(0), "Already deployed");
+        categoryManager = new CategoryManager(address(roleAccess));
+        return address(categoryManager);
     }
 
     function setTableManager(address _tableManager) external onlyAdmin {
         require(_tableManager != address(0), "Invalid address");
         tableManager = _tableManager;
+    }
+    function setOrderMForTableM (address _orderManager) external onlyAdmin {
+        require(_orderManager != address(0), "Invalid address");
+        ITableManager(tableManager).setOrderManager(_orderManager);
     }
 
     function setOrderManager(address _orderManager) external onlyAdmin {
@@ -61,16 +66,21 @@ contract FoodApp {
     }
     function setStaffManager(address _staffManager) external onlyAdmin {
         require(_staffManager != address(0), "Invalid address");
-        orderManager = _staffManager;
+        staffManager = _staffManager;
     }
     
-    function setStaffRatingManager(address _staffRatingManager) external onlyAdmin { // Thêm hàm này
+    function initStaffRatingManager(address _staffRatingManager, address _staffManager) external onlyAdmin {
+        require(_staffManager != address(0), "StaffManager not set");
         require(_staffRatingManager != address(0), "Invalid address");
         staffRatingManager = _staffRatingManager;
+        IStaffRatingManager(_staffRatingManager).setStaffManager(_staffManager);
     }
-    function setFoodRatingManager(address _foodRatingManager) external onlyAdmin { // Thêm hàm này
+
+    function initFoodRatingManager(address _foodRatingManager ,address _foodManager) external onlyAdmin {
+        require(_foodRatingManager != address(0), "FoodRatingManager not set");
         require(_foodRatingManager != address(0), "Invalid address");
         foodRatingManager = _foodRatingManager;
+        IFoodRatingManager(_foodRatingManager).setFoodManager(_foodManager);
     }
 
     // Manage food
@@ -153,39 +163,45 @@ contract FoodApp {
     function getAllFoods() external view returns (FoodWithDetails[] memory) {
         return IFoodManager(foodManager).getAllFoods();
     }
+    function getHiddenFoods() external view returns (FoodWithDetails[] memory) {
+        return IFoodManager(foodManager).getHiddenFoods();
+    }
+    // thêm
+    function getHiddenFoodDetails() external returns (FoodDetail[] memory) {
+        return IFoodManager(foodManager).getHiddenFoodDetails();
+    }
+    // thêm
+    function setFoodDetailHidden(uint256 _foodId, uint256 _foodDetailId, bool _hidden) external {
+        IFoodManager(foodManager).setFoodDetailHidden(_foodId,_foodDetailId,_hidden);
+    }
     function setFoodVisibility (uint _foodId, bool _hidden) public onlyAdmin {
         IFoodManager(foodManager).setFoodVisibility(_foodId,_hidden);
     }
 
     // CategoryManager
-    function createCategory(uint256 categoryId, string memory name)
-        external
-        onlyAdmin
-    {
-        ICategoryManager(categoryManager).createCategory(categoryId, name);
+    function createCategory(uint256 categoryId, string memory name) external onlyAdmin {
+        require(address(categoryManager) != address(0), "CategoryManager not deployed");
+        categoryManager.createCategory(categoryId, name);
     }
 
-    function getCategory(uint256 categoryId)
-        external
-        view
-        returns (Category memory)
-    {
-        return ICategoryManager(categoryManager).getCategory(categoryId);
+    function getCategory(uint256 categoryId) external view returns (Category memory) {
+        require(address(categoryManager) != address(0), "CategoryManager not deployed");
+        return categoryManager.getCategory(categoryId);
     }
 
-    function updateCategory(uint256 categoryId, string memory newName)
-        external
-        onlyAdmin
-    {
-        ICategoryManager(categoryManager).updateCategory(categoryId, newName);
+    function updateCategory(uint256 categoryId, string memory newName) external onlyAdmin {
+        require(address(categoryManager) != address(0), "CategoryManager not deployed");
+        categoryManager.updateCategory(categoryId, newName);
     }
 
     function deleteCategory(uint256 categoryId) external onlyAdmin {
-        ICategoryManager(categoryManager).deleteCategory(categoryId);
+        require(address(categoryManager) != address(0), "CategoryManager not deployed");
+        categoryManager.deleteCategory(categoryId);
     }
 
     function getAllCategories() external view returns (Category[] memory) {
-        return ICategoryManager(categoryManager).getAllCategories();
+        require(address(categoryManager) != address(0), "CategoryManager not deployed");
+        return categoryManager.getAllCategories();
     }
 
     // Order
@@ -241,12 +257,20 @@ contract FoodApp {
     }
 
     // Table
-    function addTable(uint256 _row, uint256 _col)
+    function addTable(uint256 _row, uint256 _col, string memory _qrUrl)
         external
         onlyAdmin
         returns (uint256)
     {
-        return ITableManager(tableManager).addTable(_row, _col);
+        return ITableManager(tableManager).addTable(_row, _col,_qrUrl);
+    }
+    function updateTable(
+        uint256 _tableId,
+        uint256 _row,
+        uint256 _col,
+        string memory _qrUrl
+    ) external {
+        ITableManager(tableManager).updateTable(_tableId, _row, _col,_qrUrl);
     }
 
     function editTable(

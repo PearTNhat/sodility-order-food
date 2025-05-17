@@ -7,5 +7,6 @@ struct Table {
     uint tableId;
     uint row;
     uint col;
+    string qrUrl;
     TableStatus status; // hoặc reservationStatus
 }

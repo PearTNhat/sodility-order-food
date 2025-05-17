@@ -296,11 +296,11 @@
 			]
 		},
 		"contracts/manager/CategoryManager.sol": {
-			"keccak256": "0x514ab7f0529b2d353eedaf82b89bfab720d4161640a8be496476b58d654391ff",
+			"keccak256": "0x6a37edf3f84daee87f57f0301908dbf052e03585d23322776e6e0c52fd252d8b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bc8b105d24999c7a04f5977777c05399d933a54fe1633d8e4da41b70ea4434d8",
-				"dweb:/ipfs/QmVyMeQhCJ5dj7rYYnkxvbyt2sHqk5eL3qvynnXCwGSUEr"
+				"bzz-raw://a08cf517c0b3e5d52bc7aa9c90aad79fe23e43a20489bc8475d0354a13680baf",
+				"dweb:/ipfs/QmQscekYvqozPmYYvZzjpQqLHuuPxgrfs2jDpYYfnNrzx3"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -312,11 +312,11 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0xc7e84a159519015af6abad7bd1876eb875c0c93675cd9f5300008c36d724c886",
+			"keccak256": "0xf10e8cac411afde2b7c67359281e698c58c788ec3e187d5c6a7b70fe1dea8fba",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://54725b3e32f96b63e57f4175501b7201f262de3b13a15d3843b833220f6d59a1",
-				"dweb:/ipfs/Qmd2GRLh2tm5GHmrLyRZSw2gGqZzmU1oJY3qGcZgjSAMfA"
+				"bzz-raw://8841147cc4ee9867a2426477ea57ae7bdd95b1fa8c87f0b908ce4d1e5691bee0",
+				"dweb:/ipfs/QmcJq7zSSAxHWcKg2MtDMYR9DQQiPiWFrcN8yyppx2SGEk"
 			]
 		},
 		"hardhat/console.sol": {

@@ -21,7 +21,7 @@ contract StaffRatingManager is IStaffRatingManager {
         roleAccess = RoleAccess(_roleAccess);
     }
 
-    function setStaffManager(address _staffManager) external {
+    function setStaffManager(address _staffManager) external override  {
         require(_staffManager != address(0), "Invalid address");
         staffManager = IStaffManager(_staffManager);
     }

@@ -8,8 +8,17 @@ interface ITableManager {
     event StaffTableUpdated(uint tableId, uint staffId);
     event TableAddedToOrder( uint _tableId,uint _orderId);
     event TableUpdatedStaus(uint _tableId);
-
-    function addTable(uint _row, uint _col) external returns (uint);
+    event TableUpdated(uint indexed tableId, uint row, uint col, string qrUrl);
+    
+    function updateTable(
+        uint256 _tableId,
+        uint256 _row,
+        uint256 _col,
+        string memory _qrUrl
+    ) external;
+    
+    function setOrderManager(address _orderManager) external ;
+    function addTable(uint _row, uint _col, string memory _qrUrl) external returns (uint);
     
     function editTable(uint _tableId, uint _row, uint _col) external;
 

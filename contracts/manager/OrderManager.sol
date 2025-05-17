@@ -6,7 +6,6 @@ import "../interfaces/ITableManager.sol";
 import "../access/RoleAccess.sol";
 import "hardhat/console.sol";
 
-// import "hardhat/console.log";
 
 contract OrderManager is IOrderManager {
     IFoodManager public foodManager;
@@ -61,11 +60,7 @@ contract OrderManager is IOrderManager {
                     _items[i].foodDetailId
                 );
             totalAmount += foodDetail.price * _items[i].quantity;
-            foodManager.reduceQuantiy(
-                _foodId,
-                _items[i].foodDetailId,
-                _items[i].quantity
-            );
+            console.log("quantity",_items[i].quantity);
             foodManager.increaseSoldQuantiy(_foodId,foodDetail.foodDetailId, _items[i].quantity);
             o.items.push(
                 OrderItem({

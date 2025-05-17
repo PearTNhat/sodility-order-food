@@ -370,27 +370,27 @@
 			]
 		},
 		"contracts/interfaces/IFoodManager.sol": {
-			"keccak256": "0xa7d95edd76e03e60daac3477f3e9fab0eaf770f83749d7bc056dee562f5fabe3",
+			"keccak256": "0x3b4f17d8f025ca9c1f3102334a2606cff33634db6375518ca13f87f5da090425",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e355ade4d53014c7facbb42b544573878740a000001a091396562059c1d73c62",
-				"dweb:/ipfs/QmVjzsMqorwwQHWvU8upDTNxouSFAyx7Z2WnNgGKxvozRy"
+				"bzz-raw://85169bb831694ecffeee7ecee6a9ef5e03882db1dc344008a9253f252d5a03f3",
+				"dweb:/ipfs/QmZ1wmc6qE6qhwfgQaNn2e3XB8iFv2ngvBX7ufu5hmR2PM"
 			]
 		},
 		"contracts/interfaces/IFoodRatingManager.sol": {
-			"keccak256": "0xa54e06cde17c4cf6d7194592cbd1c377835ef358b9ffa45b4fe34e1571e8da8f",
+			"keccak256": "0xf15667e7affac2428d509e7633adb1f87458fe5b00ea36b26980a8f9afe25b4f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://2ea1bb6dbc1d693f7685ef76dbd534100cf2df29f183777fb9212c7fc6adcccd",
-				"dweb:/ipfs/QmbZsrq5aTSfMzoPNjV8E4mDb7e9TJVb24F4dZEejA69Zd"
+				"bzz-raw://087d7c86e84796ceef4cc3059b4b47ee5361fd03a7f1123fdad590d7c10e1952",
+				"dweb:/ipfs/QmeMSMGgwCfWkjpvwYpfb3NYYiiCcv29ZLoas6Nmz8N8bw"
 			]
 		},
 		"contracts/manager/FoodRating.sol": {
-			"keccak256": "0xb8f9f1cc37dc477aefa1c7571db459ff865133480ece3afb721ef8b0b5734e27",
+			"keccak256": "0x6b1c7bc69adb7e3d2a2931f9d4aa5d5e21080f27ebd3460ad415a6a996d9077f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ebd2af99b5489ea142d0dc0a904cad45e16c3ab588165edf3f96ca3402c7ea67",
-				"dweb:/ipfs/QmNNtD1da3hz1phAqPSY9GDy5ZCZL5qm7mRmHsXpJ45rBg"
+				"bzz-raw://91c6fe6b896c8df45d74392c2cdb9acaf0eddd3f75834034aae7a7077fe7ae99",
+				"dweb:/ipfs/QmSjCbXHEEaDRMH9QDtju6DcBpU8YEs4LMoaY71YN41HMe"
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
@@ -402,11 +402,11 @@
 			]
 		},
 		"contracts/structs/RatingStruct.sol": {
-			"keccak256": "0xb45d50b9aaa7635852d03b6ca7182fd9f7184c796d75bcf29494a5e07d8c4328",
+			"keccak256": "0xb057261edeec65f3dc5e2d23c8c4a657c72b0b22cb042345bebd8c14ee2a2524",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://35a0285a7c282d78ae7bc095d87c8ac1d3d7e08fa37b47064f7c8831bdf14b1d",
-				"dweb:/ipfs/QmUW25ZjmT35px6WcWKh66j2DkRKuAsDhK17e8bn2AyhNW"
+				"bzz-raw://6a044896380e7400e860a55e9752e1369aed9af8289627979aadff1cec349fa7",
+				"dweb:/ipfs/QmVyHaCTceryQ6cLLpBGCiHyFZ7Q71fbKWZL7QLPyhW7sx"
 			]
 		}
 	},

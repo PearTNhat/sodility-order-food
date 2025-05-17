@@ -89,12 +89,122 @@
 			{
 				"inputs": [
 					{
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "addStaffRating",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					}
+				],
+				"name": "deleteStaffRating",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "staffId",
+						"type": "uint256"
+					}
+				],
+				"name": "getStaffRatingsByStaffId",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "id",
+								"type": "uint256"
+							},
+							{
+								"internalType": "address",
+								"name": "reviewer",
+								"type": "address"
+							},
+							{
+								"internalType": "uint256",
+								"name": "staffId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "content",
+								"type": "string"
+							},
+							{
+								"internalType": "uint8",
+								"name": "stars",
+								"type": "uint8"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct StaffRating[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "address",
 						"name": "_staffManager",
 						"type": "address"
 					}
 				],
 				"name": "setStaffManager",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "ratingId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "content",
+						"type": "string"
+					},
+					{
+						"internalType": "uint8",
+						"name": "stars",
+						"type": "uint8"
+					}
+				],
+				"name": "updateStaffRating",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -128,19 +238,19 @@
 	},
 	"sources": {
 		"contracts/interfaces/IStaffRatingManager.sol": {
-			"keccak256": "0x67c0f8b44cc59c84cc9fb5dee52a6fb0c678615b43148d0b7021220237b50e4b",
+			"keccak256": "0xc3b6f2b0a3cf263fda30921752a9894d58d5d725a37c8ea6427cd3681565db3e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://eaf76927c7d4dccd6d150f7debe23f30637e994b3bf9e6d6c3ffe7d992f96b79",
-				"dweb:/ipfs/QmatKc9v2YyChGtSTsxfK9nyytYW8SbnZBqBwTBF4F7LEG"
+				"bzz-raw://f5a9f718f62f9bcead5f1d76b8bfd0c2d5d485a1e6942c51a40f61e30cb07837",
+				"dweb:/ipfs/QmcfzyDFNcY3NRp1GutgT43x8iqt93wmbc4iGfKKjRpJcB"
 			]
 		},
 		"contracts/structs/RatingStruct.sol": {
-			"keccak256": "0xb45d50b9aaa7635852d03b6ca7182fd9f7184c796d75bcf29494a5e07d8c4328",
+			"keccak256": "0xb057261edeec65f3dc5e2d23c8c4a657c72b0b22cb042345bebd8c14ee2a2524",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://35a0285a7c282d78ae7bc095d87c8ac1d3d7e08fa37b47064f7c8831bdf14b1d",
-				"dweb:/ipfs/QmUW25ZjmT35px6WcWKh66j2DkRKuAsDhK17e8bn2AyhNW"
+				"bzz-raw://6a044896380e7400e860a55e9752e1369aed9af8289627979aadff1cec349fa7",
+				"dweb:/ipfs/QmVyHaCTceryQ6cLLpBGCiHyFZ7Q71fbKWZL7QLPyhW7sx"
 			]
 		}
 	},

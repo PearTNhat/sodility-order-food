@@ -41,7 +41,10 @@ contract FoodManager is IFoodManager {
             categoryManager.getCategory(_categoryId).categoryId != 0,
             "Category does not exist"
         );
-
+        uint newQuantity = 0;
+        for(uint i = 0 ; i <_foodDetail.length ; i++ ){
+            newQuantity+=_foodDetail[i].quantity;
+        }
         // Gán ID và lưu trữ thông tin thực phẩm
         Food memory newFood = Food({
             foodId: _foodId,
@@ -50,7 +53,7 @@ contract FoodManager is IFoodManager {
             categoryId: _categoryId,
             imageUrl: _imageUrl,
             soldQuantity: 0,
-            quantity: 0,
+            quantity: newQuantity,
             sumRating: 0,
             countRating: 0,
             isHidden: false
@@ -66,7 +69,8 @@ contract FoodManager is IFoodManager {
                 size: _foodDetail[i].size,
                 soldQuantity: 0,
                 quantity: _foodDetail[i].quantity,
-                price: _foodDetail[i].price
+                price: _foodDetail[i].price,
+                isHidden:false
             });
             foodDetails[_foodId].push(newFoodDetail);
         }
@@ -128,8 +132,10 @@ contract FoodManager is IFoodManager {
                 size: details[i].size,
                 soldQuantity: 0,
                 quantity: details[i].quantity,
-                price: details[i].price
+                price: details[i].price,
+                isHidden:false
             });
+            foods[foodId].quantity += details[i].quantity;
             foodDetails[foodId].push(fd);
         }
         emit FoodDetailsAdded(foodId);
@@ -168,7 +174,7 @@ contract FoodManager is IFoodManager {
             if (foodDetailList[i].foodDetailId == foodDetailId) {
                 foodDetailList[i] = foodDetailList.length > 1
                     ? foodDetailList[foodDetailList.length - 1]
-                    : FoodDetail(0, "", 0, 0, 0);
+                    : FoodDetail(0, "", 0, 0, 0,false);
                 foodDetailList.pop();
                 found = true;
                 emit FoodDetailDeleted(foodId, foodDetailId);
@@ -222,6 +228,23 @@ contract FoodManager is IFoodManager {
         emit FoodVisibilityChanged(_foodId, hidden);
     }
 
+  function setFoodDetailHidden(uint256 _foodId, uint256 _foodDetailId, bool hidden) external onlyAdmin {
+    require(foods[_foodId].foodId != 0, "Food does not exist");
+
+    // Find the FoodDetail with the given foodDetailId
+    bool found = false;
+    for (uint256 i = 0; i < foodDetails[_foodId].length; i++) {
+        if (foodDetails[_foodId][i].foodDetailId == _foodDetailId) {
+            foodDetails[_foodId][i].isHidden = hidden;
+            found = true;
+            break;
+        }
+    }
+    require(found, "FoodDetail does not exist");
+
+    emit FoodDetailVisibilityChanged(_foodId, _foodDetailId, hidden);
+}
+
     // hàm đưa dữ liệu ra bên ngoài
     function getFood(uint256 _foodId)
         external
@@ -232,24 +255,98 @@ contract FoodManager is IFoodManager {
         require(foods[_foodId].foodId != 0, "Food does not exist");
         return foods[_foodId];
     }
-
-    function getAllFoods()
-        external
-        view
-        override
-        returns (FoodWithDetails[] memory)
-    {
-        FoodWithDetails[] memory allFoods = new FoodWithDetails[](
-            foodIds.length
-        );
+    // k get ra san phẩm bị ẩn
+    function getAllFoods() external view returns (FoodWithDetails[] memory) {
+        // Count non-hidden foods
+        uint256 count = 0;
         for (uint256 i = 0; i < foodIds.length; i++) {
             uint256 foodId = foodIds[i];
-            allFoods[i] = FoodWithDetails({
-                food: foods[foodId],
-                foodDetails: foodDetails[foodId]
-            });
+            if (!foods[foodId].isHidden) {
+                count++;
+            }
         }
-        return allFoods;
+
+        FoodWithDetails[] memory availableFoods = new FoodWithDetails[](count);
+        uint256 index = 0;
+
+        for (uint256 i = 0; i < foodIds.length; i++) {
+            uint256 foodId = foodIds[i];
+            if (!foods[foodId].isHidden) {
+                // Count non-hidden FoodDetails for this food
+                uint256 detailCount = 0;
+                for (uint256 j = 0; j < foodDetails[foodId].length; j++) {
+                    if (!foodDetails[foodId][j].isHidden) {
+                        detailCount++;
+                    }
+                }
+
+                // Create a new FoodDetail array with only non-hidden details
+                FoodDetail[] memory filteredDetails = new FoodDetail[](detailCount);
+                uint256 detailIndex = 0;
+                for (uint256 j = 0; j < foodDetails[foodId].length; j++) {
+                    if (!foodDetails[foodId][j].isHidden) {
+                        filteredDetails[detailIndex] = foodDetails[foodId][j];
+                        detailIndex++;
+                    }
+                }
+
+                availableFoods[index] = FoodWithDetails({
+                    food: foods[foodId],
+                    foodDetails: filteredDetails
+                });
+                index++;
+            }
+        }
+        return availableFoods;
+    }
+
+    function getHiddenFoods() external view override returns (FoodWithDetails[] memory) {
+        uint256 count = 0;
+        for (uint256 i = 0; i < foodIds.length; i++) {
+            uint256 foodId = foodIds[i];
+            if (foods[foodId].isHidden) {
+                count++;
+            }
+        }
+        FoodWithDetails[] memory hiddenFoods = new FoodWithDetails[](count);
+        uint256 index = 0;
+        for (uint256 i = 0; i < foodIds.length; i++) {
+            uint256 foodId = foodIds[i];
+            if (foods[foodId].isHidden) {
+                hiddenFoods[index] = FoodWithDetails({
+                    food: foods[foodId],
+                    foodDetails: foodDetails[foodId]
+                });
+                index++;
+            }
+        }
+        return hiddenFoods;
+    }
+     // Returns all hidden food details across all foods
+    function getHiddenFoodDetails() external view returns (FoodDetail[] memory) {
+        // Count total hidden FoodDetails across all foods
+        uint256 totalHiddenDetails = 0;
+        for (uint256 i = 0; i < foodIds.length; i++) {
+            uint256 foodId = foodIds[i];
+            for (uint256 j = 0; j < foodDetails[foodId].length; j++) {
+                if (foodDetails[foodId][j].isHidden) {
+                    totalHiddenDetails++;
+                }
+            }
+        }
+        // Create an array to store all hidden FoodDetails
+        FoodDetail[] memory hiddenDetails = new FoodDetail[](totalHiddenDetails);
+        uint256 index = 0;
+        for (uint256 i = 0; i < foodIds.length; i++) {
+            uint256 foodId = foodIds[i];
+            for (uint256 j = 0; j < foodDetails[foodId].length; j++) {
+                if (foodDetails[foodId][j].isHidden) {
+                    hiddenDetails[index] = foodDetails[foodId][j];
+                    index++;
+                }
+            }
+        }
+        return hiddenDetails;
     }
 
     function reduceQuantiy(
@@ -257,11 +354,12 @@ contract FoodManager is IFoodManager {
         uint256 foodDetailId,
         uint256 _quantity
     ) external override {
+        console.log("FoodId",foods[_foodId].quantity ,"Quantity", _quantity);
         for (uint256 i = 0; i < foodDetails[_foodId].length; i++) {
             if (foodDetails[_foodId][i].foodDetailId == foodDetailId) {
                 require(
                     _quantity < foodDetails[_foodId][i].quantity,
-                    "Quantity's food cannot be smaller than 0"
+                    "Quantity's food item cannot be smaller than 0"
                 );
                 foodDetails[_foodId][i].quantity -= _quantity;
                 break;
@@ -319,7 +417,7 @@ contract FoodManager is IFoodManager {
         }
         require(
             foods[_foodId].soldQuantity >= _quantity,
-            "Quantity's food cannot be smaller than 0"
+            "Sold quantity's food cannot be smaller than 0"
         );
         foods[_foodId].soldQuantity -= _quantity;
     }

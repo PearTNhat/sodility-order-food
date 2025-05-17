@@ -27,7 +27,7 @@ struct Order {
     string note;
     string name;
     string imgage;
-    uint  staffId; // nếu staffId = 0 thì k có nhân viên
+    address staffAddress; // nếu staffId = 0 thì k có nhân viên
     uint tableId; // bàn được order nếu = 0 là k có bàn
     OrderItem[] items;
     uint totalAmount;

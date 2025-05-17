@@ -8,9 +8,7 @@ import "../access/RoleAccess.sol";
 contract StaffManagement is IStaffManager {
     IOrderManager public orderManager;
     RoleAccess public roleAccess;
-    mapping(uint256 => Staff) public staffs;
-
-    // mapping(uint => uint) public staffInOrder;
+    mapping(address => Staff) public staffs; // Changed from uint256 to address
 
     constructor(address _orderManagerAddress, address _roleAccess) {
         orderManager = IOrderManager(_orderManagerAddress);
@@ -23,56 +21,57 @@ contract StaffManagement is IStaffManager {
     }
 
     function addStaff(
-        uint256 _staffId,
+        address addressStaff,
         string calldata _name,
         string calldata _dob,
         string calldata _phone
     ) external override onlyAdmin {
-        require(staffs[_staffId].staffId == 0, "Staff ID already exists");
-        staffs[_staffId] = Staff(_staffId, _name, _dob, _phone, 0, 0);
-        emit StaffAdded(_staffId, _name);
+        require(addressStaff != address(0), "Invalid staff address");
+        require(staffs[addressStaff].staffAddress == address(0), "Staff address already exists");
+        staffs[addressStaff] = Staff(addressStaff, _name, _dob, _phone, 0, 0);
+        emit StaffAdded(addressStaff, _name);
     }
 
-    function getStaff(uint256 _staffId)
+    function getStaff(address addressStaff)
         external
         view
         override
         returns (Staff memory)
     {
-        return staffs[_staffId];
+        return staffs[addressStaff];
     }
 
     function updateStaffInfo(
-        uint256 _staffId,
+        address addressStaff,
         string calldata _name,
         string calldata _dob,
         string calldata _phone
     ) external override {
-        require(staffs[_staffId].staffId != 0, "Staff ID does not exist");
-        staffs[_staffId].name = _name;
-        staffs[_staffId].dob = _dob;
-        staffs[_staffId].phone = _phone;
-        emit StaffUpdated(_staffId, _name);
+        require(staffs[addressStaff].staffAddress != address(0), "Staff address does not exist");
+        staffs[addressStaff].name = _name;
+        staffs[addressStaff].dob = _dob;
+        staffs[addressStaff].phone = _phone;
+        emit StaffUpdated(addressStaff, _name);
     }
 
-    function addStaffToOrder(uint256 _orderId, uint256 _staffId)
+    function addStaffToOrder(uint256 _orderId, address addressStaff)
         external
         override
         onlyAdmin
     {
-        require(staffs[_staffId].staffId != 0, "Staff ID does not exist");
-        orderManager.addStaffForOrder(_orderId, _staffId);
-        emit StaffAddedToOrder(_staffId, _orderId);
+        require(staffs[addressStaff].staffAddress != address(0), "Staff address does not exist");
+        orderManager.addStaffForOrder(_orderId, addressStaff);
+        emit StaffAddedToOrder(addressStaff, _orderId);
     }
 
     function updateRatingStaff(
-        uint256 _staffId,
+        address addressStaff,
         uint256 _sumRating,
         uint256 _countRating
     ) external onlyAdmin {
-        require(staffs[_staffId].staffId != 0, "Staff does not exist");
-        staffs[_staffId].sumRating = _sumRating;
-        staffs[_staffId].countRating = _countRating;
-        emit StaffRatingUpdated(_staffId, _sumRating, _countRating);
+        require(staffs[addressStaff].staffAddress != address(0), "Staff does not exist");
+        staffs[addressStaff].sumRating = _sumRating;
+        staffs[addressStaff].countRating = _countRating;
+        emit StaffRatingUpdated(addressStaff, _sumRating, _countRating);
     }
 }

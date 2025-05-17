@@ -49,7 +49,11 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"setStaffManager(address)": "ea0f24e9"
+			"addStaffRating(uint256,string,uint8)": "1806107f",
+			"deleteStaffRating(uint256)": "fcd3223c",
+			"getStaffRatingsByStaffId(uint256)": "f9274e03",
+			"setStaffManager(address)": "ea0f24e9",
+			"updateStaffRating(uint256,string,uint8)": "18211503"
 		}
 	},
 	"abi": [
@@ -137,12 +141,122 @@
 		{
 			"inputs": [
 				{
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "content",
+					"type": "string"
+				},
+				{
+					"internalType": "uint8",
+					"name": "stars",
+					"type": "uint8"
+				}
+			],
+			"name": "addStaffRating",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "ratingId",
+					"type": "uint256"
+				}
+			],
+			"name": "deleteStaffRating",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "staffId",
+					"type": "uint256"
+				}
+			],
+			"name": "getStaffRatingsByStaffId",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "uint256",
+							"name": "id",
+							"type": "uint256"
+						},
+						{
+							"internalType": "address",
+							"name": "reviewer",
+							"type": "address"
+						},
+						{
+							"internalType": "uint256",
+							"name": "staffId",
+							"type": "uint256"
+						},
+						{
+							"internalType": "string",
+							"name": "content",
+							"type": "string"
+						},
+						{
+							"internalType": "uint8",
+							"name": "stars",
+							"type": "uint8"
+						},
+						{
+							"internalType": "uint256",
+							"name": "timestamp",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct StaffRating[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "view",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
 					"internalType": "address",
 					"name": "_staffManager",
 					"type": "address"
 				}
 			],
 			"name": "setStaffManager",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "ratingId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "string",
+					"name": "content",
+					"type": "string"
+				},
+				{
+					"internalType": "uint8",
+					"name": "stars",
+					"type": "uint8"
+				}
+			],
+			"name": "updateStaffRating",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
