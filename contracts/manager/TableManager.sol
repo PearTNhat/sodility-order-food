@@ -12,7 +12,7 @@ contract TableManager is ITableManager {
     mapping(uint256 => Table) public tables;
 
     mapping(uint256 => uint256[]) public orderTable;
-
+    uint256[] public tableIds; // Dùng để lưu danh sách các tableId
     constructor(address _roleAccess) {
         roleAccess = RoleAccess(_roleAccess);
     }
@@ -49,6 +49,7 @@ contract TableManager is ITableManager {
             qrUrl: _qrUrl,
             status: TableStatus.Free
         });
+        tableIds.push(newTableId); // Thêm dòng này sau khi tạo bàn mới
         emit TableAdded(newTableId, _row, _col);
         return newTableId;
     }
@@ -88,6 +89,14 @@ contract TableManager is ITableManager {
     function deleteTable(uint256 _tableId) external override {
         require(tables[_tableId].tableId != 0, "Table does not exist");
         delete tables[_tableId];
+        // Xoá tableId khỏi danh sách tableIds khi xóa table
+for (uint256 i = 0; i < tableIds.length; i++) {
+    if (tableIds[i] == _tableId) {
+        tableIds[i] = tableIds[tableIds.length - 1];
+        tableIds.pop();
+        break;
+    }
+}
         emit TableDeleted(_tableId);
     }
 
@@ -119,5 +128,12 @@ contract TableManager is ITableManager {
         require(tables[_tableId].tableId != 0, "Table ID does not exist");
         tables[_tableId].status = _status;
         emit TableUpdatedStaus(_tableId);
+    }
+    function getAllTables() external view override returns (Table[] memory)  {
+        Table[] memory allTables = new Table[](tableIds.length);
+        for (uint256 i = 0; i < tableIds.length; i++) {
+            allTables[i] = tables[tableIds[i]];
+        }
+        return allTables;
     }
 }

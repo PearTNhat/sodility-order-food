@@ -322,6 +322,9 @@ contract FoodApp {
     }
 
     // Table
+    function getAllTables() external view returns (Table[] memory) {
+        return ITableManager(tableManager).getAllTables();
+    }
     function addTable(
         uint256 _row,
         uint256 _col,

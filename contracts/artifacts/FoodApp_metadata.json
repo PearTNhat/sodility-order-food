@@ -799,6 +799,46 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "getAllTables",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "tableId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "row",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "col",
+								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "qrUrl",
+								"type": "string"
+							},
+							{
+								"internalType": "enum TableStatus",
+								"name": "status",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct Table[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -1980,11 +2020,11 @@
 	},
 	"sources": {
 		"contracts/FoodApp.sol": {
-			"keccak256": "0x2b9e05ee3fc79b8a3e4ca653a9842414fdd4cc0f7b3803ad686938ed5ed77c6b",
+			"keccak256": "0xa68bc624617c15eafc3d6c482f694cec98a39b051be65b84e9267ff7754afa5e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c5ba34c1254336443f8670ee0629a3c8c3e5c7273318606c7d57a3630a8a9dc3",
-				"dweb:/ipfs/QmWtAqA9vHft8T8kpEggin8Bzq6ts2Jis8u7Sz2ADKahGT"
+				"bzz-raw://10458f9fc3faa02bea29f8ad46f04004c608b2a99209f3d94f8dd3c181357856",
+				"dweb:/ipfs/QmZ1WtXdJQ3vpiNyGdva3SMsgneie1VFQpd697HjjaL6Aq"
 			]
 		},
 		"contracts/access/RoleAccess.sol": {
@@ -2044,11 +2084,11 @@
 			]
 		},
 		"contracts/interfaces/ITableManager.sol": {
-			"keccak256": "0xb30e7c3d1e19f2d63870989920f5a0d0bfcbfd226fcfdddc273015bfaf4f824b",
+			"keccak256": "0x927553b0d0b3b703b61ccb8bb68d525fd990c5dd97b3ccb670c6eacedfe9927b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://60648974d0c0327e019b30edb7f11e2d8806a551b49bca4104addf5d2420d8cb",
-				"dweb:/ipfs/QmNWpJfFA31oeDf6QL1f6x6wxgvxHaXt2jiRdVGfhYp1wW"
+				"bzz-raw://876ce0c267231006691de298976431e91d9d3c9e9d5326f942b13df140bdbad7",
+				"dweb:/ipfs/QmNpt2VDwuWDb2Le7SddSeoTQZb9DvZ5RxnHB5MJGWfbhE"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
