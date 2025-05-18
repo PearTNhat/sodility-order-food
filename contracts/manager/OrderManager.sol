@@ -3,30 +3,54 @@ pragma solidity ^0.8.0;
 import "../interfaces/IOrderManager.sol";
 import "../interfaces/IFoodManager.sol";
 import "../interfaces/ITableManager.sol";
+import "../interfaces/IStaffManager.sol";
 import "../access/RoleAccess.sol";
 import "hardhat/console.sol";
-
 
 contract OrderManager is IOrderManager {
     IFoodManager public foodManager;
     ITableManager public tableManager;
+    IStaffManager public staffManager;
     RoleAccess public roleAccess;
-
 
     uint256 nextOrderItemId = 1;
     mapping(uint256 => Order) public orders;
     uint256 public nextOrderId = 1;
     mapping(address => uint256[]) public userOrders; //track order ids by user
 
-    constructor(address _foodManagerAddress, address _roleAcces, address _tableManager) {
+    constructor(
+        address _foodManagerAddress,
+        address _roleAcces,
+        address _tableManager
+    ) {
         foodManager = IFoodManager(_foodManagerAddress);
-        tableManager=ITableManager(_tableManager);
+        tableManager = ITableManager(_tableManager);
         roleAccess = RoleAccess(_roleAcces);
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(tx.origin), "You are not admin");
+         require(roleAccess.hasRole(tx.origin,RoleType.ADMIN), "Not admin");
         _;
+    }
+    modifier onlyAdminOrStaff() {
+        require(
+            roleAccess.hasRole(tx.origin, RoleType.ADMIN) ||
+                roleAccess.hasRole(tx.origin, RoleType.STAFF),
+            "Not admin or staff"
+        );
+        _;
+    }
+
+    function setStaffManager(address _staffManagerAddress)
+        external
+        override
+        onlyAdmin
+    {
+        require(
+            _staffManagerAddress != address(0),
+            "Invalid staff manager address"
+        );
+        staffManager = IStaffManager(_staffManagerAddress);
     }
 
     function createOrder(
@@ -34,7 +58,7 @@ contract OrderManager is IOrderManager {
         uint256 _foodId,
         string memory _userInfo,
         string memory _note,
-        uint _tableId,
+        uint256 _tableId,
         OrderItemRequest[] memory _items
     ) public override returns (Order memory) {
         require(_items.length > 0, "Order must contain at least one item");
@@ -46,8 +70,8 @@ contract OrderManager is IOrderManager {
         o.user = _user;
         o.userInfo = _userInfo;
         o.name = food.name;
-        o.staffId =0; // nếu staffId = 0 thì k có nhân viên
-        o.tableId =_tableId;
+        o.staffAddress = address(0); // nếu staffId = 0 thì k có nhân viên
+        o.tableId = _tableId; // k có là 0
         o.note = _note;
         o.imgage = food.imageUrl[0];
         o.status = OrderStatus.Pending;
@@ -60,8 +84,11 @@ contract OrderManager is IOrderManager {
                     _items[i].foodDetailId
                 );
             totalAmount += foodDetail.price * _items[i].quantity;
-            console.log("quantity",_items[i].quantity);
-            foodManager.increaseSoldQuantiy(_foodId,foodDetail.foodDetailId, _items[i].quantity);
+            foodManager.increaseSoldQuantiy(
+                _foodId,
+                foodDetail.foodDetailId,
+                _items[i].quantity
+            );
             o.items.push(
                 OrderItem({
                     orderItemId: nextOrderItemId++,
@@ -69,13 +96,14 @@ contract OrderManager is IOrderManager {
                     foodId: _items[i].foodId,
                     quantity: _items[i].quantity,
                     price: foodDetail.price,
-                    status: OrderItemStatus.Shipping
+                    status: OrderItemStatus.Doing,
+                    timestamp: block.timestamp
                 })
             );
         }
         o.totalAmount = totalAmount;
         orders[orderId] = o;
-        if(_tableId > 0){
+        if (_tableId > 0) {
             tableManager.updateStatusTable(_tableId, TableStatus.Booked);
         }
         userOrders[_user].push(orderId);
@@ -87,7 +115,7 @@ contract OrderManager is IOrderManager {
         uint256 _orderId,
         uint256 _orderItemId,
         OrderItemStatus _newStatus
-    ) public override onlyAdmin {
+    ) public override onlyAdminOrStaff {
         require(orders[_orderId].orderId != 0, "Order does not exist");
         require(
             orders[_orderId].items.length != 0,
@@ -98,22 +126,40 @@ contract OrderManager is IOrderManager {
         for (uint256 i = 0; i < order.items.length; i++) {
             // tìm kiếm orderItemId trong đó xem =  truyền vào k
             if (order.items[i].orderItemId == _orderItemId) {
+                // Check if cancellation is within 10 minutes
+                if (_newStatus == OrderItemStatus.Cancelled) {
+                    require(
+                        block.timestamp <= order.timestamp + 600,
+                        "Cannot cancel order item after 10 minutes"
+                    );
+                }
                 require(
                     order.items[i].status != OrderItemStatus.Success,
-                    "Order item already marked as success. Can not update"
+                    "Order item already marked as success. Cannot update"
                 );
                 require(
                     order.items[i].status != OrderItemStatus.Cancelled,
-                    "Order item already marked as cancelled. Can not update"
+                    "Order item already marked as cancelled. Cannot update"
                 );
                 order.items[i].status = _newStatus;
-                if(order.items[i].status == OrderItemStatus.Cancelled){
-                    OrderItem memory orderItem =order.items[i];
+                OrderItem memory orderItem = order.items[i];
+                if (order.items[i].status == OrderItemStatus.Cancelled) {
                     if (_newStatus != OrderItemStatus.Success) {
-                        foodManager.increaseQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
-                        foodManager.reduceSoldQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                        // foodManager.increaseQuantiy(orderItem.foodId, orderItem.foodDetailId, orderItem.quantity);
+                        foodManager.reduceSoldQuantiy(
+                            orderItem.foodId,
+                            orderItem.foodDetailId,
+                            orderItem.quantity
+                        );
                     }
                     order.totalAmount -= orderItem.price;
+                }
+                // nếu thành công thì cho đánh giá food.
+                if (_newStatus == OrderItemStatus.Success) {
+                    foodManager.addRaingWhenOrderSuccess(
+                        _orderId,
+                        orderItem.foodId
+                    );
                 }
                 found = true;
                 break;
@@ -150,7 +196,7 @@ contract OrderManager is IOrderManager {
     function updateOrderStatus(uint256 _orderId, OrderStatus _status)
         public
         override
-        onlyAdmin
+        onlyAdminOrStaff
     {
         Order memory tempOrder = orders[_orderId];
         require(tempOrder.orderId != 0, "Order does not exist");
@@ -163,16 +209,35 @@ contract OrderManager is IOrderManager {
             "Order already cancelled as confirm. Can not update"
         );
         for (uint256 i = 0; i < tempOrder.items.length; i++) {
-            foodManager.increaseQuantiy(
+            // nếu item cancel trc đó r
+            if (tempOrder.items[i].status == OrderItemStatus.Cancelled)
+                continue;
+            if (_status == OrderStatus.Cancelled) {
+                tempOrder.items[i].status = OrderItemStatus.Cancelled;
+            }
+            foodManager.reduceSoldQuantiy(
                 tempOrder.items[i].foodId,
                 tempOrder.items[i].foodDetailId,
                 tempOrder.items[i].quantity
             );
-            foodManager.reduceSoldQuantiy(tempOrder.items[i].foodId, tempOrder.items[i].foodDetailId,  tempOrder.items[i].quantity);
-        }   
-        console.log("tableId: ",tempOrder.tableId);
-        if(tempOrder.tableId>0){
+            // foodManager.increaseQuantiy(
+            //     tempOrder.items[i].foodId,
+            //     tempOrder.items[i].foodDetailId,
+            //     tempOrder.items[i].quantity
+            // );
+        }
+        if (tempOrder.tableId > 0) {
             tableManager.updateStatusTable(tempOrder.tableId, TableStatus.Free);
+        }
+        // khi 1 đơn hàng thành công thì cho khách hàng đó đc đánh giá staff
+        if (
+            tempOrder.status == OrderStatus.Success &&
+            tempOrder.staffAddress != address(0)
+        ) {
+            staffManager.addRaingWhenOrderSuccess(
+                tempOrder.staffAddress,
+                tempOrder.orderId
+            );
         }
         orders[_orderId].status = _status;
         emit OrderUpdated(_orderId, _status);
@@ -186,12 +251,20 @@ contract OrderManager is IOrderManager {
     {
         return userOrders[_user];
     }
-    function addStaffForOrder(uint orderId, uint staffId) public onlyAdmin {
+
+    function addStaffForOrder(uint256 orderId, address staffAddress)
+        public
+        onlyAdmin
+    {
         require(orders[orderId].orderId != 0, "OrderId does not exist");
-        orders[orderId].staffId = staffId;
+        orders[orderId].staffAddress = staffAddress;
     }
-    function addTableForOrder(uint _orderId, uint _tableId ) public onlyAdmin {
-         require(orders[_orderId].orderId != 0, "OrderId does not exist");
-         orders[_orderId].tableId = _tableId;
+
+    function addTableForOrder(uint256 _orderId, uint256 _tableId)
+        public
+        onlyAdmin
+    {
+        require(orders[_orderId].orderId != 0, "OrderId does not exist");
+        orders[_orderId].tableId = _tableId;
     }
 }

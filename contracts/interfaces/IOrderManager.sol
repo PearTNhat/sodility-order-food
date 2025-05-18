@@ -7,6 +7,8 @@ interface IOrderManager {
     event OrderItemStatusUpdated(uint orderId, uint orderItemId, OrderItemStatus newStatus); // Thêm sự kiện
     event OrderDeleted(uint orderId);
 
+    function setStaffManager(address _staffManagerAddress) external;
+
     function createOrder(
         address _user,
         uint _foodId,
@@ -28,6 +30,6 @@ interface IOrderManager {
         returns (Order[] memory);
     function updateOrderStatus(uint _orderId, OrderStatus _status) external;
     function getUserOrders(address _user) external view returns (uint[] memory);
-    function addStaffForOrder(uint orderId, uint staffId) external;
-     function addTableForOrder(uint _orderId, uint _tableId ) external;
+    function addStaffForOrder(uint orderId, address staffId) external;
+    function addTableForOrder(uint _orderId, uint _tableId ) external;
 }

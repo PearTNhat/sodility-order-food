@@ -101,12 +101,30 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
+						"internalType": "address",
 						"name": "staffId",
-						"type": "uint256"
+						"type": "address"
 					}
 				],
 				"name": "addStaffForOrder",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					}
+				],
+				"name": "addTableForOrder",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -132,6 +150,11 @@
 						"internalType": "string",
 						"name": "note",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
 					},
 					{
 						"components": [
@@ -191,8 +214,13 @@
 								"type": "string"
 							},
 							{
+								"internalType": "address",
+								"name": "staffAddress",
+								"type": "address"
+							},
+							{
 								"internalType": "uint256",
-								"name": "staffId",
+								"name": "tableId",
 								"type": "uint256"
 							},
 							{
@@ -299,8 +327,13 @@
 								"type": "string"
 							},
 							{
+								"internalType": "address",
+								"name": "staffAddress",
+								"type": "address"
+							},
+							{
 								"internalType": "uint256",
-								"name": "staffId",
+								"name": "tableId",
 								"type": "uint256"
 							},
 							{
@@ -446,26 +479,26 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0xf1b6d1f85c82dbb44ed7a990a8b0f509d7f78430916562b4b2eb6e951bdd1eaa",
+			"keccak256": "0x9a56bf18b1fcfd2caa9184c5d193f3af1b48b59825a1e811eca816053fe5fc32",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://41e137ebbb9eac0ebb9bb22726beab91031ab96e608bfa379b423c64920253b6",
-				"dweb:/ipfs/QmYp9VQ1eaxWbnKjZKGhfxecpDue4AYRjPgK8fBugnJWCu"
+				"bzz-raw://47a151709281a41b81facea8d2313ec0bf51a33e74876919b48135e9856ae0bf",
+				"dweb:/ipfs/QmZNBSqca6ayGr3NCeQvrFt16ojb2UdEZyyikafZjDK19N"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0x63ad6664a74698bb883333feaba5c5bc3426c1ab87b4aee14c8079f1874d35cd",
+			"keccak256": "0x546225fbed7a3bdb97085d40f2db9e81cc726de0621fd8223202ac11cc86ab3e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://514867577c9e7424b27443812aa06027fd674fd49684b2472c42b3ca718388f2",
-				"dweb:/ipfs/QmV97uo2cLyAnQZsuzDgKBTJFx3VQs1FFWBm7eg5CmKRha"
+				"bzz-raw://7408697b4d40faacab5497f256b29c5a77411bb2889ce9f0419c3504de466b14",
+				"dweb:/ipfs/QmfUMLRPKGmvXm4XSK923xvmKbLw6yUP6yuFUKYeoVCEKj"
 			]
 		}
 	},

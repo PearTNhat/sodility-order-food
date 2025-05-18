@@ -18,7 +18,7 @@ contract CategoryManager is ICategoryManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(tx.origin), "You are not admin");
+        require(roleAccess.hasRole(tx.origin,RoleType.ADMIN), "You are not admin");
         _;
     }
 

@@ -49,8 +49,9 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addStaffForOrder(uint256,uint256)": "3f9fb5fd",
-			"createOrder(address,uint256,string,string,(uint256,uint256,uint256)[])": "5055aa01",
+			"addStaffForOrder(uint256,address)": "7ea076a3",
+			"addTableForOrder(uint256,uint256)": "914ee455",
+			"createOrder(address,uint256,string,string,uint256,(uint256,uint256,uint256)[])": "8c9da843",
 			"getOrdersByStatus(uint8)": "8ce2ec79",
 			"getUserOrders(address)": "63c69f08",
 			"updateOrderItemStatus(uint256,uint256,uint8)": "8a46e8eb",
@@ -154,12 +155,30 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "uint256",
+					"internalType": "address",
 					"name": "staffId",
-					"type": "uint256"
+					"type": "address"
 				}
 			],
 			"name": "addStaffForOrder",
+			"outputs": [],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_orderId",
+					"type": "uint256"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
+				}
+			],
+			"name": "addTableForOrder",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -185,6 +204,11 @@
 					"internalType": "string",
 					"name": "note",
 					"type": "string"
+				},
+				{
+					"internalType": "uint256",
+					"name": "_tableId",
+					"type": "uint256"
 				},
 				{
 					"components": [
@@ -244,8 +268,13 @@
 							"type": "string"
 						},
 						{
+							"internalType": "address",
+							"name": "staffAddress",
+							"type": "address"
+						},
+						{
 							"internalType": "uint256",
-							"name": "staffId",
+							"name": "tableId",
 							"type": "uint256"
 						},
 						{
@@ -352,8 +381,13 @@
 							"type": "string"
 						},
 						{
+							"internalType": "address",
+							"name": "staffAddress",
+							"type": "address"
+						},
+						{
 							"internalType": "uint256",
-							"name": "staffId",
+							"name": "tableId",
 							"type": "uint256"
 						},
 						{

@@ -121,6 +121,37 @@
 				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tableId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "row",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "col",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "qrUrl",
+						"type": "string"
+					}
+				],
+				"name": "TableUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
 						"indexed": false,
 						"internalType": "uint256",
 						"name": "_tableId",
@@ -141,6 +172,11 @@
 						"internalType": "uint256",
 						"name": "_col",
 						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_qrUrl",
+						"type": "string"
 					}
 				],
 				"name": "addTable",
@@ -234,6 +270,11 @@
 								"internalType": "uint256",
 								"name": "col",
 								"type": "uint256"
+							},
+							{
+								"internalType": "string",
+								"name": "qrUrl",
+								"type": "string"
 							},
 							{
 								"internalType": "enum TableStatus",
@@ -351,6 +392,11 @@
 						"type": "uint256"
 					},
 					{
+						"internalType": "string",
+						"name": "qrUrl",
+						"type": "string"
+					},
+					{
 						"internalType": "enum TableStatus",
 						"name": "status",
 						"type": "uint8"
@@ -373,6 +419,34 @@
 					}
 				],
 				"name": "updateStatusTable",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_tableId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_row",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_col",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_qrUrl",
+						"type": "string"
+					}
+				],
+				"name": "updateTable",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -406,51 +480,59 @@
 	},
 	"sources": {
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
+			"keccak256": "0xf7c7840494f46a4a76c03026875596d2bf9d40afdacd4598978b4bcba4848296",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
-				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+				"bzz-raw://400f64b6575d1f9fcd16b3d53b076ec4f983a24210a118c43de5dbd5a58bf1dc",
+				"dweb:/ipfs/QmdLoJhTb4bmyvcW5RUqrdA6PnySfeRcfkDMkG6nyeu1Re"
 			]
 		},
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0x146f96a3ac47375ef900a45d65c2adddb454829758461b0460fb538a034b6618",
+			"keccak256": "0x2629dd0be6902ec15f42b024e29f82560c49a14c85a9c9305e7f36a536eaf7af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd07e37634fe9d526ed8e2d4fb53f367a10050c82a02aee30a10d12989a096ad",
-				"dweb:/ipfs/Qmac4dXJvLwwKXxFNaTjLjEUhPSAAgh9fvLZqUVMJuJY4N"
+				"bzz-raw://17a88d2b18073d043d994d510723c9825c423cb0f09483c1eece06f10e3c028c",
+				"dweb:/ipfs/QmW95CR3TErbLG8baav8tm7dqAVe33sDo3XkKM9PtxGGuM"
 			]
 		},
 		"contracts/interfaces/ITableManager.sol": {
-			"keccak256": "0x06e4c677085867bd9b67874e1ab228c45672d1428c12eb38c4a2cd98cea7ebdd",
+			"keccak256": "0xb30e7c3d1e19f2d63870989920f5a0d0bfcbfd226fcfdddc273015bfaf4f824b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9f0cf988fd3571268a6a28109ea0860b1a43ba40f20a0efcc0e8fc1e3daf9b7f",
-				"dweb:/ipfs/QmaCDxZoSMdTwSsf5wCrgMRk41dCgQLBGQV5VGH2U1kWZy"
+				"bzz-raw://60648974d0c0327e019b30edb7f11e2d8806a551b49bca4104addf5d2420d8cb",
+				"dweb:/ipfs/QmNWpJfFA31oeDf6QL1f6x6wxgvxHaXt2jiRdVGfhYp1wW"
 			]
 		},
 		"contracts/manager/TableManager.sol": {
-			"keccak256": "0x4ff101b6ff8119ebb4f1aa3ada09ee51872a1c88412ddac6c1a6feadc3385fc8",
+			"keccak256": "0xded4b9fc7e3eca2bb14c0ff3a60a5242db01bda2d7809890204f76ff8083a6b6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d4918f475d23810ea6e6e6e923bc6b75c73ad8d0786d356b3003875185b0bfd4",
-				"dweb:/ipfs/Qmf7x9zkwMQRqBkEZ4piQYR78SCLKPUhLuNa9hQAaK7F4K"
+				"bzz-raw://ed8a00ed9d16c2bff23965999db678d48fb45e990105a57c78fb056d7c08f53e",
+				"dweb:/ipfs/QmfPoDbu37ZYpcGneUstqowmwoVV5hf1o5tZUDXGDhBQJk"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0x9db119baedfe813ab9224ce215da9e553525189cdcadab3b11e8892f195c3a71",
+			"keccak256": "0xe198fac65192fa7928ad4f0b026fa4526bb9e7b151d41efa66f4a74e6b33951a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4db24211ed639ad9555a4097a4dd9b417eb4bf7ce8bdc5328a4b65c16134c297",
-				"dweb:/ipfs/QmbwVLFCzMhUZrBBNmpRpZXawdcg4fGCP9fX8KV4cw8s6S"
+				"bzz-raw://664dc8af2d3844381f9f5ed9cf139f6eaf958a42e466d9c23d5fbf8b256d49c7",
+				"dweb:/ipfs/QmaWX4wZXPGwnwP5C3Aw4DXCdadW5vNyxKg8ULzEgiox5D"
+			]
+		},
+		"contracts/structs/RoleStruct.sol": {
+			"keccak256": "0x3c26e4a36495372966405aa3ab2cb31c039d144e8175a787626e50c322fdfc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db04945c3081d35e2841f1bfbb756b4ecc9c2ededb939e3f438eebe4fac37797",
+				"dweb:/ipfs/QmQB16oyza9CoZpk83Zc24KYjt39r1JFiEN4beFdLh7d8H"
 			]
 		},
 		"contracts/structs/TableStruct.sol": {
-			"keccak256": "0xeba4b14f3eda8af9b2e3e318ac15b5f9ede865664825482581c00f1f9aae23c6",
+			"keccak256": "0xb3f81a41b43a179f4e75356fb9133912293dd34ed7832778a753f8f7993eafd4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://754308bf229ded8e1bd8ffb5020e06340c39ea89c2f0f31bcff589b777ebd0bd",
-				"dweb:/ipfs/QmYv9zq8t97k9TP74oKs475dsfeN2pegBihQbPUNCNCqBk"
+				"bzz-raw://1fbb6957291c092adfaabde60a6b37ed11e996275137988cd3bfb4ec51c55935",
+				"dweb:/ipfs/QmZ6KoJTe91TYsP5qWK6Pgk4eFzuAKGaTuqq4xiyna4WqU"
 			]
 		}
 	},

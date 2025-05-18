@@ -9,16 +9,16 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
+						"indexed": true,
 						"internalType": "uint256",
 						"name": "ratingId",
 						"type": "uint256"
 					},
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"indexed": true,
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -40,16 +40,16 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
+						"indexed": true,
 						"internalType": "uint256",
 						"name": "ratingId",
 						"type": "uint256"
 					},
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"indexed": true,
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					}
 				],
 				"name": "StaffRatingDeleted",
@@ -59,16 +59,16 @@
 				"anonymous": false,
 				"inputs": [
 					{
-						"indexed": false,
+						"indexed": true,
 						"internalType": "uint256",
 						"name": "ratingId",
 						"type": "uint256"
 					},
 					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"indexed": true,
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -89,9 +89,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"internalType": "string",
@@ -125,9 +125,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					}
 				],
 				"name": "getStaffRatingsByStaffId",
@@ -145,14 +145,19 @@
 								"type": "address"
 							},
 							{
-								"internalType": "uint256",
-								"name": "staffId",
-								"type": "uint256"
+								"internalType": "address",
+								"name": "staffAddress",
+								"type": "address"
 							},
 							{
 								"internalType": "string",
 								"name": "content",
 								"type": "string"
+							},
+							{
+								"internalType": "string[]",
+								"name": "image",
+								"type": "string[]"
 							},
 							{
 								"internalType": "uint8",
@@ -238,19 +243,19 @@
 	},
 	"sources": {
 		"contracts/interfaces/IStaffRatingManager.sol": {
-			"keccak256": "0xc3b6f2b0a3cf263fda30921752a9894d58d5d725a37c8ea6427cd3681565db3e",
+			"keccak256": "0x96b7ac0e922dee3df66a2e0c1740fd34ea08a47ad48f9eb8b2ee60e47c754ffb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://f5a9f718f62f9bcead5f1d76b8bfd0c2d5d485a1e6942c51a40f61e30cb07837",
-				"dweb:/ipfs/QmcfzyDFNcY3NRp1GutgT43x8iqt93wmbc4iGfKKjRpJcB"
+				"bzz-raw://4798649b2d9754de3ee8cdb864d772908a6e7eed9ff92d502727b597c70bfd73",
+				"dweb:/ipfs/QmdoaSiCQ21nSnuDt3vH1yWzz9QKvmHqntoPF3d99RzT9k"
 			]
 		},
 		"contracts/structs/RatingStruct.sol": {
-			"keccak256": "0xb057261edeec65f3dc5e2d23c8c4a657c72b0b22cb042345bebd8c14ee2a2524",
+			"keccak256": "0x1f50d4ce5501f361ee8f01df3e292f68f1e52e15a17b29bd140e6ae333c6360f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6a044896380e7400e860a55e9752e1369aed9af8289627979aadff1cec349fa7",
-				"dweb:/ipfs/QmVyHaCTceryQ6cLLpBGCiHyFZ7Q71fbKWZL7QLPyhW7sx"
+				"bzz-raw://c8afc4a04098e74e163b7c29eaff97201cefa7b17df840c1128c8c869a38db86",
+				"dweb:/ipfs/QmYevpyJJBKXfukoFSpyAsg2mMyrrUQ8oUC9F4q5qnnLQi"
 			]
 		}
 	},

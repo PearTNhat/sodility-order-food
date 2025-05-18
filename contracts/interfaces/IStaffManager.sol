@@ -21,7 +21,7 @@ interface IStaffManager {
     ) external;
 
     function getStaff(address addressStaff) external view returns (Staff memory);
-
+    function getAllStaffs () external returns (Staff[] memory);
     function updateStaffInfo(
         address addressStaff,
         string calldata _name,
@@ -36,4 +36,9 @@ interface IStaffManager {
         uint256 _sumRating,
         uint256 _countRating
     ) external;
+    function addRaingWhenOrderSuccess (address _staffAddress, uint _orderId) external;
+    function getStaffInOrder(address _staffAddress, uint _orderId) external  returns (bool);
+    function removeOrderInStaffInOrder (address _staffAddress, uint _orderId)external;
+
+
 }

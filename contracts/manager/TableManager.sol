@@ -18,10 +18,18 @@ contract TableManager is ITableManager {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(tx.origin), "You are not admin");
+        require(roleAccess.hasRole(tx.origin,RoleType.ADMIN), "Not admin");
         _;
     }
-
+    
+    modifier onlyAdminOrStaff() {
+        require(
+            roleAccess.hasRole(msg.sender, RoleType.ADMIN) ||
+                roleAccess.hasRole(msg.sender, RoleType.STAFF),
+            "Not admin or staff"
+        );
+        _;
+    }
     function setOrderManager(address _orderManager) external override {
         orderManager = IOrderManager(_orderManager);
     }
@@ -106,7 +114,7 @@ contract TableManager is ITableManager {
     function updateStatusTable(uint256 _tableId, TableStatus _status)
         external
         override
-        onlyAdmin
+        onlyAdminOrStaff
     {
         require(tables[_tableId].tableId != 0, "Table ID does not exist");
         tables[_tableId].status = _status;

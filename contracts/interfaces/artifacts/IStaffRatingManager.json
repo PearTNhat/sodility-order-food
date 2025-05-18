@@ -49,9 +49,9 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addStaffRating(uint256,string,uint8)": "1806107f",
+			"addStaffRating(address,string,uint8)": "75fb2f13",
 			"deleteStaffRating(uint256)": "fcd3223c",
-			"getStaffRatingsByStaffId(uint256)": "f9274e03",
+			"getStaffRatingsByStaffId(address)": "b2fdfe05",
 			"setStaffManager(address)": "ea0f24e9",
 			"updateStaffRating(uint256,string,uint8)": "18211503"
 		}
@@ -61,16 +61,16 @@
 			"anonymous": false,
 			"inputs": [
 				{
-					"indexed": false,
+					"indexed": true,
 					"internalType": "uint256",
 					"name": "ratingId",
 					"type": "uint256"
 				},
 				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"indexed": true,
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -92,16 +92,16 @@
 			"anonymous": false,
 			"inputs": [
 				{
-					"indexed": false,
+					"indexed": true,
 					"internalType": "uint256",
 					"name": "ratingId",
 					"type": "uint256"
 				},
 				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"indexed": true,
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				}
 			],
 			"name": "StaffRatingDeleted",
@@ -111,16 +111,16 @@
 			"anonymous": false,
 			"inputs": [
 				{
-					"indexed": false,
+					"indexed": true,
 					"internalType": "uint256",
 					"name": "ratingId",
 					"type": "uint256"
 				},
 				{
-					"indexed": false,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"indexed": true,
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -141,9 +141,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"internalType": "string",
@@ -177,9 +177,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				}
 			],
 			"name": "getStaffRatingsByStaffId",
@@ -197,14 +197,19 @@
 							"type": "address"
 						},
 						{
-							"internalType": "uint256",
-							"name": "staffId",
-							"type": "uint256"
+							"internalType": "address",
+							"name": "staffAddress",
+							"type": "address"
 						},
 						{
 							"internalType": "string",
 							"name": "content",
 							"type": "string"
+						},
+						{
+							"internalType": "string[]",
+							"name": "image",
+							"type": "string[]"
 						},
 						{
 							"internalType": "uint8",

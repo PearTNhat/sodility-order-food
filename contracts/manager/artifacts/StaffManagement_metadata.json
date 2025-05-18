@@ -26,9 +26,9 @@
 				"inputs": [
 					{
 						"indexed": true,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -45,9 +45,9 @@
 				"inputs": [
 					{
 						"indexed": true,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -64,9 +64,9 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -89,9 +89,9 @@
 				"inputs": [
 					{
 						"indexed": true,
-						"internalType": "uint256",
-						"name": "staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"indexed": false,
@@ -106,9 +106,27 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_staffAddress",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
-						"name": "_staffId",
+						"name": "_orderId",
 						"type": "uint256"
+					}
+				],
+				"name": "addRaingWhenOrderSuccess",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addressStaff",
+						"type": "address"
 					},
 					{
 						"internalType": "string",
@@ -139,9 +157,9 @@
 						"type": "uint256"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "addressStaff",
+						"type": "address"
 					}
 				],
 				"name": "addStaffToOrder",
@@ -150,21 +168,15 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
-					}
-				],
-				"name": "getStaff",
+				"inputs": [],
+				"name": "getAllStaffs",
 				"outputs": [
 					{
 						"components": [
 							{
-								"internalType": "uint256",
-								"name": "staffId",
-								"type": "uint256"
+								"internalType": "address",
+								"name": "staffAddress",
+								"type": "address"
 							},
 							{
 								"internalType": "string",
@@ -190,11 +202,96 @@
 								"internalType": "uint256",
 								"name": "countRating",
 								"type": "uint256"
+							},
+							{
+								"internalType": "enum StaffStatus",
+								"name": "status",
+								"type": "uint8"
+							}
+						],
+						"internalType": "struct Staff[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addressStaff",
+						"type": "address"
+					}
+				],
+				"name": "getStaff",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "address",
+								"name": "staffAddress",
+								"type": "address"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "dob",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "phone",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "sumRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "uint256",
+								"name": "countRating",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum StaffStatus",
+								"name": "status",
+								"type": "uint8"
 							}
 						],
 						"internalType": "struct Staff",
 						"name": "",
 						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_staffAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "getStaffInOrder",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -214,6 +311,24 @@
 				"type": "function"
 			},
 			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_staffAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_orderId",
+						"type": "uint256"
+					}
+				],
+				"name": "removeOrderInStaffInOrder",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [],
 				"name": "roleAccess",
 				"outputs": [
@@ -229,17 +344,41 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "staffs",
+				"name": "staffInOrder",
 				"outputs": [
 					{
 						"internalType": "uint256",
-						"name": "staffId",
+						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "staffs",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "staffAddress",
+						"type": "address"
 					},
 					{
 						"internalType": "string",
@@ -265,6 +404,11 @@
 						"internalType": "uint256",
 						"name": "countRating",
 						"type": "uint256"
+					},
+					{
+						"internalType": "enum StaffStatus",
+						"name": "status",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -273,9 +417,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "addressStaff",
+						"type": "address"
 					},
 					{
 						"internalType": "uint256",
@@ -296,9 +440,9 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_staffId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "addressStaff",
+						"type": "address"
 					},
 					{
 						"internalType": "string",
@@ -350,51 +494,59 @@
 	},
 	"sources": {
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
+			"keccak256": "0xf7c7840494f46a4a76c03026875596d2bf9d40afdacd4598978b4bcba4848296",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
-				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+				"bzz-raw://400f64b6575d1f9fcd16b3d53b076ec4f983a24210a118c43de5dbd5a58bf1dc",
+				"dweb:/ipfs/QmdLoJhTb4bmyvcW5RUqrdA6PnySfeRcfkDMkG6nyeu1Re"
 			]
 		},
 		"contracts/interfaces/IOrderManager.sol": {
-			"keccak256": "0x146f96a3ac47375ef900a45d65c2adddb454829758461b0460fb538a034b6618",
+			"keccak256": "0x2629dd0be6902ec15f42b024e29f82560c49a14c85a9c9305e7f36a536eaf7af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bd07e37634fe9d526ed8e2d4fb53f367a10050c82a02aee30a10d12989a096ad",
-				"dweb:/ipfs/Qmac4dXJvLwwKXxFNaTjLjEUhPSAAgh9fvLZqUVMJuJY4N"
+				"bzz-raw://17a88d2b18073d043d994d510723c9825c423cb0f09483c1eece06f10e3c028c",
+				"dweb:/ipfs/QmW95CR3TErbLG8baav8tm7dqAVe33sDo3XkKM9PtxGGuM"
 			]
 		},
 		"contracts/interfaces/IStaffManager.sol": {
-			"keccak256": "0x2414f51962e37cbe55c17da36f7ec1c7881677d02e63b276f3b604f303344819",
+			"keccak256": "0x98dfbeeb917cdf1848eee2e140c65c68c489fe72c4326a4ea6bbf6118fbb3b4c",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1c82c305d1a63e364dccd5b0f52f55d7b3a7f6a3d7c11fa2abeceb84631442da",
-				"dweb:/ipfs/QmVp22ZhGc2JoAD9up7e25A5QXTkuKC9aR6ByTh713pUvj"
+				"bzz-raw://d99124baf8d75074b038a998fb17902987934ddb0fad52d4687f9e0d09edf077",
+				"dweb:/ipfs/QmVyfn8DswRsTTBMRy3vSHX7hp24mBE47HcLLetXuiiELX"
 			]
 		},
 		"contracts/manager/StaffManager.sol": {
-			"keccak256": "0xf546b19acd740308cc3bb951ea00196faa04f14f3339e6aba7e02791ff28cdfc",
+			"keccak256": "0xf383acdb2e06298c21e39e07395506837226b89bba4e1a3fd7ce2cc300a40fe2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e36e2f5ec3ff90a36b423ffa8eca96f6ad1479525df45c7355cde5f7ed15ac24",
-				"dweb:/ipfs/QmRbboknA981T48DphuNQWXBTXFDMEXya9EPhGE2uEmwTd"
+				"bzz-raw://ed4475040294586e50181e7b0b712dabaaf47486ab0ea489d18ea9a443e5da03",
+				"dweb:/ipfs/QmZmXWW6Do5MgrDqxqNUispMWweMoa2UYARrpdZJsWD38C"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {
-			"keccak256": "0x9db119baedfe813ab9224ce215da9e553525189cdcadab3b11e8892f195c3a71",
+			"keccak256": "0xe198fac65192fa7928ad4f0b026fa4526bb9e7b151d41efa66f4a74e6b33951a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://4db24211ed639ad9555a4097a4dd9b417eb4bf7ce8bdc5328a4b65c16134c297",
-				"dweb:/ipfs/QmbwVLFCzMhUZrBBNmpRpZXawdcg4fGCP9fX8KV4cw8s6S"
+				"bzz-raw://664dc8af2d3844381f9f5ed9cf139f6eaf958a42e466d9c23d5fbf8b256d49c7",
+				"dweb:/ipfs/QmaWX4wZXPGwnwP5C3Aw4DXCdadW5vNyxKg8ULzEgiox5D"
+			]
+		},
+		"contracts/structs/RoleStruct.sol": {
+			"keccak256": "0x3c26e4a36495372966405aa3ab2cb31c039d144e8175a787626e50c322fdfc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db04945c3081d35e2841f1bfbb756b4ecc9c2ededb939e3f438eebe4fac37797",
+				"dweb:/ipfs/QmQB16oyza9CoZpk83Zc24KYjt39r1JFiEN4beFdLh7d8H"
 			]
 		},
 		"contracts/structs/StaffStruct.sol": {
-			"keccak256": "0x9d8928b427fd4e538d9a70a0d102a292128823230c9577685d0b87f435f0e497",
+			"keccak256": "0xca14d2cf4d0eef7b8c9fda92659b4636f05b9b21abbed6d8d2a0044322d9907b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://fe01fba94919580a61dc1187be389989995d77a980a3cc9ad13eb43a7a529666",
-				"dweb:/ipfs/QmRo6GbkhL9Ei4NVkRxJss192tCiYreKpvByywFxthu9qc"
+				"bzz-raw://7740884026e8a396b9fbb1062c878c2ddce470cd219b4095ecd74b5df7848302",
+				"dweb:/ipfs/QmTJQVZN2BjdFpJyk5mjpxJuq4pA66CPgUBEsfppC6tzNs"
 			]
 		}
 	},

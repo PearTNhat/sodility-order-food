@@ -11,16 +11,114 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": true,
 						"internalType": "address",
-						"name": "_admin",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "roleName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum RoleType",
+						"name": "roleType",
+						"type": "uint8"
+					}
+				],
+				"name": "RoleAssigned",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
 						"type": "address"
 					}
 				],
-				"name": "addAdmin",
+				"name": "RoleRevoked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "roleName",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "enum RoleType",
+						"name": "roleType",
+						"type": "uint8"
+					}
+				],
+				"name": "RoleUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "roleId",
+						"type": "uint256"
+					}
+				],
+				"name": "assignRole",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getAllRoles",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "roleId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum RoleType",
+								"name": "role",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Role[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -40,11 +138,52 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_addr",
+						"name": "account",
 						"type": "address"
 					}
 				],
-				"name": "isAdmin",
+				"name": "getUserRole",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "uint256",
+								"name": "roleId",
+								"type": "uint256"
+							},
+							{
+								"internalType": "enum RoleType",
+								"name": "role",
+								"type": "uint8"
+							},
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							}
+						],
+						"internalType": "struct Role",
+						"name": "",
+						"type": "tuple"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					},
+					{
+						"internalType": "enum RoleType",
+						"name": "roleType",
+						"type": "uint8"
+					}
+				],
+				"name": "hasRole",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -56,35 +195,29 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
 					{
 						"internalType": "address",
-						"name": "_admin",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "removeAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "",
+						"name": "account",
 						"type": "address"
 					}
 				],
-				"name": "roles",
-				"outputs": [
-					{
-						"internalType": "enum RoleAccess.Role",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
+				"name": "revokeRole",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -109,18 +242,26 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": false,
+			"enabled": true,
 			"runs": 200
 		},
 		"remappings": []
 	},
 	"sources": {
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
+			"keccak256": "0xf7c7840494f46a4a76c03026875596d2bf9d40afdacd4598978b4bcba4848296",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
-				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+				"bzz-raw://400f64b6575d1f9fcd16b3d53b076ec4f983a24210a118c43de5dbd5a58bf1dc",
+				"dweb:/ipfs/QmdLoJhTb4bmyvcW5RUqrdA6PnySfeRcfkDMkG6nyeu1Re"
+			]
+		},
+		"contracts/structs/RoleStruct.sol": {
+			"keccak256": "0x3c26e4a36495372966405aa3ab2cb31c039d144e8175a787626e50c322fdfc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db04945c3081d35e2841f1bfbb756b4ecc9c2ededb939e3f438eebe4fac37797",
+				"dweb:/ipfs/QmQB16oyza9CoZpk83Zc24KYjt39r1JFiEN4beFdLh7d8H"
 			]
 		}
 	},

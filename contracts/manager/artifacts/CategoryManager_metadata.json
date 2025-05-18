@@ -280,11 +280,11 @@
 	},
 	"sources": {
 		"contracts/access/RoleAccess.sol": {
-			"keccak256": "0x3fd2eb2886ba9fe501a7657ef1633fdb16a441490e4f9b66e3d45427294f2b7d",
+			"keccak256": "0xf7c7840494f46a4a76c03026875596d2bf9d40afdacd4598978b4bcba4848296",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://6558cde8cda6f95fded84ad73efa0fd67dda014918cb040a77c6853dfe3a43f1",
-				"dweb:/ipfs/QmczZ4tCa6qmFFwjbGBVbKW1Tzxi6HwNZE4nWKMmW7RjcP"
+				"bzz-raw://400f64b6575d1f9fcd16b3d53b076ec4f983a24210a118c43de5dbd5a58bf1dc",
+				"dweb:/ipfs/QmdLoJhTb4bmyvcW5RUqrdA6PnySfeRcfkDMkG6nyeu1Re"
 			]
 		},
 		"contracts/interfaces/ICategoryManager.sol": {
@@ -296,11 +296,11 @@
 			]
 		},
 		"contracts/manager/CategoryManager.sol": {
-			"keccak256": "0x6a37edf3f84daee87f57f0301908dbf052e03585d23322776e6e0c52fd252d8b",
+			"keccak256": "0x1ecbe2439d845b2b9823d1b357a50bf1c51b6c567864fbd054049f6ceb607f43",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a08cf517c0b3e5d52bc7aa9c90aad79fe23e43a20489bc8475d0354a13680baf",
-				"dweb:/ipfs/QmQscekYvqozPmYYvZzjpQqLHuuPxgrfs2jDpYYfnNrzx3"
+				"bzz-raw://62c9867882f686e6e38a6761e707e46ed9bd6d1d2d9a7810a87207ba75439a5c",
+				"dweb:/ipfs/QmdG6THDaBg5ofejKzge8X7Khew3yaEjMJe3iHxu3UNC4W"
 			]
 		},
 		"contracts/structs/CategoryStructs.sol": {
@@ -312,11 +312,19 @@
 			]
 		},
 		"contracts/structs/FoodStructs.sol": {
-			"keccak256": "0xf10e8cac411afde2b7c67359281e698c58c788ec3e187d5c6a7b70fe1dea8fba",
+			"keccak256": "0x68d4711f54c824ccd050df329e307135fd45c1e729e7fcb9fff05e49d2275d8e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8841147cc4ee9867a2426477ea57ae7bdd95b1fa8c87f0b908ce4d1e5691bee0",
-				"dweb:/ipfs/QmcJq7zSSAxHWcKg2MtDMYR9DQQiPiWFrcN8yyppx2SGEk"
+				"bzz-raw://21f55add06cf7450b955c75d5a3c339a1a0d1bb018b195782640cf42e9337325",
+				"dweb:/ipfs/QmT9VJ54bvNT6HdWKb6jGGDVB16SfaBa6CoT1d519dRANC"
+			]
+		},
+		"contracts/structs/RoleStruct.sol": {
+			"keccak256": "0x3c26e4a36495372966405aa3ab2cb31c039d144e8175a787626e50c322fdfc1f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://db04945c3081d35e2841f1bfbb756b4ecc9c2ededb939e3f438eebe4fac37797",
+				"dweb:/ipfs/QmQB16oyza9CoZpk83Zc24KYjt39r1JFiEN4beFdLh7d8H"
 			]
 		},
 		"hardhat/console.sol": {

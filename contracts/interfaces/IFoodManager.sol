@@ -89,4 +89,7 @@ interface IFoodManager {
         uint256 _sumRating,
         uint256 _countRating
     ) external;
+    function addRaingWhenOrderSuccess (uint _foodId, uint _orderId) external ;
+    function getFoodInOrder(uint  _foodId, uint _orderId) external view  returns (bool);
+    function removeFoodInOrder (uint  _foodId, uint _orderId) external ;
 }

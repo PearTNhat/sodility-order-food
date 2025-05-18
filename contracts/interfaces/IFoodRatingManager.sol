@@ -8,7 +8,7 @@ interface IFoodRatingManager {
     event FoodRatingDeleted(uint ratingId, uint foodId);
     
     function setFoodManager(address _foodManager) external;
-    function addFoodRating(uint foodId, string calldata content, uint8 stars) external returns (uint);
+    function addFoodRating(uint foodId, uint _orderId,string[] memory imgs,string calldata content, uint8 stars) external returns (uint);
     function updateFoodRating(uint ratingId, string calldata content, uint8 stars) external; // Thường không cho phép sửa rating.
     function deleteFoodRating(uint ratingId) external;  // Thường không cho phép xóa rating.
     function getFoodRatingsByFoodId(uint foodId) external view returns (FoodRating[] memory);

@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "../interfaces/IFoodRatingManager.sol";
 import "../access/RoleAccess.sol";
 import "../interfaces/IFoodManager.sol";
+import "hardhat/console.sol";
 
 contract FoodRatingManager is IFoodRatingManager {
     RoleAccess public roleAccess;
@@ -11,10 +12,10 @@ contract FoodRatingManager is IFoodRatingManager {
     uint public nextFoodRatingId = 1;
     mapping(uint => FoodRating) public foodRatings;
     mapping(uint => uint[]) public foodIdToRatingIds; // Để lấy tất cả ratings cho một món ăn
-
+ 
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(tx.origin), "You are not admin");  //Sửa lại nếu thư viện RoleAccess có hàm isAdmin
+        require(roleAccess.hasRole(tx.origin,RoleType.ADMIN), "Not admin");
         _;
     }
 
@@ -25,9 +26,13 @@ contract FoodRatingManager is IFoodRatingManager {
         require(_foodManager != address(0), "Invalid address");
         foodManager = IFoodManager(_foodManager);
     }
-    function addFoodRating(uint foodId, string calldata content, uint8 stars) external override returns (uint) {
+    function addFoodRating(uint foodId, uint _orderId,string[] memory imgs,string calldata content, uint8 stars) external override returns (uint) {
         require(stars > 0 && stars <= 5, "Stars must be between 1 and 5");
         uint ratingId = nextFoodRatingId++;
+        require(imgs.length <=5 , "Img <= 5");
+        require(foodManager.getFoodInOrder(foodId, _orderId), "Food not in order");
+        console.log("sender",msg.sender);
+        foodManager.removeFoodInOrder(foodId, _orderId);
         FoodRating storage rating = foodRatings[ratingId];
         rating.id = ratingId;
         rating.reviewer = msg.sender;
@@ -58,7 +63,7 @@ contract FoodRatingManager is IFoodRatingManager {
 
     function updateFoodRating(uint ratingId, string calldata content, uint8 stars) external override {
         require(foodRatings[ratingId].id != 0, "Rating does not exist");
-        // require(msg.sender == foodRatings[ratingId].reviewer, "Only reviewer can update");
+        require(msg.sender == foodRatings[ratingId].reviewer || roleAccess.hasRole(tx.origin,RoleType.ADMIN), "reviewer or admin can delete");
         require(stars > 0 && stars <= 5, "Stars must be between 1 and 5");
         uint oldStars =  foodRatings[ratingId].stars ;
         foodRatings[ratingId].content = content;
@@ -72,7 +77,7 @@ contract FoodRatingManager is IFoodRatingManager {
 
     function deleteFoodRating(uint ratingId) external override {
         require(foodRatings[ratingId].id != 0, "Rating does not exist");
-        // require(msg.sender == foodRatings[ratingId].reviewer || roleAccess.isAdmin(msg.sender), "Only reviewer or admin can delete"); //Sửa lại nếu thư viện RoleAccess có hàm isAdmin
+        require(msg.sender == foodRatings[ratingId].reviewer || roleAccess.hasRole(tx.origin,RoleType.ADMIN), "reviewer or admin can delete");
 
         // Xóa rating khỏi mapping foodIdToRatingIds
         uint foodId = foodRatings[ratingId].foodId;
@@ -93,6 +98,7 @@ contract FoodRatingManager is IFoodRatingManager {
         delete foodRatings[ratingId];
         emit FoodRatingDeleted(ratingId, foodId);
     }
+
 
    
 }

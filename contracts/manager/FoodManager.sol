@@ -17,13 +17,16 @@ contract FoodManager is IFoodManager {
     mapping(uint256 => FoodDetail[]) private foodDetails;
     uint256[] private foodIds;
 
+    // orderId -> [foodId] khi muốn đánh giá phải có orderId, foodId, nếu có thì xóa foodId r đánh giá
+    mapping(uint => uint[]) public orderFoodRatings;
+
     constructor(address _categoryManagerAddress, address _roleAcces) {
         categoryManager = ICategoryManager(_categoryManagerAddress); // Khởi tạo CategoryManager
         roleAccess = RoleAccess(_roleAcces);
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(tx.origin), "You are not admin");
+         require(roleAccess.hasRole(tx.origin,RoleType.ADMIN), "Not admin");
         _;
     }
 
@@ -444,5 +447,25 @@ contract FoodManager is IFoodManager {
         foods[_foodId].sumRating = _sumRating;
         foods[_foodId].countRating = _countRating;
         emit FoodRatingUpdate(_foodId, _sumRating);
+    }
+    function addRaingWhenOrderSuccess (uint _orderId, uint _foodId ) external override  {
+        require( foods[_foodId].foodId != 0,"Food does not exist");
+        orderFoodRatings[_orderId].push(_foodId);
+    }
+    function getFoodInOrder(uint  _foodId, uint _orderId) external view override returns (bool){
+        for(uint i = 0 ; i < orderFoodRatings[_orderId].length ;  i++){
+            if(orderFoodRatings[_orderId][i]== _foodId ){
+                return true;
+            }
+        }
+        return false;
+    }
+    // mỗi khi đánh giá xong là xóa foodId đó đi
+    function removeFoodInOrder (uint  _foodId, uint _orderId) external override {
+        for(uint i = 0 ;i < orderFoodRatings[_orderId].length;  i++){
+            if (orderFoodRatings[_orderId][i] == _foodId) { // xóa order đồng thời các rating có bắt buộc là vì sao mà không sử dụng for
+                orderFoodRatings[_orderId].pop(); // pop xóa phần tử
+            }
+        }
     }
 }

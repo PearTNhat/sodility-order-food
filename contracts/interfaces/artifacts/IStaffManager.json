@@ -49,11 +49,12 @@
 		},
 		"gasEstimates": null,
 		"methodIdentifiers": {
-			"addStaff(uint256,string,string,string)": "9121f4eb",
-			"addStaffToOrder(uint256,uint256)": "fdff9aab",
-			"getStaff(uint256)": "f4def44b",
-			"updateRatingStaff(uint256,uint256,uint256)": "deab8c75",
-			"updateStaffInfo(uint256,string,string,string)": "b3ce9dea"
+			"addStaff(address,string,string,string)": "dcad55c0",
+			"addStaffToOrder(uint256,address)": "abf5e836",
+			"getAllStaffs()": "037c73c2",
+			"getStaff(address)": "ddd79504",
+			"updateRatingStaff(address,uint256,uint256)": "e0e8086b",
+			"updateStaffInfo(address,string,string,string)": "5be5fd39"
 		}
 	},
 	"abi": [
@@ -62,9 +63,9 @@
 			"inputs": [
 				{
 					"indexed": true,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -81,9 +82,9 @@
 			"inputs": [
 				{
 					"indexed": true,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -100,9 +101,9 @@
 			"inputs": [
 				{
 					"indexed": false,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -125,9 +126,9 @@
 			"inputs": [
 				{
 					"indexed": true,
-					"internalType": "uint256",
-					"name": "staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "staffAddress",
+					"type": "address"
 				},
 				{
 					"indexed": false,
@@ -142,9 +143,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "addressStaff",
+					"type": "address"
 				},
 				{
 					"internalType": "string",
@@ -175,9 +176,9 @@
 					"type": "uint256"
 				},
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "addressStaff",
+					"type": "address"
 				}
 			],
 			"name": "addStaffToOrder",
@@ -186,11 +187,56 @@
 			"type": "function"
 		},
 		{
+			"inputs": [],
+			"name": "getAllStaffs",
+			"outputs": [
+				{
+					"components": [
+						{
+							"internalType": "address",
+							"name": "staffAddress",
+							"type": "address"
+						},
+						{
+							"internalType": "string",
+							"name": "name",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "dob",
+							"type": "string"
+						},
+						{
+							"internalType": "string",
+							"name": "phone",
+							"type": "string"
+						},
+						{
+							"internalType": "uint256",
+							"name": "sumRating",
+							"type": "uint256"
+						},
+						{
+							"internalType": "uint256",
+							"name": "countRating",
+							"type": "uint256"
+						}
+					],
+					"internalType": "struct Staff[]",
+					"name": "",
+					"type": "tuple[]"
+				}
+			],
+			"stateMutability": "nonpayable",
+			"type": "function"
+		},
+		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "addressStaff",
+					"type": "address"
 				}
 			],
 			"name": "getStaff",
@@ -198,9 +244,9 @@
 				{
 					"components": [
 						{
-							"internalType": "uint256",
-							"name": "staffId",
-							"type": "uint256"
+							"internalType": "address",
+							"name": "staffAddress",
+							"type": "address"
 						},
 						{
 							"internalType": "string",
@@ -239,9 +285,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "addressStaff",
+					"type": "address"
 				},
 				{
 					"internalType": "uint256",
@@ -262,9 +308,9 @@
 		{
 			"inputs": [
 				{
-					"internalType": "uint256",
-					"name": "_staffId",
-					"type": "uint256"
+					"internalType": "address",
+					"name": "addressStaff",
+					"type": "address"
 				},
 				{
 					"internalType": "string",

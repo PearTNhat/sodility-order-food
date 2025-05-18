@@ -7,15 +7,15 @@ import "./interfaces/ICategoryManager.sol";
 import "./interfaces/ITableManager.sol";
 import "./interfaces/IOrderManager.sol";
 import "./interfaces/IStaffManager.sol";
-import "./interfaces/IStaffRatingManager.sol"; 
+import "./interfaces/IStaffRatingManager.sol";
 import "./interfaces/IFoodRatingManager.sol";
 
-import "./manager/CategoryManager.sol";
+import "hardhat/console.sol";
 contract FoodApp {
     RoleAccess public roleAccess;
 
     address public foodManager;
-    ICategoryManager public categoryManager;
+    address public categoryManager;
     address public tableManager;
     address public orderManager;
     address public staffManager;
@@ -27,16 +27,32 @@ contract FoodApp {
     }
 
     modifier onlyAdmin() {
-        require(roleAccess.isAdmin(msg.sender), "Not admin");
+        require(roleAccess.hasRole(msg.sender, RoleType.ADMIN), "Not admin");
+        _;
+    }
+    modifier onlyAdminOrStaff() {
+        require(
+            roleAccess.hasRole(msg.sender, RoleType.ADMIN) ||
+                roleAccess.hasRole(msg.sender, RoleType.STAFF),
+            "Not admin or staff"
+        );
         _;
     }
 
-    function getOwner() public view returns (address owner) {
+    function getOwner() public view returns (address) {
         return roleAccess.getOwner();
     }
 
-    function addAmin(address _address) public {
-        roleAccess.addAdmin(_address);
+    function getCurrentUser() public view returns (address) {
+        return msg.sender;
+    }
+
+    function addAdminRole(address _address) public {
+        roleAccess.assignRole(_address, 1);
+    }
+
+    function addStaffRole(address _address) public {
+        roleAccess.assignRole(_address, 2);
     }
 
     function setFoodManager(address _foodManager) external onlyAdmin {
@@ -44,39 +60,50 @@ contract FoodApp {
         foodManager = _foodManager;
     }
 
-    function deployCategoryManager() external onlyAdmin returns (address) {
-        require(address(roleAccess) != address(0), "Invalid RoleAccess");
-        require(address(categoryManager) == address(0), "Already deployed");
-        categoryManager = new CategoryManager(address(roleAccess));
-        return address(categoryManager);
+    function setCategory(address _categoryManager) external onlyAdmin {
+        require(_categoryManager != address(0), "Invalid address");
+        categoryManager = _categoryManager;
     }
 
-    function setTableManager(address _tableManager) external onlyAdmin {
+    function setTableManager(address _tableManager, address _orderManager)
+        external
+        onlyAdmin
+    {
         require(_tableManager != address(0), "Invalid address");
-        tableManager = _tableManager;
-    }
-    function setOrderMForTableM (address _orderManager) external onlyAdmin {
         require(_orderManager != address(0), "Invalid address");
+        tableManager = _tableManager;
         ITableManager(tableManager).setOrderManager(_orderManager);
     }
 
-    function setOrderManager(address _orderManager) external onlyAdmin {
+    function setOrderManager(
+        address _orderManager,
+        address _staffManagerAddress
+    ) external onlyAdmin {
         require(_orderManager != address(0), "Invalid address");
+        require(_staffManagerAddress != address(0), "Invalid address");
         orderManager = _orderManager;
+        IOrderManager(orderManager).setStaffManager(_staffManagerAddress);
     }
+
     function setStaffManager(address _staffManager) external onlyAdmin {
         require(_staffManager != address(0), "Invalid address");
         staffManager = _staffManager;
     }
-    
-    function initStaffRatingManager(address _staffRatingManager, address _staffManager) external onlyAdmin {
-        require(_staffManager != address(0), "StaffManager not set");
+
+    function setStaffRatingManager(
+        address _staffRatingManager,
+        address _staffManager
+    ) external onlyAdmin {
+        require(_staffManager != address(0), "Invalid address");
         require(_staffRatingManager != address(0), "Invalid address");
         staffRatingManager = _staffRatingManager;
         IStaffRatingManager(_staffRatingManager).setStaffManager(_staffManager);
     }
 
-    function initFoodRatingManager(address _foodRatingManager ,address _foodManager) external onlyAdmin {
+    function initFoodRatingManager(
+        address _foodRatingManager,
+        address _foodManager
+    ) external onlyAdmin {
         require(_foodRatingManager != address(0), "FoodRatingManager not set");
         require(_foodRatingManager != address(0), "Invalid address");
         foodRatingManager = _foodRatingManager;
@@ -163,45 +190,82 @@ contract FoodApp {
     function getAllFoods() external view returns (FoodWithDetails[] memory) {
         return IFoodManager(foodManager).getAllFoods();
     }
+
     function getHiddenFoods() external view returns (FoodWithDetails[] memory) {
         return IFoodManager(foodManager).getHiddenFoods();
     }
+
     // thêm
     function getHiddenFoodDetails() external returns (FoodDetail[] memory) {
         return IFoodManager(foodManager).getHiddenFoodDetails();
     }
+
     // thêm
-    function setFoodDetailHidden(uint256 _foodId, uint256 _foodDetailId, bool _hidden) external {
-        IFoodManager(foodManager).setFoodDetailHidden(_foodId,_foodDetailId,_hidden);
+    function setFoodDetailHidden(
+        uint256 _foodId,
+        uint256 _foodDetailId,
+        bool _hidden
+    ) external {
+        IFoodManager(foodManager).setFoodDetailHidden(
+            _foodId,
+            _foodDetailId,
+            _hidden
+        );
     }
-    function setFoodVisibility (uint _foodId, bool _hidden) public onlyAdmin {
-        IFoodManager(foodManager).setFoodVisibility(_foodId,_hidden);
+
+    function setFoodVisibility(uint256 _foodId, bool _hidden) public onlyAdmin {
+        IFoodManager(foodManager).setFoodVisibility(_foodId, _hidden);
     }
 
     // CategoryManager
-    function createCategory(uint256 categoryId, string memory name) external onlyAdmin {
-        require(address(categoryManager) != address(0), "CategoryManager not deployed");
-        categoryManager.createCategory(categoryId, name);
+    function createCategory(uint256 categoryId, string memory name)
+        external
+        onlyAdmin
+    {
+        require(
+            address(categoryManager) != address(0),
+            "CategoryManager not deployed"
+        );
+        ICategoryManager(categoryManager).createCategory(categoryId, name);
     }
 
-    function getCategory(uint256 categoryId) external view returns (Category memory) {
-        require(address(categoryManager) != address(0), "CategoryManager not deployed");
-        return categoryManager.getCategory(categoryId);
+    function getCategory(uint256 categoryId)
+        external
+        view
+        returns (Category memory)
+    {
+        require(
+            address(categoryManager) != address(0),
+            "CategoryManager not deployed"
+        );
+        return ICategoryManager(categoryManager).getCategory(categoryId);
     }
 
-    function updateCategory(uint256 categoryId, string memory newName) external onlyAdmin {
-        require(address(categoryManager) != address(0), "CategoryManager not deployed");
-        categoryManager.updateCategory(categoryId, newName);
+    function updateCategory(uint256 categoryId, string memory newName)
+        external
+        onlyAdmin
+    {
+        require(
+            address(categoryManager) != address(0),
+            "CategoryManager not deployed"
+        );
+        ICategoryManager(categoryManager).updateCategory(categoryId, newName);
     }
 
     function deleteCategory(uint256 categoryId) external onlyAdmin {
-        require(address(categoryManager) != address(0), "CategoryManager not deployed");
-        categoryManager.deleteCategory(categoryId);
+        require(
+            address(categoryManager) != address(0),
+            "CategoryManager not deployed"
+        );
+        ICategoryManager(categoryManager).deleteCategory(categoryId);
     }
 
     function getAllCategories() external view returns (Category[] memory) {
-        require(address(categoryManager) != address(0), "CategoryManager not deployed");
-        return categoryManager.getAllCategories();
+        require(
+            address(categoryManager) != address(0),
+            "CategoryManager not deployed"
+        );
+        return ICategoryManager(categoryManager).getAllCategories();
     }
 
     // Order
@@ -228,7 +292,7 @@ contract FoodApp {
         uint256 _orderId,
         uint256 _orderItemId,
         OrderItemStatus _newStatus
-    ) external {
+    ) external onlyAdminOrStaff {
         IOrderManager(orderManager).updateOrderItemStatus(
             _orderId,
             _orderItemId,
@@ -239,6 +303,7 @@ contract FoodApp {
     function getOrdersByStatus(OrderStatus _status)
         external
         view
+    onlyAdminOrStaff
         returns (Order[] memory)
     {
         return IOrderManager(orderManager).getOrdersByStatus(_status);
@@ -257,20 +322,21 @@ contract FoodApp {
     }
 
     // Table
-    function addTable(uint256 _row, uint256 _col, string memory _qrUrl)
-        external
-        onlyAdmin
-        returns (uint256)
-    {
-        return ITableManager(tableManager).addTable(_row, _col,_qrUrl);
+    function addTable(
+        uint256 _row,
+        uint256 _col,
+        string memory _qrUrl
+    ) external onlyAdmin returns (uint256) {
+        return ITableManager(tableManager).addTable(_row, _col, _qrUrl);
     }
+
     function updateTable(
         uint256 _tableId,
         uint256 _row,
         uint256 _col,
         string memory _qrUrl
     ) external {
-        ITableManager(tableManager).updateTable(_tableId, _row, _col,_qrUrl);
+        ITableManager(tableManager).updateTable(_tableId, _row, _col, _qrUrl);
     }
 
     function editTable(
@@ -302,14 +368,14 @@ contract FoodApp {
 
     function updateStatusTable(uint256 _tableId, TableStatus _status)
         external
-        onlyAdmin
+        onlyAdminOrStaff
     {
         ITableManager(tableManager).updateStatusTable(_tableId, _status);
     }
 
     // Staff
     function addStaff(
-        uint256 _staffId,
+        address _staffId,
         string calldata _name,
         string calldata _dob,
         string calldata _phone
@@ -317,12 +383,12 @@ contract FoodApp {
         IStaffManager(staffManager).addStaff(_staffId, _name, _dob, _phone);
     }
 
-    function getStaff(uint256 _staffId) external view returns (Staff memory) {
+    function getStaff(address _staffId) external view returns (Staff memory) {
         return IStaffManager(staffManager).getStaff(_staffId);
     }
 
     function updateStaffInfo(
-        uint256 _staffId,
+        address _staffId,
         string calldata _name,
         string calldata _dob,
         string calldata _phone
@@ -335,43 +401,103 @@ contract FoodApp {
         );
     }
 
-    function addStaffToOrder(uint256 _orderId, uint256 _staffId)
+    // thêm
+    function getAllStaffs() external returns (Staff[] memory) {
+        return IStaffManager(staffManager).getAllStaffs();
+    }
+
+    function addStaffToOrder(uint256 _orderId, address _staffId)
         external
         onlyAdmin
     {
         IStaffManager(staffManager).addStaffToOrder(_orderId, _staffId);
     }
-     // Các hàm FoodRatingManager
-    function addFoodRating(uint foodId, string calldata content, uint8 stars) external  {
-        IFoodRatingManager(foodRatingManager).addFoodRating(foodId, content, stars);
+
+    // Các hàm FoodRatingManager
+    function addFoodRating(
+        uint256 foodId,
+        uint256 orderId,
+        string[] memory imgs,
+        string calldata content,
+        uint8 stars
+    ) external {
+        IFoodRatingManager(foodRatingManager).addFoodRating(
+            foodId,
+            orderId,
+            imgs,
+            content,
+            stars
+        );
     }
 
-    function  getFoodRatingsByFoodId(uint foodId) external view  returns (FoodRating[] memory) {
-         return IFoodRatingManager(foodRatingManager).getFoodRatingsByFoodId(foodId);
+    function getFoodRatingsByFoodId(uint256 foodId)
+        external
+        view
+        returns (FoodRating[] memory)
+    {
+        return
+            IFoodRatingManager(foodRatingManager).getFoodRatingsByFoodId(
+                foodId
+            );
     }
 
-    function updateFoodRating(uint ratingId, string calldata content, uint8 stars) external  {
-         IFoodRatingManager(foodRatingManager).updateFoodRating(ratingId, content, stars);
+    function updateFoodRating(
+        uint256 ratingId,
+        string calldata content,
+        uint8 stars
+    ) external {
+        IFoodRatingManager(foodRatingManager).updateFoodRating(
+            ratingId,
+            content,
+            stars
+        );
     }
 
-    function  deleteFoodRating(uint ratingId) external  {
-         IFoodRatingManager(foodRatingManager).deleteFoodRating(ratingId);
+    function deleteFoodRating(uint256 ratingId) external {
+        IFoodRatingManager(foodRatingManager).deleteFoodRating(ratingId);
     }
 
     // staff rating
-    function addStaffRating(uint staffId, string calldata content, uint8 stars) external {
-        IStaffRatingManager(staffRatingManager).addStaffRating(staffId, content, stars);
+    function addStaffRating(
+        address staffAddress,
+        uint256 _orderId,
+        string calldata content,
+        string[] memory imgs,
+        uint8 stars
+    ) external {
+        IStaffRatingManager(staffRatingManager).addStaffRating(
+            staffAddress,
+            _orderId,
+            content,
+            imgs,
+            stars
+        );
     }
 
-    function getStaffRatingsByStaffId(uint staffId) external view returns (StaffRating[] memory) {
-        return IStaffRatingManager(staffRatingManager).getStaffRatingsByStaffId(staffId);
+    function getStaffRatingsByStaffId(address staffId)
+        external
+        view
+        returns (StaffRating[] memory)
+    {
+        return
+            IStaffRatingManager(staffRatingManager).getStaffRatingsByStaffId(
+                staffId
+            );
     }
 
-    function updateStaffRating(uint ratingId, string calldata content, uint8 stars) external {
-        IStaffRatingManager(staffRatingManager).updateStaffRating(ratingId, content, stars);
+    function updateStaffRating(
+        uint256 ratingId,
+        string calldata content,
+        uint8 stars
+    ) external {
+        IStaffRatingManager(staffRatingManager).updateStaffRating(
+            ratingId,
+            content,
+            stars
+        );
     }
 
-    function deleteStaffRating(uint ratingId) external {
+    function deleteStaffRating(uint256 ratingId) external {
         IStaffRatingManager(staffRatingManager).deleteStaffRating(ratingId);
     }
 }

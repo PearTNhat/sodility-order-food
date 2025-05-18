@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-enum OrderStatus {  Confirmed,Pending, Cancelled }
-enum OrderItemStatus {Success,  Shipping,Cancelled }
+enum OrderStatus { Success,Confirmed,Pending, Cancelled }
+enum OrderItemStatus {Success, Doing, Cancelled }
 struct OrderItem {
     uint orderItemId;
     uint foodDetailId;
@@ -10,6 +10,7 @@ struct OrderItem {
     uint quantity;
     uint price;
     OrderItemStatus status;
+    uint timestamp;
 }
 struct OrderItemRequest {
     uint foodId;
