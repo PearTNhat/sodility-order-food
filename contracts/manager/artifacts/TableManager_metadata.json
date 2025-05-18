@@ -473,7 +473,7 @@
 			"bytecodeHash": "ipfs"
 		},
 		"optimizer": {
-			"enabled": true,
+			"enabled": false,
 			"runs": 200
 		},
 		"remappings": []
@@ -504,11 +504,11 @@
 			]
 		},
 		"contracts/manager/TableManager.sol": {
-			"keccak256": "0xded4b9fc7e3eca2bb14c0ff3a60a5242db01bda2d7809890204f76ff8083a6b6",
+			"keccak256": "0x61f645f724f011e8ba2fe954edcbf05193911c143d0f016ab04004af9d667791",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ed8a00ed9d16c2bff23965999db678d48fb45e990105a57c78fb056d7c08f53e",
-				"dweb:/ipfs/QmfPoDbu37ZYpcGneUstqowmwoVV5hf1o5tZUDXGDhBQJk"
+				"bzz-raw://55c1eb1f80d13fd9373e31992c28697285763209de5b009e5a67b8b5eb8d1d25",
+				"dweb:/ipfs/QmVcD5hDeksxaxLx7a143NDN4Yg85NFMBMQok822SR7kau"
 			]
 		},
 		"contracts/structs/OrderStructs.sol": {

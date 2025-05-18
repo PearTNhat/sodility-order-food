@@ -24,8 +24,8 @@ contract TableManager is ITableManager {
     
     modifier onlyAdminOrStaff() {
         require(
-            roleAccess.hasRole(msg.sender, RoleType.ADMIN) ||
-                roleAccess.hasRole(msg.sender, RoleType.STAFF),
+            roleAccess.hasRole(tx.origin, RoleType.ADMIN) ||
+                roleAccess.hasRole(tx.origin, RoleType.STAFF),
             "Not admin or staff"
         );
         _;
